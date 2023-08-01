@@ -1,11 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
+import Header from './components/Header';
+import CarImage from './components/CarImage';
+import ScoreBoard from './components/ScoreBoard';
+import FormSubmit from './components/FormSubmit';
 
 function App() {
   return (
     <div className="App">
-      <h1>CARDLE</h1>
+      <Header/>
+      <CarImage/>
+      <ScoreBoard/>
+      <FormSubmit/>
     </div>
   );
 }
