@@ -1,0 +1,42 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    height: 5rem;
+
+    &--img {
+      height: 100%;
+    }
+  }
+
+  &__header{
+    font-size: 1.5rem;
+  }
+
+  &__links {
+    display: flex;
+  }
+
+  &__link {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $bb-grey;
+    border-radius: 100%;
+    margin:0 0.5rem;
+  }
+
+  &__icon {
+    width: fit-content;
+    aspect-ratio: 1 / 1;
+    color: $bb-white;
+  }
+}
