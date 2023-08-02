@@ -35,7 +35,20 @@ export default function ScoreBoard() {
           <div className="scoreboard__light"></div>
         </div>
       </section>
-      <section className="scoreboard__tally"></section>
+      <section className="scoreboard__tally">
+        <div className="scoreboard__tally-row">
+            <p className="scoreboard__text scoreboard__text--current">Current Points:</p>
+            <p className="scoreboard__text scoreboard__text--current">-</p>
+        </div>
+        <div className="scoreboard__tally-row">
+            <p className="scoreboard__text scoreboard__text--multiplier">Round Multiplier</p>
+            <p className="scoreboard__text scoreboard__text--multiplier">x5</p>
+        </div>
+        <div className="scoreboard__tally-row">
+            <p className="scoreboard__text scoreboard__text--total">Total Points:</p>
+            <p className="scoreboard__text scoreboard__text--total">-</p>
+        </div>
+      </section>
     </section>
   );
 }

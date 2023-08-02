@@ -1,0 +1,10 @@
+@use './colours' as *;
+
+@mixin body-mobile{
+    font-size: 1.325rem;
+    color: $bb-white;
+}
+@mixin header-mobile{
+    font-size: 1.55rem;
+    color: $bb-white;
+}
