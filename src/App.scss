@@ -1,5 +1,11 @@
-@use './styles/global.scss';
+@use "./styles/global.scss" as *;
+@use "./styles/partials/colours" as *;
 
 .App {
-   
+  background-color: $bb-black;
+  color: $bb-white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
