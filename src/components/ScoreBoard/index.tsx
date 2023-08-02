@@ -35,6 +35,7 @@ export default function ScoreBoard() {
           <div className="scoreboard__light"></div>
         </div>
       </section>
+      <section className="scoreboard__tally"></section>
     </section>
   );
 }

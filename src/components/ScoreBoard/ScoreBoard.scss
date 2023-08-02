@@ -8,7 +8,26 @@
     justify-content: space-between;
   }
 
-  &__heading{
+  &__heading {
     border-bottom: 2px solid $bb-white;
+  }
+
+  &__row {
+    border-bottom: 2px solid $bb-grey;
+    padding: 0.5rem 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    &:nth-child(5){
+        border-bottom: 2px solid $bb-white;
+    }
+  }
+
+  &__light {
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid $bb-white;
+    border-radius: 100%;
   }
 }
