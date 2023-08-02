@@ -1,5 +1,6 @@
 @use "../../styles/partials/_layout.scss" as *;
 @use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
 
 .scoreboard {
   margin: 0 2.5rem;
@@ -8,7 +9,47 @@
     justify-content: space-between;
   }
 
-  &__heading{
+  &__heading {
+    width: 30%;
+    text-align: center;
     border-bottom: 2px solid $bb-white;
+    @include header-mobile;
+  }
+
+  &__row {
+    border-bottom: 2px solid $bb-grey;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    &:nth-child(5) {
+      border-bottom: 2px solid $bb-white;
+    }
+  }
+
+  &__light {
+    height: 1.75rem;
+    width: 1.745rem;
+    border: 1px solid $bb-white;
+    border-radius: 100%;
+  }
+
+  &__tally {
+    padding: 0.5rem 0;
+    &-row {
+      display: flex;
+      justify-content: space-between;
+      @include body-mobile;
+
+      &:nth-child(2) {
+        padding: 0.5rem 0;
+      }
+
+      &:nth-child(3) {
+        padding-top: 0.5rem;
+        border-top: 2px solid $bb-white;
+      }
+    }
   }
 }
