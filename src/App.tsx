@@ -11,7 +11,7 @@ function App() {
       <Header/>
       <CarImage/>
       <ScoreBoard/>
-      {/* <FormSubmit/> */}
+      <FormSubmit/>
     </div>
   );
 }

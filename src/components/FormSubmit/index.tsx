@@ -1,8 +1,11 @@
+import Select from '../Select'
 import './FormSubmit.scss'
 
 export default function FormSubmit(){
 
     return(
-        <h1>FORMSUBMIT</h1>
+        <form action="" className="formsubmit">
+            <Select/>
+        </form>
     )
 }

@@ -1,0 +1,52 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.selector {
+  width: 100%;
+}
+
+.select__label {
+  position: absolute;
+  left: 1rem;
+  top: 0.8rem;
+  padding: 0 0.5rem;
+  color: white;
+  cursor: text;
+  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+  background-color: $bb-black;
+}
+
+.cardle__select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  border: 2px solid $bb-white;
+  border-radius: 0.25rem;
+  font-family: inherit;
+  font-size: inherit;
+  color: white;
+  outline: none;
+  padding: 1.25rem;
+  background: none;
+
+  &:hover {
+    border-color: $bb-grey;
+  }
+
+  /* Change border when input focus*/
+
+  &:focus {
+    border-color: rgb(77, 48, 118);
+  }
+}
+
+.cardle__select:focus ~ .select__label,
+.cardle__select:not(:placeholder-shown).cardle__select:not(:focus)
+  ~ .select__label {
+  top: -0.5rem;
+  font-size: 0.8rem;
+  left: 0.8rem;
+}
