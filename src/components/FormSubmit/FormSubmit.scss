@@ -2,7 +2,18 @@
 @use "../../styles/partials/colours" as *;
 @use "../../styles/partials/typography" as *;
 
-.formsubmit{
+.form {
+  &submit {
     position: relative;
     margin: 0 2.5rem;
+  }
+
+  &__select {
+    color: $bb-white;
+    border-color: $bb-white;
+  }
+}
+
+#formSelect{
+    color: $bb-white;
 }
