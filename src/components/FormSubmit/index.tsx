@@ -1,17 +1,34 @@
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
+import Select from "../Select";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import "./FormSubmit.scss";
 
 export default function FormSubmit() {
+  const [makes, setMakes] = useState(null);
+
+  useEffect(() => {
+    axios({
+        method: "get",
+        url: `https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getMakes`,
+        withCredentials: false,
+      })
+      .then((response) => {
+        const carMakes = response.data["Makes"];
+        setMakes(carMakes);
+      })
+      .catch((error) => error);
+  }, []);
+
+  console.log(makes);
+  if (!makes) {
+    console.log("makes loading...");
+  }
   return (
-    <form action="" className="formsubmit">
-      <InputLabel id="formSelect">Car</InputLabel>
-      <Select label="Car" className="form__select" id="formSelect">
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
+    <form action="" className="form">
+      <Select className="select__input--make" name="Make" />
+      <Select className="select__input--model" name="Model" />
+      <Select className="select__input--year" name="Year" />
+      <button type="submit" className="form__submit">submit</button>
     </form>
   );
 }

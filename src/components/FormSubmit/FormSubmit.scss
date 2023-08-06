@@ -3,17 +3,21 @@
 @use "../../styles/partials/typography" as *;
 
 .form {
-  &submit {
     position: relative;
     margin: 0 2.5rem;
-  }
+    display: flex;
+    flex-direction: column;
 
-  &__select {
-    color: $bb-white;
-    border-color: $bb-white;
-  }
+
+    &__submit{
+        width: 60%;
+        margin: 0.5rem auto;
+        // margin: 0 auto 1rem;
+        background: none;
+        font: inherit;
+        color: inherit;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
 }
 
-#formSelect{
-    color: $bb-white;
-}
