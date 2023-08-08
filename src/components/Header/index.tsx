@@ -4,7 +4,14 @@ import question from "../../assets/icons/question-icon.svg";
 import chart from "../../assets/icons/chart-icon.svg";
 import "./Header.scss";
 
-export default function Header() {
+
+interface headerProps {
+  onClick: () => any
+}
+export default function Header({onClick}: headerProps) {
+
+
+
   return (
     <nav className="nav">
       <a href="https://www.boxbox.autos/" className="nav__logo">
