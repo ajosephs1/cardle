@@ -2,6 +2,7 @@
 @use "./styles/partials/colours" as *;
 
 .App {
+  max-width: 800px;
   background-color: $bb-black;
   color: $bb-white;
   height: 100%;

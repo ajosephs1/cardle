@@ -1,6 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from 'react'
 import Header from './components/Header';
+import HelpModal from './components/HelpModal';
 import CarImage from './components/CarImage';
 import ScoreBoard from './components/ScoreBoard';
 import FormSubmit from './components/FormSubmit';
@@ -22,6 +23,7 @@ function App() {
       <ScoreBoard/>
       <FormSubmit/>
       <div className='advertisement'><p>Ads placement</p></div>
+      {/* <HelpModal/> */}
     </div>
   );
 }

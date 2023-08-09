@@ -1,0 +1,33 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: inherit;
+
+  &__info {
+    margin: auto;
+    width: 85%;
+    height: 90%;
+    background-color: $bb-grey;
+    padding: 0 2rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+  }
+
+  &__subheading{
+    text-decoration: underline;
+    padding: 1rem 0;
+  }
+}
