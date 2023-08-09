@@ -1,28 +1,29 @@
-import bbLogo from "../../assets/images/boxbox_logo.svg";
+// import bbLogo from "../../assets/images/boxbox_logo.svg";
 import instagram from "../../assets/icons/instagram-icon.svg";
 import question from "../../assets/icons/question-icon.svg";
 import chart from "../../assets/icons/chart-icon.svg";
 import "./Header.scss";
 
-
-interface headerProps {
-  onClick: () => any
+interface HeaderProps {
+  handleClick: (bool: boolean) => void;
 }
-export default function Header({onClick}: headerProps) {
 
-
+export default function Header({ handleClick }: HeaderProps) {
 
   return (
     <nav className="nav">
-      <a href="https://www.boxbox.autos/" className="nav__logo">
-        <img src={bbLogo} alt="BoxBox logo" className="nav__logo--img" />
+      <a href="https://boxbox.autos/" target="blank" className="nav__header--link">
+        <h1 className="nav__header">CAR-DLE</h1>
       </a>
-      <h1 className="nav__header">CAR-DLE</h1>
       <div className="nav__links">
-        <div className="nav__link">
+        <a
+          href="https://www.instagram.com/boxbox_carclub/"
+          target="blank"
+          className="nav__link"
+        >
           <img src={instagram} alt="instagram icon" className="nav__icon" />
-        </div>
-        <div className="nav__link">
+        </a>
+        <div className="nav__link" onClick={() => handleClick(true)}>
           <img src={question} alt="question icon" className="nav__icon" />
         </div>
         <div className="nav__link">
