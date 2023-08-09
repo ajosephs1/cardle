@@ -1,21 +1,30 @@
 @use "../../styles/partials/_layout.scss" as *;
 @use "../../styles/partials/colours" as *;
 @use "../../styles/partials/typography" as *;
+
 .nav {
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   &__logo {
-    height: 4rem;
+    height: 2.5rem;
 
     &--img {
       height: 100%;
     }
   }
 
-  &__header{
-    @include header-mobile
+  &__header {
+    @include header-mobile;
+
+    &--link {
+      text-decoration: none;
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 
   &__links {
@@ -26,12 +35,18 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    padding: 0.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    padding: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background-color: $bb-grey;
     border-radius: 100%;
-    margin:0 0.5rem;
+    margin: 0 0.5rem;
+    transition: 0.2s, linear;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
   }
 
   &__icon {

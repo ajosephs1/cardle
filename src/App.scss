@@ -3,11 +3,20 @@
 
 .App {
   background-color: $bb-black;
+  height: 100vh;
+}
+
+.container{
+  margin: 0 auto;
+  background-color: $bb-black;
+  position: relative;
+  max-width: 726px;
   color: $bb-white;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  
 }
 
 .advertisement{
