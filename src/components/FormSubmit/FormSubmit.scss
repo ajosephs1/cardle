@@ -3,6 +3,7 @@
 @use "../../styles/partials/typography" as *;
 
 .form {
+    @include body-mobile;
     position: relative;
     margin: 0 2.5rem;
     display: flex;
@@ -12,11 +13,10 @@
     &__submit{
         width: 60%;
         margin: 0.5rem auto;
-        // margin: 0 auto 1rem;
         background: none;
         font: inherit;
         color: inherit;
-        padding: 1rem;
+        padding: 0.25rem 0.5rem;
         border-radius: 1rem;
     }
 }
