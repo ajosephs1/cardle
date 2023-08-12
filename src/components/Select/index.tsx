@@ -1,29 +1,36 @@
-import './Select.scss'
+import { useState } from "react";
+import "./Select.scss";
 
 export type SelectProps = {
-  data: string[] | number[];
+  data: Array<(string|number)>;
   name: string;
-  class: string
-}
+  class: string;
+};
 
 export default function Select(props: SelectProps) {
+  // onclick if searh is empty display a dropdown of all the data option
+  // once typing filter search to include what's in the search box to lowecase everything
+  //if name is model select search box is diabled
+  const [search, setSearch] = useState("");
+  const [focus, setFocus] = useState(false);
 
-  console.log(props.data)
+
+  const filteredData: Array<(string|number)> = props.data.filter(item=> item.toString().toLowerCase().includes(search.toLowerCase()))
+
+  // console.log(filteredData)
   return (
-    <div className= "select">
-      {/* include animation for when selected label goes to top left */}
-      {/* <label htmlFor="cardle-select" className="select__label">
-        {props.name}
-      </label> */}
-      <select
-        name={props.name}
+    <div className="select">
+      <input
+        type="text"
         id="cardle-select"
-        className= {`select__input ${props.class}`}
+        className={`select__input ${props.class}`}
         placeholder={props.name}
-      >
-        <option value="1">{props.name}</option>
-        {props.data.map(item => (<option key={crypto.randomUUID()} value={item}>{item}</option>))}
-      </select>
+        onChange={(e) => setSearch(e.target.value)}
+        onFocus={() => setFocus(true)}
+      />
+      {focus && <ul className="select__data">{
+        filteredData.map((item, index) => (<li key={index}>{item}</li>))
+      }</ul>}
     </div>
   );
 }

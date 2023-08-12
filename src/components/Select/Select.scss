@@ -37,6 +37,13 @@
     }
 
   }
+
+  &__data{
+    list-style-type: none;
+    padding: 0 0.5rem;
+    height: 3rem;
+    overflow: scroll;
+  }
 }
 
 

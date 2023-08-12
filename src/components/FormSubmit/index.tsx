@@ -13,24 +13,6 @@ export default function FormSubmit() {
   // get value from selected makes and set model state 
   // years will be year ranges 
 
-
-  // useEffect(() => {
-  //   axios({
-  //       method: "get",
-  //       url: `https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getMakes`,
-  //       withCredentials: false,
-  //     })
-  //     .then((response) => {
-  //       const carMakes = response.data["Makes"];
-  //       setMakes(carMakes);
-  //     })
-  //     .catch((error) => error);
-  // }, []);
-
-  // console.log(makes);
-  // if (!makes) {
-  //   console.log("makes loading...");
-  // }
   return (
     <form action="" className="form">
       <Select class="select__input--make" name="Make" data={makes}/>
