@@ -39,9 +39,12 @@
   }
 
   &__data{
+    position: absolute;
+    width: 100%;
+    top: 2rem;
     list-style-type: none;
     padding: 0 0.5rem;
-    height: 3rem;
+    height: 5rem;
     overflow: scroll;
   }
 }
