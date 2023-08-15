@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Select.scss";
 
 export type SelectProps = {
@@ -20,8 +20,29 @@ export default function Select(props: SelectProps) {
   const [focus, setFocus] = useState(false);
   const [inputVal, setInputValue] = useState("");
 
+  const selectRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
+  }, []);
+
+  useEffect(() => {
+    // Attach a click event listener to the window
+    const handleWindowClick = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setFocus(false); // Hide the dropdown when clicking outside
+      }
+    };
+
+    window.addEventListener("click", handleWindowClick);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("click", handleWindowClick);
+    };
   }, []);
 
   const filteredData: Array<string | number> = props.data.filter((item) =>
@@ -50,7 +71,7 @@ export default function Select(props: SelectProps) {
 
   return (
     // may have to return a different div for each typeof element
-    <div className="select">
+    <div className="select" ref={selectRef}>
       <input
         type="text"
         id="cardle-select"
