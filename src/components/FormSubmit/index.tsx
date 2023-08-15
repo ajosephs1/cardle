@@ -5,6 +5,15 @@ import DateRangeSelect from "../DateRangeSelect";
 // import axios from "axios";
 import "./FormSubmit.scss";
 
+ type FormProps = {
+  formVals: {
+    make: string,
+    model: string,
+    year: string
+  },
+  updateForm: ()=> void
+};
+
 export default function FormSubmit() {
   const [selMake, setSelMake] = useState({
     name: "",

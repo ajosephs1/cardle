@@ -8,8 +8,8 @@ type SelectOption = {
 
 const generateDateRangeOptions = (): SelectOption[] => {
   const currentYear = new Date().getFullYear();
-  const startYear = 1930;
-  const yearRange = 10;
+  const startYear = 1950;
+  const yearRange = 5;
   const options: SelectOption[] = [];
 
   for (let year = startYear; year <= currentYear; year += yearRange) {
