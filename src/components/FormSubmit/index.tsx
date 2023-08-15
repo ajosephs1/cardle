@@ -6,17 +6,36 @@ import "./FormSubmit.scss";
 
 
 export default function FormSubmit() {
-  // const [makes, setMakes] = useState(null);
+  const [selMake, setSelMake] = useState({
+    name: '',
+    isSel: false
+  });
+
+  const [formVals, setFormVals] = useState({
+    make: "",
+    model: "",
+    year: ""
+  })
+
+  // need a state for all value for submit in an object{make,model,year}
+  // 
+  function updateForm(valtype: string, val: string){
+    setFormVals({...formVals, [valtype]: val})
+  }
 
   const makes = [...new Set(carData.map(item => item.make))].sort()
+  const models = [...new Set(carData.filter(item => item.make == formVals.make).map(item => item.model))].sort()
+
+  console.log(formVals)
+  console.log(models)
 
   // get value from selected makes and set model state 
   // years will be year ranges 
 
   return (
     <form action="" className="form">
-      <Select class="select__input--make" name="Make" data={makes}/>
-      {/* <Select class="select__input--model" name="Model" /> */}
+      <Select class="select__input--make" name="Make" data={makes} updateForm={updateForm} selType='make'/>
+      <Select class="select__input--model" name="Model" data={models} updateForm={updateForm} selType="model" />
       {/* <Select class="select__input--year" name="Year" /> */}
       <button type="submit" className="form__submit">submit</button>
     </form>
