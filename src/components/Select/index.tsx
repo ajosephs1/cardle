@@ -22,6 +22,8 @@ export default function Select(props: SelectProps) {
 
   const selectRef = useRef<HTMLDivElement>(null);
 
+  
+
   useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
   }, []);
