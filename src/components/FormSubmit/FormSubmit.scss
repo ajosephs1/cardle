@@ -14,10 +14,18 @@
         width: 60%;
         margin: 0.5rem auto;
         background: none;
-        font: inherit;
+        font-size: inherit;
+        font-family: inherit;
         color: inherit;
         padding: 0.25rem 0.5rem;
+        outline: none;
+        border: 2px solid $bb-white;
         border-radius: 1rem;
+        cursor: pointer;
+
+        &:hover{
+            border-color: $bb-grey;
+        }
     }
 }
 
