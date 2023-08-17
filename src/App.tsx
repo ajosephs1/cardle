@@ -10,14 +10,70 @@ import "./App.scss";
 function App() {
   const [help, setHelp] = useState(false);
 
+  // state for round
+  const [round, setRound] = useState({
+    currentRound: 1,
+    1: {
+      played: false,
+      score: 0,
+      make: null,
+      model: null,
+      year: null,
+    },
+    2: {
+      played: false,
+      score: 0,
+      make: null,
+      model: null,
+      year: null,
+    },
+    3: {
+      played: false,
+      score: 0,
+      make: null,
+      model: null,
+      year: null,
+    },
+    4: {
+      played: false,
+      score: 0,
+      make: null,
+      model: null,
+      year: null,
+    },
+    5: {
+      played: false,
+      score: 0,
+      make: null,
+      model: null,
+      year: null,
+    }
+  });
+
+  function updateRound(){
+    const nextRound = round.currentRound + 1
+    // remove ternary function 
+    setRound({...round, currentRound: round.currentRound === 5? 0: nextRound})
+  }
+
+  console.log(round.currentRound)
+  
   const [formVals, setFormVals] = useState({
     make: "",
     model: "",
     year: "",
   });
 
-  // game logic 
- /*
+  const answer = {
+    make: "BMW",
+    model: "M3",
+    year: "1985 - 1989",
+  };
+  // mock answer
+  // include an object and 5 images
+
+  // game logic
+  /*
  1. useEffect to hold state of game logic for the day 
  2. scoreboard will work in a loop: 
  max five loops
@@ -37,20 +93,20 @@ function App() {
     setHelp(bool);
   };
 
-  console.log(formVals)
-// hold values of form input in app state 
-// therfore pass props to formsubmit then 
+  console.log(formVals);
+  // hold values of form input in app state
+  // therfore pass props to formsubmit then
   return (
     <div className="App">
       <main className="container">
         <Header handleClick={helpClick} />
-        <CarImage />
+        <CarImage round={round.currentRound}/>
         <ScoreBoard />
-        <FormSubmit formValues ={formVals} updateForm = {updateForm}/>
+        <FormSubmit formValues={formVals} updateForm={updateForm} updateRound ={updateRound} />
         <div className="advertisement">
           <p>Ads placement</p>
         </div>
-        {help? <HelpModal handleClick={helpClick}/>: null}
+        {help ? <HelpModal handleClick={helpClick} /> : null}
       </main>
     </div>
   );
