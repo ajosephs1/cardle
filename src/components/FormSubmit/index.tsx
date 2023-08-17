@@ -5,45 +5,27 @@ import DateRangeSelect from "../DateRangeSelect";
 // import axios from "axios";
 import "./FormSubmit.scss";
 
- type FormProps = {
-  formVals: {
+type FormProps = {
+  formValues: {
     make: string,
     model: string,
-    year: string
-  },
-  updateForm: ()=> void
+    year:string
+  }
+  updateForm: (valtype: string, val: string) => void;
 };
 
-export default function FormSubmit() {
-  const [selMake, setSelMake] = useState({
-    name: "",
-    isSel: false,
-  });
-
-  const [formVals, setFormVals] = useState({
-    make: "",
-    model: "",
-    year: "",
-  });
-
-  // need a state for all value for submit in an object{make,model,year}
-  //
-  function updateForm(valtype: string, val: string) {
-    setFormVals({ ...formVals, [valtype]: val });
-  }
+export default function FormSubmit({updateForm, formValues }: FormProps) {
 
   const makes = [...new Set(carData.map((item) => item.make))].sort();
   const models = [
     ...new Set(
       carData
-        .filter((item) => item.make == formVals.make)
+        .filter((item) => item.make == formValues.make)
         .map((item) => item.model)
     ),
   ].sort();
 
-  console.log(formVals);
-  console.log(models);
-
+ 
   // get value from selected makes and set model state
   // years will be year ranges
 
@@ -63,10 +45,8 @@ export default function FormSubmit() {
         updateForm={updateForm}
         selType="model"
       />
-      {/* <Select class="select__input--year" name="Year" /> */}
-      {/* for the final input we add date ranges if the date is between the date range then the answer is correct*/}
-      <DateRangeSelect />
-      <button type="submit" className="form__submit">
+      <DateRangeSelect selType="year" updateForm={updateForm}/>
+      <button type="submit" className="form__submit" onClick={(e=> e.preventDefault())}>
         submit
       </button>
     </form>

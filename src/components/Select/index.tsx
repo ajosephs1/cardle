@@ -22,8 +22,6 @@ export default function Select(props: SelectProps) {
 
   const selectRef = useRef<HTMLDivElement>(null);
 
-  
-
   useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
   }, []);
@@ -65,10 +63,8 @@ export default function Select(props: SelectProps) {
       setInputValue(liValue);
       setSearch("");
       setFocus(false);
-      props.updateForm(`${props.selType}`, liValue)
+      props.updateForm(`${props.selType}`, liValue);
     }
-    // else if (liValue && selectType.model){}
-    // else if (liValue && selectType.year){}
   }
 
   return (
