@@ -2,12 +2,14 @@
 @use "../../styles/partials/colours" as *;
 @use "../../styles/partials/typography" as *;
 
-.select {
+.select-data {
   width: 100%;
   position: relative;
-  margin-bottom: 0.425rem;
+  margin-bottom: 0.25rem;
 
   &__input {
+    top: 0;
+    left: 0;
     width: 100%;
     height: fit-content;
     border: 2px solid $bb-white;
@@ -19,32 +21,16 @@
     padding: 0.25rem 0.5rem;
     background: none;
 
-    &::placeholder {
-      color: $bb-white;
-    }
-
     &:hover {
       border-color: $bb-grey;
     }
   }
 
-  &__data {
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    top: 1.8rem;
-    list-style-type: none;
-    padding: 0 0.5rem;
-    height: 5rem;
-    overflow: scroll;
-    border: 2px solid $bb-white;
-    border-top: none;
-    border-radius: 0 0 0.25rem 0.25rem;
-    scroll-behavior: smooth;
-    background-color: $bb-black;
-  }
-
   &__value {
+    background-color: $bb-black;
+    font-family: inherit;
+    font-size: inherit;
+
     &:hover {
       background-color: $bb-grey;
       cursor: pointer;
