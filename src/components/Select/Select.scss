@@ -37,6 +37,10 @@
     padding: 0 0.5rem;
     height: 5rem;
     overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    // scrollbar-color: $bb-grey;
+    // scrollbar-base-color: $bb-black;
     border: 2px solid $bb-white;
     border-top: none;
     border-radius: 0 0 0.25rem 0.25rem;

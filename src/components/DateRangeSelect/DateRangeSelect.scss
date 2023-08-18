@@ -6,6 +6,8 @@
   width: 100%;
   position: relative;
   margin-bottom: 0.25rem;
+  font-family: inherit;
+  font-size: inherit;
 
   &__input {
     top: 0;
@@ -23,12 +25,13 @@
 
     &:hover {
       border-color: $bb-grey;
+      cursor: pointer;
     }
   }
 
   &__value {
+    @include body-mobile;
     background-color: $bb-black;
-    font-family: inherit;
     font-size: inherit;
 
     &:hover {

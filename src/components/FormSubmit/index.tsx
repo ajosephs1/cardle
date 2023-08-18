@@ -7,15 +7,19 @@ import "./FormSubmit.scss";
 
 type FormProps = {
   formValues: {
-    make: string,
-    model: string,
-    year:string
-  }
+    make: string;
+    model: string;
+    year: string;
+  };
   updateForm: (valtype: string, val: string) => void;
+  updateRound: () => void;
 };
 
-export default function FormSubmit({updateForm, formValues }: FormProps) {
-
+export default function FormSubmit({
+  formValues,
+  updateForm,
+  updateRound,
+}: FormProps) {
   const makes = [...new Set(carData.map((item) => item.make))].sort();
   const models = [
     ...new Set(
@@ -25,7 +29,6 @@ export default function FormSubmit({updateForm, formValues }: FormProps) {
     ),
   ].sort();
 
- 
   // get value from selected makes and set model state
   // years will be year ranges
 
@@ -45,8 +48,16 @@ export default function FormSubmit({updateForm, formValues }: FormProps) {
         updateForm={updateForm}
         selType="model"
       />
-      <DateRangeSelect selType="year" updateForm={updateForm}/>
-      <button type="submit" className="form__submit" onClick={(e=> e.preventDefault())}>
+      <DateRangeSelect selType="year" updateForm={updateForm} />
+      <button
+        type="submit"
+        className="form__submit"
+        // onSubmit={updateRound}
+        onClick={(e) => {
+          e.preventDefault()
+          updateRound()
+        }}
+      >
         submit
       </button>
     </form>

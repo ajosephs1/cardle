@@ -1,3 +1,9 @@
-.carImage {
-  margin: 1rem auto;
+.image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+
+  &--container {
+    margin: 1rem auto;
+    width: 180px;
+  }
 }
