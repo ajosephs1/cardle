@@ -33,7 +33,16 @@
     margin: 0 auto;
     width: 1.125rem;
     border: 1px solid $bb-white;
+    box-shadow: 0 0 10px $bb-white;
     border-radius: 100%;
+
+    &--red{
+      background-color: red;
+    }
+
+    &--green{
+      background-color: green;
+    }
 
     &__container {
       width: 30%;
