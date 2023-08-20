@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./ScoreBoard.scss";
 
 type ScoreBoardProps = {
@@ -21,6 +22,187 @@ export default function ScoreBoard({
   currentPoints,
   score,
 }: ScoreBoardProps) {
+  const [makeClassName, setMakeClassName] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  const [modelClassName, setModelClassName] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  const [yearClassName, setYearClassName] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  
+  const [lightClass, setLightClass] = useState({
+    makeLight: {
+      1: "",
+      2: "",
+      3: "",
+      4: "",
+      5: ""
+    },
+    modelLight: {
+      1: "",
+      2: "",
+      3: "",
+      4: "",
+      5: ""
+    },
+    yearLight: {
+      1: "",
+      2: "",
+      3: "",
+      4: "",
+      5: ""
+    },
+  });
+  // add state and hold classnames in each object pass current round through to useEffect
+  
+  // pass update class as props to formSubmit
+  // arguments would be states for each so four arguments
+  // lift state to app
+
+  // function updateClass() {
+  //   if (score[currentRound].make) {
+  //     setTimeout(() => {
+  //       setMakeClassName({
+  //         ...lightClass, makeLight: {...lightClass.make, [currentRound]: "scoreboard__light--green"}
+  //       });
+  //     }, 1000);
+  //   } else if (score[currentRound].make === false) {
+  //     setTimeout(() => {
+  //       setMakeClassName({
+  //         ...makeClassName,
+  //         [currentRound]: "scoreboard__light--red",
+  //       });
+  //     }, 1000);
+  //   } else {
+  //     setMakeClassName({
+  //       ...makeClassName,
+  //       [currentRound]: "",
+  //     });
+  //   }
+
+  //   if (score[currentRound].model) {
+  //     setTimeout(() => {
+  //       setModelClassName({
+  //         ...modelClassName,
+  //         [currentRound]: "scoreboard__light--green",
+  //       });
+  //     }, 2000);
+  //   } else if (score[currentRound].model === false) {
+  //     setTimeout(() => {
+  //       setModelClassName({
+  //         ...modelClassName,
+  //         [currentRound]: "scoreboard__light--red",
+  //       });
+  //     }, 2000);
+  //   } else {
+  //     setModelClassName({
+  //       ...modelClassName,
+  //       [currentRound]: "",
+  //     });
+  //   }
+
+  //   if (score[currentRound].year) {
+  //     setTimeout(() => {
+  //       setYearClassName({
+  //         ...yearClassName,
+  //         [currentRound]: "scoreboard__light--green",
+  //       });
+  //     }, 3000);
+  //   } else if (score[currentRound].year === false) {
+  //     setTimeout(() => {
+  //       setYearClassName({
+  //         ...yearClassName,
+  //         [currentRound]: "scoreboard__light--red",
+  //       });
+  //     }, 3000);
+  //   } else {
+  //     setYearClassName({
+  //       ...yearClassName,
+  //       [currentRound]: "",
+  //     });
+  //   }
+  // }
+
+  useEffect(() => {
+    updateClass();
+    // if (score[currentRound].make) {
+    //   setTimeout(() => {
+    //     setMakeClassName((prevMakeClassName) => ({
+    //       ...prevMakeClassName,
+    //       [currentRound]: "scoreboard__light--green",
+    //     }));
+    //   }, 1000);
+    // } else if (score[currentRound].make === false) {
+    //   setTimeout(() => {
+    //     setMakeClassName((prevMakeClassName) => ({
+    //       ...prevMakeClassName,
+    //       [currentRound]: "scoreboard__light--red",
+    //     }));
+    //   }, 1000);
+    // } else {
+    //   setMakeClassName((prevMakeClassName) => ({
+    //     ...prevMakeClassName,
+    //     [currentRound]: "",
+    //   }));
+    // }
+    // if (score[currentRound].model) {
+    //   setTimeout(() => {
+    //     setModelClassName((prevModelClassName) => ({
+    //       ...prevModelClassName,
+    //       [currentRound]: "scoreboard__light--green",
+    //     }));
+    //   }, 2000);
+    // } else if (score[currentRound].model === false) {
+    //   setTimeout(() => {
+    //     setModelClassName((prevModelClassName) => ({
+    //       ...prevModelClassName,
+    //       [currentRound]: "scoreboard__light--red",
+    //     }));
+    //   }, 2000);
+    // } else {
+    //   setModelClassName((prevModelClassName) => ({
+    //     ...prevModelClassName,
+    //     [currentRound]: "",
+    //   }));
+    // }
+    // if (score[currentRound].year) {
+    //   setTimeout(() => {
+    //     setYearClassName((prevYearClassName) => ({
+    //       ...prevYearClassName,
+    //       [currentRound]: "scoreboard__light--green",
+    //     }));
+    //   }, 3000);
+    // } else if (score[currentRound].year === false) {
+    //   setTimeout(() => {
+    //     setYearClassName((prevYearClassName) => ({
+    //       ...prevYearClassName,
+    //       [currentRound]: "scoreboard__light--red",
+    //     }));
+    //   }, 3000);
+    // } else {
+    //   setYearClassName((prevYearClassName) => ({
+    //     ...prevYearClassName,
+    //     [currentRound]: "",
+    //   }));
+    // }
+    // ... repeat for the year class ...
+  }, [currentRound, score]);
+
+  console.log(currentRound);
   return (
     <section className="scoreboard">
       <div className="scoreboard__headings">
@@ -33,145 +215,85 @@ export default function ScoreBoard({
         <div className="scoreboard__row">
           <div className="scoreboard__light__container">
             <div
-              className={`scoreboard__light scoreboard__light--make ${
-                score[1].make
-                  ? "scoreboard__light--green"
-                  :(score[1].make === null? "" : "scoreboard__light--red")
-              }`}
+              className={`scoreboard__light scoreboard__light--make ${makeClassName[1]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--model ${
-                score[1].model
-                  ? "scoreboard__light--green"
-                  :(score[1].model === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--model ${modelClassName[1]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--year ${
-                score[1].year
-                  ? "scoreboard__light--green"
-                  :(score[1].year === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--year ${yearClassName[1]}`}
             />
           </div>
         </div>
         <div className="scoreboard__row">
           <div className="scoreboard__light__container">
             <div
-              className={`scoreboard__light scoreboard__light--make ${
-                score[2].make
-                  ? "scoreboard__light--green"
-                  :(score[2].make === null? "" : "scoreboard__light--red")
-              }`}
+              className={`scoreboard__light scoreboard__light--make ${makeClassName[2]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--model ${
-                score[2].model
-                  ? "scoreboard__light--green"
-                  :(score[2].model === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--model ${modelClassName[2]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--year ${
-                score[2].year
-                  ? "scoreboard__light--green"
-                  :(score[2].year === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--year ${yearClassName[2]}`}
             />
           </div>
         </div>
         <div className="scoreboard__row">
           <div className="scoreboard__light__container">
             <div
-              className={`scoreboard__light scoreboard__light--make ${
-                score[3].make
-                  ? "scoreboard__light--green"
-                  :(score[3].make === null? "" : "scoreboard__light--red")
-              }`}
+              className={`scoreboard__light scoreboard__light--make ${makeClassName[3]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--model ${
-                score[3].model
-                  ? "scoreboard__light--green"
-                  :(score[3].model === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--model ${modelClassName[3]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--year ${
-                score[3].year
-                  ? "scoreboard__light--green"
-                  :(score[3].year === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--year ${yearClassName[3]}`}
             />
           </div>
         </div>
         <div className="scoreboard__row">
           <div className="scoreboard__light__container">
             <div
-              className={`scoreboard__light scoreboard__light--make ${
-                score[4].make
-                  ? "scoreboard__light--green"
-                  :(score[4].make === null? "" : "scoreboard__light--red")
-              }`}
+              className={`scoreboard__light scoreboard__light--make ${makeClassName[4]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--model ${
-                score[4].model
-                  ? "scoreboard__light--green"
-                  :(score[4].model === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--model ${modelClassName[4]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--year ${
-                score[4].year
-                  ? "scoreboard__light--green"
-                  :(score[4].year === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--year ${yearClassName[4]}`}
             />
           </div>
         </div>
         <div className="scoreboard__row">
           <div className="scoreboard__light__container">
             <div
-              className={`scoreboard__light scoreboard__light--make ${
-                score[5].make
-                  ? "scoreboard__light--green"
-                  :(score[5].make === null? "" : "scoreboard__light--red")
-              }`}
+              className={`scoreboard__light scoreboard__light--make ${makeClassName[5]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--model ${
-                score[5].model
-                  ? "scoreboard__light--green"
-                  :(score[5].model === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--model ${modelClassName[5]}`}
             />
           </div>
           <div className="scoreboard__light__container">
-          <div
-              className={`scoreboard__light scoreboard__light--year ${
-                score[5].year
-                  ? "scoreboard__light--green"
-                  :(score[5].year === null? "" : "scoreboard__light--red")
-              }`}
+            <div
+              className={`scoreboard__light scoreboard__light--year ${yearClassName[5]}`}
             />
           </div>
         </div>
