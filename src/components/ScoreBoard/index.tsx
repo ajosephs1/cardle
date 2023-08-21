@@ -207,7 +207,6 @@ export default function ScoreBoard({
             />
           </div>
         </div>
-        
       </section>
       <section className="scoreboard__tally">
         <div className="scoreboard__tally-row">
