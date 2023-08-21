@@ -22,7 +22,8 @@ export default function ScoreBoard({
   currentPoints,
   score,
 }: ScoreBoardProps) {
-  console.log(currentRound);
+
+  // create function for row to make more DRY
   return (
     <section className="scoreboard">
       <div className="scoreboard__headings">

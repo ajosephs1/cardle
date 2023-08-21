@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import HelpModal from "./components/HelpModal";
+import ResultModal from "./components/ResultModal";
 import CarImage from "./components/CarImage";
 import ScoreBoard from "./components/ScoreBoard";
 import FormSubmit from "./components/FormSubmit";
@@ -10,6 +11,8 @@ import "./App.scss";
 function App() {
   // state to display instructions modal
   const [help, setHelp] = useState(false);
+
+  const [didWin, setDidWin] = useState("");
   // state for round
   const [round, setRound] = useState({
     currentRound: 1,
@@ -116,6 +119,16 @@ function App() {
       year: roundBools.year,
     });
     setFormVals(newFormVals);
+
+    if (addPoints === 3) {
+      setDidWin("win");
+      // return;
+    }
+
+    if (currentRound === 5 && addPoints !== 3) {
+      setDidWin("lose");
+      // return;
+    }
   }
 
   function updateRound() {
@@ -133,6 +146,8 @@ function App() {
     setHelp(bool);
   };
 
+  const totalPoints = round.currentPoints * (round.multiplier + 1)
+
   return (
     <div className="App">
       <main className="container">
@@ -142,7 +157,7 @@ function App() {
           currentRound={round.currentRound}
           multiplier={round.multiplier}
           currentPoints={round.currentPoints}
-          score = {score}
+          score={score}
         />
         <FormSubmit
           formValues={formVals}
@@ -152,7 +167,8 @@ function App() {
         <div className="advertisement">
           <p>Ads placement</p>
         </div>
-        {help ? <HelpModal handleClick={helpClick} /> : null}
+        {help && <HelpModal handleClick={helpClick} />}
+        {didWin && <ResultModal score={score} result={didWin} total={totalPoints}/>}
       </main>
     </div>
   );
