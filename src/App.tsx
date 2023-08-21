@@ -22,43 +22,32 @@ function App() {
 
   const [score, setScore] = useState({
     1: {
-      // played: false,
-      // score: 0,
       make: null,
       model: null,
       year: null,
     },
     2: {
-      // played: false,
-      // score: 0,
       make: null,
       model: null,
       year: null,
     },
     3: {
-      // played: false,
-      // score: 0,
       make: null,
       model: null,
       year: null,
     },
     4: {
-      // played: false,
-      // score: 0,
       make: null,
       model: null,
       year: null,
     },
     5: {
-      // played: false,
-      // score: 0,
       make: null,
       model: null,
       year: null,
     },
   });
-  // state to hold current use input values
-  // after submit set input values and erase only values that are incorrect
+
   const [formVals, setFormVals] = useState({
     make: "",
     model: "",
@@ -72,85 +61,68 @@ function App() {
     year: "1985-1989",
   };
 
-  // use inscope variable to call upadateScore only once and previous value only once 
-  function updateScore() {
-    // if (make = answer.make) setState (set round.round[round.currentround].make = true) setState(Add to currentPoints score )
-    if (formVals.make === answer.make) {
-      setScore({
-        ...score,
-        [round.currentRound]: { ...[round.currentRound], make: true },
-      });
+  function updateScore(nR: number, nM: number) {
+    let currentRound = round.currentRound;
+    let addPoints = round.currentPoints;
+    let roundBools = {
+      make: false,
+      model: false,
+      year: false,
+    };
+    let newFormVals = {
+      make: formVals.make,
+      model: formVals.model,
+      year: formVals.year,
+    };
 
-      const newPoints = round.currentPoints + 1;
-      !round.make && setRound({ ...round, currentPoints: newPoints });
+    if (formVals.make === answer.make) {
+      roundBools.make = true;
+
+      if (!round.make) {
+        addPoints += 1;
+      }
     } else {
-      setScore({
-        ...score,
-        [round.currentRound]: { ...[round.currentRound], make: false },
-      });
-      setFormVals({
-        ...formVals,
-        make: "",
-      });
+      newFormVals.make = "";
     }
 
     if (formVals.model === answer.model) {
-      setScore({
-        ...score,
-        [round.currentRound]: { ...[round.currentRound], model: true },
-      });
+      roundBools.model = true;
 
-      const newPoints = round.currentPoints + 1;
-      !round.model && setRound({ ...round, currentPoints: newPoints });
+      if (!round.model) {
+        addPoints += 1;
+      }
     } else {
-      setScore({
-        ...score,
-        [round.currentRound]: { ...[round.currentRound], model: false },
-      });
-      setFormVals({
-        ...formVals,
-        model: "",
-      });
+      newFormVals.model = "";
     }
 
     if (formVals.year === answer.year) {
-      setScore({
-        ...score,
-        [round.currentRound]: { ...[round.currentRound], year: true },
-      });
+      roundBools.year = true;
 
-      const newPoints = round.currentPoints + 1;
-      !round.year && setRound({ ...round, currentPoints: newPoints });
+      if (!round.year) {
+        addPoints += 1;
+      }
     } else {
-      setScore({
-        ...score,
-        [round.currentRound]: { ...[round.currentRound], year: false },
-      });
-      setFormVals({
-        ...formVals,
-        make: "",
-      });
+      newFormVals.year = "";
     }
+
+    setScore({ ...score, [currentRound]: roundBools });
+    setRound({
+      ...round,
+      currentPoints: addPoints,
+      currentRound: round.currentRound === 5 ? 1 : nR,
+      multiplier: round.multiplier === 1 ? 5 : nM,
+      make: roundBools.make,
+      model: roundBools.model,
+      year: roundBools.year,
+    });
+    setFormVals(newFormVals);
   }
-  /* first check
-   */
-  /* 
-  perform this for all rounds this will trigger lights
-  put value of false of form inputs back to "" all others remain the same
-  */
-  //  if at any attemp score === 3 display winning modal
-  //  on the fifth attempt if current score != 3 display losing modal : display winning modal
+
   function updateRound() {
     const nextRound = round.currentRound + 1;
     const nextMultiplier = round.multiplier - 1;
-    // remove ternary function
-    // update state
-    updateScore()
-    setRound({
-      ...round,
-      currentRound: round.currentRound === 5 ? 1 : nextRound,
-      multiplier: round.multiplier === 1 ? 5 : nextMultiplier,
-    });
+
+    updateScore(nextRound, nextMultiplier);
   }
 
   function updateForm(valtype: string, val: string) {
@@ -161,9 +133,6 @@ function App() {
     setHelp(bool);
   };
 
-  console.log((formVals.year))
-  console.log((answer.year))
-
   return (
     <div className="App">
       <main className="container">
@@ -173,6 +142,7 @@ function App() {
           currentRound={round.currentRound}
           multiplier={round.multiplier}
           currentPoints={round.currentPoints}
+          score = {score}
         />
         <FormSubmit
           formValues={formVals}
