@@ -6,4 +6,30 @@
     margin: 1rem auto;
     width: 180px;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--modal {
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    &-content {
+      margin-top: 3rem;
+      width: 90%;
+      aspect-ratio: 3 / 2;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
