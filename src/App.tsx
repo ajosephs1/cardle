@@ -168,7 +168,7 @@ function App() {
           <p>Ads placement</p>
         </div>
         {help && <HelpModal handleClick={helpClick} />}
-        {didWin && <ResultModal score={score} result={didWin} total={totalPoints}/>}
+        {didWin && <ResultModal score={score} result={didWin} round = {round.currentRound}total={totalPoints} closeModal={()=> setDidWin('')}/>}
       </main>
     </div>
   );
