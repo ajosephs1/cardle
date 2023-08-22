@@ -45,9 +45,32 @@ export default function ResultModal({
       }
     }
 
-    console.log(result);
+    return result;
   }
 
+  function shareResult() {
+    const shareData = { text: emojiGrid(score) };
+    if (navigator.share) {
+      navigator
+        .share(shareData)
+        .then(() => {
+          console.log(`thanks for sharing \n ${shareData.text} `);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      navigator.clipboard
+        .writeText(shareData.text)
+        .then(() => {
+          console.log("copied to clipboard");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
+  // if navigator.canShare() navigator.share() else copy to clipboard
   /* 
 filter through objects that don't have a score of null
 create a row for each objec and a circle for each result so two maps or do a loop of 3  */
@@ -262,7 +285,7 @@ create a row for each objec and a circle for each result so two maps or do a loo
           src={share}
           alt="share button"
           className="result__share"
-          onClick={() => emojiGrid(score)}
+          onClick={() => shareResult()}
         />
       </div>
     </div>
