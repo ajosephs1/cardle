@@ -1,3 +1,4 @@
+import {useState} from "react"
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
 import fullImage from "../../data/images/bmwe30.png";
@@ -24,10 +25,8 @@ export default function ResultModal({
   total,
   closeModal,
 }: ResultModalProps) {
-  // function to display emoji grid
-  // map through each key
-  // loop 3 make model year for each true add green circle
-  // for each false add red circle on the third loop add a line break
+  
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false)
 
   function emojiGrid(obj: ResultModalProps["score"]) {
     let result = `Car-dle ${round - 1}/5\n\n`;
@@ -45,9 +44,36 @@ export default function ResultModal({
       }
     }
 
-    console.log(result);
+    return result;
   }
 
+  function shareResult() {
+    const shareData = { text: emojiGrid(score) };
+    if (navigator.share) {
+      navigator
+        .share(shareData)
+        .then(() => {
+          console.log(`thanks for sharing \n ${shareData.text} `);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      navigator.clipboard
+        .writeText(shareData.text)
+        .then(() => {
+          console.log("copied to clipboard");
+          setShowCopiedMessage(true);
+          setTimeout(() => {
+            setShowCopiedMessage(false);
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
+  // if navigator.canShare() navigator.share() else copy to clipboard
   /* 
 filter through objects that don't have a score of null
 create a row for each objec and a circle for each result so two maps or do a loop of 3  */
@@ -258,11 +284,12 @@ create a row for each objec and a circle for each result so two maps or do a loo
             <p className="result__value--value">-</p>
           </div>
         </div>
+        <p className={`result__copied ${showCopiedMessage?"result__copied--visible":""}`}>coppied to clipboard 📋</p>
         <img
           src={share}
           alt="share button"
           className="result__share"
-          onClick={() => emojiGrid(score)}
+          onClick={() => shareResult()}
         />
       </div>
     </div>
