@@ -1,3 +1,4 @@
+import {useState} from "react"
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
 import fullImage from "../../data/images/bmwe30.png";
@@ -24,10 +25,8 @@ export default function ResultModal({
   total,
   closeModal,
 }: ResultModalProps) {
-  // function to display emoji grid
-  // map through each key
-  // loop 3 make model year for each true add green circle
-  // for each false add red circle on the third loop add a line break
+  
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false)
 
   function emojiGrid(obj: ResultModalProps["score"]) {
     let result = `Car-dle ${round - 1}/5\n\n`;
@@ -64,6 +63,10 @@ export default function ResultModal({
         .writeText(shareData.text)
         .then(() => {
           console.log("copied to clipboard");
+          setShowCopiedMessage(true);
+          setTimeout(() => {
+            setShowCopiedMessage(false);
+          }, 2000);
         })
         .catch((err) => {
           console.error(err);
@@ -281,6 +284,7 @@ create a row for each objec and a circle for each result so two maps or do a loo
             <p className="result__value--value">-</p>
           </div>
         </div>
+        <p className={`result__copied ${showCopiedMessage?"result__copied--visible":""}`}>coppied to clipboard 📋</p>
         <img
           src={share}
           alt="share button"

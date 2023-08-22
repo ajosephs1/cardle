@@ -37,7 +37,7 @@
   }
 
   &__title {
-    @include body-mobile;
+    @include header-mobile;
     margin: 0.5rem 0;
   }
 
@@ -115,8 +115,30 @@
     display: flex;
     justify-content: space-between;
   }
+  &__copied{
+    @include body-mobile;
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8); 
+    bottom: 1rem;
+    width: fit-content;
+    margin: auto;
+    border: 1px solid $bb-white;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    
+    &--visible{
+      display: block;
+      opacity: 1;
+    }
+  }
 
   &__share{
     height: 1rem;
+    &:hover{
+      cursor: pointer;
+    }
   }
 }
