@@ -14,6 +14,7 @@ export default function Header({ handleClick }: HeaderProps) {
     <nav className="nav">
       <a href="https://boxbox.autos/" target="blank" className="nav__header--link">
         <h1 className="nav__header">CAR-DLE</h1>
+        <p className="nav__header--tiny">powered by BoxBox</p>
       </a>
       <div className="nav__links">
         <a

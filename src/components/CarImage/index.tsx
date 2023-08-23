@@ -10,7 +10,7 @@ export default function CarImage({ round }: CarImageProps) {
 
   const imagePath = require(`../../data/images/bmwe30${round}.png`);
   return (
-    <div className="image--container">
+    <div className="image-container">
       <img
         src={imagePath}
         alt="car image placeholder"
@@ -18,12 +18,11 @@ export default function CarImage({ round }: CarImageProps) {
         onClick={() => showImageModal(true)}
       />
       {imageModal && (
-        <div className="image--modal">
+        <div className="image--modal" onClick={() => showImageModal(false)}>
           <img
             src={imagePath}
             alt="car image placeholder"
             className="image--modal-content"
-            onClick={() => showImageModal(false)}
           />
         </div>
       )}
