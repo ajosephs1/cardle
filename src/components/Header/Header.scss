@@ -3,6 +3,7 @@
 @use "../../styles/partials/typography" as *;
 
 .nav {
+  max-width: 64rem;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
@@ -19,6 +20,11 @@
   &__header {
     @include header-mobile;
 
+    &--tiny{
+      font-size: 0.5em;
+      color: $bb-pink
+    }
+
     &--link {
       text-decoration: none;
       &:hover{
@@ -28,6 +34,7 @@
   }
 
   &__links {
+    height: 100%;
     display: flex;
   }
 
@@ -36,8 +43,10 @@
     justify-content: center;
     display: flex;
     padding: 0.25rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
     background-color: $bb-grey;
     border-radius: 100%;
     margin: 0 0.5rem;
@@ -50,7 +59,8 @@
   }
 
   &__icon {
-    width: fit-content;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1 / 1;
     color: $bb-white;
   }

@@ -112,8 +112,8 @@ function App() {
     setRound({
       ...round,
       currentPoints: addPoints,
-      currentRound: round.currentRound === 5 ? 1 : nR,
-      multiplier: round.multiplier === 1 ? 5 : nM,
+      currentRound: round.currentRound === 5 ? 5 : nR,
+      multiplier: round.multiplier === 1 ? 1 : nM,
       make: roundBools.make,
       model: roundBools.model,
       year: roundBools.year,
@@ -121,12 +121,12 @@ function App() {
     setFormVals(newFormVals);
 
     if (addPoints === 3) {
-      setDidWin("win");
+      setTimeout(() => setDidWin("win"), 2750);
       // return;
     }
 
     if (currentRound === 5 && addPoints !== 3) {
-      setDidWin("lose");
+      setTimeout(() => setDidWin("lose"), 2750);
       // return;
     }
   }
@@ -146,12 +146,14 @@ function App() {
     setHelp(bool);
   };
 
-  const totalPoints = round.currentPoints * (round.multiplier + 1)
+  const totalPoints = round.currentPoints * (round.multiplier + 1);
 
   return (
     <div className="App">
-      <main className="container">
+      <header className="header">
         <Header handleClick={helpClick} />
+      </header>
+      <main className="container">
         <CarImage round={round.currentRound} />
         <ScoreBoard
           currentRound={round.currentRound}
@@ -164,11 +166,19 @@ function App() {
           updateForm={updateForm}
           updateRound={updateRound}
         />
-        <div className="advertisement">
+        {/* <div className="advertisement">
           <p>Ads placement</p>
-        </div>
+        </div> */}
         {help && <HelpModal handleClick={helpClick} />}
-        {didWin && <ResultModal score={score} result={didWin} round = {round.currentRound}total={totalPoints} closeModal={()=> setDidWin('')}/>}
+        {didWin && (
+          <ResultModal
+            score={score}
+            result={didWin}
+            round={round.currentRound}
+            total={totalPoints}
+            closeModal={() => setDidWin("")}
+          />
+        )}
       </main>
     </div>
   );

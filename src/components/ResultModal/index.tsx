@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react";
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
 import fullImage from "../../data/images/bmwe30.png";
@@ -25,8 +25,7 @@ export default function ResultModal({
   total,
   closeModal,
 }: ResultModalProps) {
-  
-  const [showCopiedMessage, setShowCopiedMessage] = useState(false)
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   function emojiGrid(obj: ResultModalProps["score"]) {
     let result = `Car-dle ${round - 1}/5\n\n`;
@@ -44,11 +43,12 @@ export default function ResultModal({
       }
     }
 
+    result += "\ncardle.com"
     return result;
   }
 
   function shareResult() {
-    const shareData = { text: emojiGrid(score) };
+    const shareData = { text: emojiGrid(score)};
     if (navigator.share) {
       navigator
         .share(shareData)
@@ -62,7 +62,7 @@ export default function ResultModal({
       navigator.clipboard
         .writeText(shareData.text)
         .then(() => {
-          console.log("copied to clipboard");
+          console.log(`copied to clipboard \n ${shareData.text} `);
           setShowCopiedMessage(true);
           setTimeout(() => {
             setShowCopiedMessage(false);
@@ -73,10 +73,6 @@ export default function ResultModal({
         });
     }
   }
-  // if navigator.canShare() navigator.share() else copy to clipboard
-  /* 
-filter through objects that don't have a score of null
-create a row for each objec and a circle for each result so two maps or do a loop of 3  */
 
   return (
     <div className="result">
@@ -284,13 +280,17 @@ create a row for each objec and a circle for each result so two maps or do a loo
             <p className="result__value--value">-</p>
           </div>
         </div>
-        <p className={`result__copied ${showCopiedMessage?"result__copied--visible":""}`}>coppied to clipboard 📋</p>
-        <img
-          src={share}
-          alt="share button"
-          className="result__share"
-          onClick={() => shareResult()}
-        />
+        <p
+          className={`result__copied ${
+            showCopiedMessage ? "result__copied--visible" : ""
+          }`}
+        >
+          coppied to clipboard 📋
+        </p>
+        <div className="result__share" onClick={() => shareResult()}>
+          <p className="result__share-text">share</p>
+          <img src={share} alt="share button" className="result__share-icon" />
+        </div>
       </div>
     </div>
   );

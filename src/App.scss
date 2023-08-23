@@ -1,6 +1,7 @@
 @use "./styles/global.scss" as *;
 @use "./styles/partials/colours" as *;
 
+
 .App {
   background-color: $bb-black;
   height: 100vh;
@@ -8,14 +9,15 @@
 
 .container{
   margin: 0 auto;
+  padding: 0.5rem 0 0;
   background-color: $bb-black;
   position: relative;
-  max-width: 726px;
+  max-width: 450px;
   color: $bb-white;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   
 }
 

@@ -1,10 +1,13 @@
 .image {
   width: 100%;
   aspect-ratio: 3 / 2;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
-  &--container {
+  &-container {
     margin: 1rem auto;
-    width: 180px;
+    width: 30vh;
   }
 
   &:hover {
@@ -12,6 +15,7 @@
   }
 
   &--modal {
+    z-index: 1;
     top: 0;
     left: 0;
     position: absolute;
@@ -26,6 +30,7 @@
       margin-top: 3rem;
       width: 90%;
       aspect-ratio: 3 / 2;
+      border-radius: 0.25rem;
 
       &:hover {
         cursor: pointer;

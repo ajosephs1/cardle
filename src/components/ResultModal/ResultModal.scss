@@ -136,9 +136,26 @@
   }
 
   &__share{
-    height: 1rem;
+    display: flex;
+    border: 2px solid $bb-white;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+
     &:hover{
       cursor: pointer;
+      border-color:  rgba(255, 255, 255, 0.5); 
     }
+
+    &-text{
+      @include body-mobile;
+      margin-right: 0.5rem;
+    }
+
+    &-icon{
+      height: 1rem;
+    }
+    
   }
 }
