@@ -154,5 +154,15 @@
     &-icon {
       height: 1rem;
     }
+
+    &-text{
+      @include body-mobile;
+      margin-right: 0.5rem;
+    }
+
+    &-icon{
+      height: 1rem;
+    }
+    
   }
 }
