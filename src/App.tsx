@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import HelpModal from "./components/HelpModal";
@@ -50,19 +51,32 @@ function App() {
       year: null,
     },
   });
-
+  
   const [formVals, setFormVals] = useState({
     make: "",
     model: "",
     year: "",
   });
+  
+  const [answer, setAnswser] = useState({
+    make: "",
+    model: "",
+    year: "",
+  })
+ 
+  useEffect(() => {
+    axios.get("http://localhost:1337/api/answers/1").then((response) => {
+      console.log(response.data.data);
+      const make = response.data.data.attributes.make
+      const model = response.data.data.attributes.model
+      const year = response.data.data.attributes.year
 
-  // mock answer that will be pulled from cms daily
-  const answer = {
-    make: "BMW",
-    model: "M3",
-    year: "1985-1989",
-  };
+    setAnswser({make, model, year} )
+    });
+
+  }, []);
+
+
 
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
@@ -112,46 +126,49 @@ function App() {
     setRound({
       ...round,
       currentPoints: addPoints,
-      currentRound: round.currentRound === 5 ? 1 : nR,
-      multiplier: round.multiplier === 1 ? 5 : nM,
+      currentRound: round.currentPoints=== 3? round.currentRound: round.currentRound === 5 ? 5 : nR,
+      multiplier: round.currentPoints=== 3? round.multiplier: round.multiplier === 1 ? 1 : nM,
       make: roundBools.make,
       model: roundBools.model,
       year: roundBools.year,
     });
     setFormVals(newFormVals);
-
+    
     if (addPoints === 3) {
-      setDidWin("win");
+      setTimeout(() => setDidWin("win"), 2750);
       // return;
     }
-
+    
     if (currentRound === 5 && addPoints !== 3) {
-      setDidWin("lose");
+      setTimeout(() => setDidWin("lose"), 2750);
       // return;
     }
   }
-
+  
   function updateRound() {
     const nextRound = round.currentRound + 1;
     const nextMultiplier = round.multiplier - 1;
-
+    
     updateScore(nextRound, nextMultiplier);
   }
-
+  
   function updateForm(valtype: string, val: string) {
     setFormVals({ ...formVals, [valtype]: val });
   }
-
+  
   const helpClick = (bool: boolean) => {
     setHelp(bool);
   };
-
-  const totalPoints = round.currentPoints * (round.multiplier + 1)
-
+  
+  const totalPoints = round.currentPoints * (round.multiplier + 1);
+  
+  
   return (
     <div className="App">
-      <main className="container">
+      <header className="header">
         <Header handleClick={helpClick} />
+      </header>
+      <main className="container">
         <CarImage round={round.currentRound} />
         <ScoreBoard
           currentRound={round.currentRound}
@@ -164,11 +181,19 @@ function App() {
           updateForm={updateForm}
           updateRound={updateRound}
         />
-        <div className="advertisement">
+        {/* <div className="advertisement">
           <p>Ads placement</p>
-        </div>
+        </div> */}
         {help && <HelpModal handleClick={helpClick} />}
-        {didWin && <ResultModal score={score} result={didWin} round = {round.currentRound}total={totalPoints} closeModal={()=> setDidWin('')}/>}
+        {didWin && (
+          <ResultModal
+            score={score}
+            result={didWin}
+            round={round.currentRound}
+            total={totalPoints}
+            closeModal={() => setDidWin("")}
+          />
+        )}
       </main>
     </div>
   );

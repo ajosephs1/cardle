@@ -54,10 +54,10 @@ export default function HelpModal({ handleClick }: ModalProps) {
             <li>
               To keep track of your score and climb the leaderboard, create a
               free account by entering your email and choosing a username
-              <li>
-                Click on the bar graph in the top right corner to view your
-                stats and the leaderboard each day
-              </li>
+            </li>
+            <li>
+              Click on the bar graph in the top right corner to view your stats
+              and the leaderboard each day
             </li>
           </ul>
           <h2 className="modal__subheading">Contact Us</h2>

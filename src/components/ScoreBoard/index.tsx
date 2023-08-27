@@ -212,25 +212,15 @@ export default function ScoreBoard({
       <section className="scoreboard__tally">
         <div className="scoreboard__tally-row">
           <p className="scoreboard__text scoreboard__text--current">
-            Current Points:
+            Current Score:
           </p>
           <p className="scoreboard__text scoreboard__text--current">
             {currentPoints === 0 ? `-` : currentPoints}
           </p>
         </div>
         <div className="scoreboard__tally-row">
-          <p className="scoreboard__text">Round Multiplier</p>
+          <p className="scoreboard__text">Final Score Multiplier:</p>
           <p className="scoreboard__text scoreboard__text--multiplier">{`x${multiplier}`}</p>
-        </div>
-        <div className="scoreboard__tally-row">
-          <p className="scoreboard__text scoreboard__text--total">
-            Total Points:
-          </p>
-          <p className="scoreboard__text scoreboard__text--total">
-            {currentPoints * multiplier === 0
-              ? `-`
-              : currentPoints * multiplier}
-          </p>
         </div>
       </section>
     </section>
