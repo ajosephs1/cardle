@@ -43,7 +43,7 @@ export default function ResultModal({
       }
     }
 
-    result += "\ncardle.com"
+    result += "cardle.com"
     return result;
   }
 
@@ -53,7 +53,7 @@ export default function ResultModal({
       navigator
         .share(shareData)
         .then(() => {
-          console.log(`thanks for sharing \n ${shareData.text} `);
+          console.log(`thanks for sharing \n\n ${shareData.text} `);
         })
         .catch((err) => {
           console.error(err);
@@ -62,7 +62,7 @@ export default function ResultModal({
       navigator.clipboard
         .writeText(shareData.text)
         .then(() => {
-          console.log(`copied to clipboard \n ${shareData.text} `);
+          console.log(`copied to clipboard \n\n ${shareData.text} `);
           setShowCopiedMessage(true);
           setTimeout(() => {
             setShowCopiedMessage(false);
