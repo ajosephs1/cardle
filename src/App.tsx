@@ -10,6 +10,10 @@ import FormSubmit from "./components/FormSubmit";
 import "./App.scss";
 
 function App() {
+
+  // function for strapiUtils
+  const [apiModels, setApiModels] = useState(null);
+  const [apiMakes, setApiMakes] = useState(null);
   // state to display instructions modal
   const [help, setHelp] = useState(false);
 
@@ -51,32 +55,31 @@ function App() {
       year: null,
     },
   });
-  
+
   const [formVals, setFormVals] = useState({
     make: "",
     model: "",
     year: "",
   });
-  
-  const [answer, setAnswser] = useState({
+
+  const [answer, setAnswer] = useState({
     make: "",
     model: "",
     year: "",
-  })
- 
-  useEffect(() => {
-    axios.get("http://localhost:1337/api/answers/1").then((response) => {
-      console.log(response.data.data);
-      const make = response.data.data.attributes.make
-      const model = response.data.data.attributes.model
-      const year = response.data.data.attributes.year
+  });
 
-    setAnswser({make, model, year} )
-    });
+  // useEffect(() => {
+  //   axios.get("http://localhost:1337/api/answers/1").then((response) => {
+  //     console.log(response.data.data);
+  //     const make = response.data.data.attributes.make
+  //     const model = response.data.data.attributes.model
+  //     const year = response.data.data.attributes.year
 
-  }, []);
+  //   setAnswer({make, model, year} )
+  //   });
 
-
+  // }, []);
+  console.log(formVals)
 
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
@@ -126,43 +129,52 @@ function App() {
     setRound({
       ...round,
       currentPoints: addPoints,
-      currentRound: round.currentPoints=== 3? round.currentRound: round.currentRound === 5 ? 5 : nR,
-      multiplier: round.currentPoints=== 3? round.multiplier: round.multiplier === 1 ? 1 : nM,
+      currentRound:
+        round.currentPoints === 3
+          ? round.currentRound
+          : round.currentRound === 5
+          ? 5
+          : nR,
+      multiplier:
+        round.currentPoints === 3
+          ? round.multiplier
+          : round.multiplier === 1
+          ? 1
+          : nM,
       make: roundBools.make,
       model: roundBools.model,
       year: roundBools.year,
     });
     setFormVals(newFormVals);
-    
+
     if (addPoints === 3) {
       setTimeout(() => setDidWin("win"), 2750);
       // return;
     }
-    
+
     if (currentRound === 5 && addPoints !== 3) {
       setTimeout(() => setDidWin("lose"), 2750);
       // return;
     }
   }
-  
+
   function updateRound() {
     const nextRound = round.currentRound + 1;
     const nextMultiplier = round.multiplier - 1;
-    
+
     updateScore(nextRound, nextMultiplier);
   }
-  
+
   function updateForm(valtype: string, val: string) {
     setFormVals({ ...formVals, [valtype]: val });
   }
-  
+
   const helpClick = (bool: boolean) => {
     setHelp(bool);
   };
-  
+
   const totalPoints = round.currentPoints * (round.multiplier + 1);
-  
-  
+
   return (
     <div className="App">
       <header className="header">

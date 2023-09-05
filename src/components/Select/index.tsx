@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./Select.scss";
 
 export type SelectProps = {
-  data: Array<string | number>;
+  data: string[];
   name: string;
   class: string;
   updateForm: (valtype: string, val: string) => void;
