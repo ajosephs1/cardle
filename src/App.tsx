@@ -11,12 +11,8 @@ import "./App.scss";
 
 function App() {
 
-  // function for strapiUtils
-  const [apiModels, setApiModels] = useState(null);
-  const [apiMakes, setApiMakes] = useState(null);
   // state to display instructions modal
   const [help, setHelp] = useState(false);
-
   const [didWin, setDidWin] = useState("");
   // state for round
   const [round, setRound] = useState({
@@ -27,7 +23,6 @@ function App() {
     model: false,
     year: false,
   });
-
   const [score, setScore] = useState({
     1: {
       make: null,
@@ -55,32 +50,49 @@ function App() {
       year: null,
     },
   });
-
   const [formVals, setFormVals] = useState({
     make: "",
     model: "",
     year: "",
   });
-
   const [answer, setAnswer] = useState({
     make: "",
     model: "",
     year: "",
   });
+  const [carImages, setCarImages] = useState({
+    imageFull: "",
+    imageOne: "",
+    imageTwo: "",
+    imageThree: "",
+    imageFour: "",
+    imageFive: ""
+  })
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:1337/api/answers/1").then((response) => {
-  //     console.log(response.data.data);
-  //     const make = response.data.data.attributes.make
-  //     const model = response.data.data.attributes.model
-  //     const year = response.data.data.attributes.year
+  const BASE_URL = 'http://localhost:1337/api'
+  useEffect(() => {
+    axios.get(`${BASE_URL}/test-answers/1?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats`).then((response) => {
+      // console.log(response.data.data);
+      const answerData = response.data.data.attributes
+      const make = answerData.make.data.attributes.make
+      const model = answerData.model.data.attributes.model
+      const year = answerData.year.data.attributes.year
+      const imageFull = answerData.imageFull.data.attributes.formats.medium.url
+      const imageOne = answerData.imageOne.data.attributes.formats.thumbnail.url
+      const imageTwo = answerData.imageTwo.data.attributes.formats.thumbnail.url
+      const imageThree = answerData.imageThree.data.attributes.formats.thumbnail.url
+      const imageFour = answerData.imageFour.data.attributes.formats.thumbnail.url
+      const imageFive = answerData.imageFive.data.attributes.formats.thumbnail.url
+      
+      // console.log(`${make}\n${model}\n${year}\n${imageFull}\n${imageOne}\n${imageTwo}\n${imageThree}\n${imageFour}\n${imageFive}`);
+      setAnswer({make, model, year} )
+      setCarImages({imageFull, imageOne, imageTwo, imageThree, imageFour, imageFive})
+    });
 
-  //   setAnswer({make, model, year} )
-  //   });
+  }, []);
 
-  // }, []);
-  console.log(formVals)
 
+  console.log(answer)
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
     let addPoints = round.currentPoints;
@@ -95,7 +107,7 @@ function App() {
       year: formVals.year,
     };
 
-    if (formVals.make === answer.make) {
+    if (answer.make && formVals.make === answer.make) {
       roundBools.make = true;
 
       if (!round.make) {
@@ -105,7 +117,7 @@ function App() {
       newFormVals.make = "";
     }
 
-    if (formVals.model === answer.model) {
+    if (answer.model && formVals.model === answer.model) {
       roundBools.model = true;
 
       if (!round.model) {
@@ -149,12 +161,10 @@ function App() {
 
     if (addPoints === 3) {
       setTimeout(() => setDidWin("win"), 2750);
-      // return;
     }
 
     if (currentRound === 5 && addPoints !== 3) {
       setTimeout(() => setDidWin("lose"), 2750);
-      // return;
     }
   }
 
@@ -181,7 +191,7 @@ function App() {
         <Header handleClick={helpClick} />
       </header>
       <main className="container">
-        <CarImage round={round.currentRound} />
+        <CarImage round={round.currentRound} images={carImages} />
         <ScoreBoard
           currentRound={round.currentRound}
           multiplier={round.multiplier}
