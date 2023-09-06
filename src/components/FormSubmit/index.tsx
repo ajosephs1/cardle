@@ -22,8 +22,7 @@ export default function FormSubmit({
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
 
-
-  const BASE_URL = "http://localhost:1337/api"
+  const BASE_URL = "http://localhost:1337/api";
 
   useEffect(() => {
     axios
@@ -32,43 +31,52 @@ export default function FormSubmit({
       )
       .then((response) => {
         const makeObject = response.data.data;
-        let makeList: string[]=[]
+        let makeList: string[] = [];
 
-        makeObject.map((item: {id:number, attributes:{make:string}})=>{
-          makeList.push(item.attributes.make)
-        })
+        makeObject.map((item: { id: number; attributes: { make: string } }) => {
+          makeList.push(item.attributes.make);
+        });
 
-        setMakes(makeList)
+        setMakes(makeList);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     axios
       .get(
         `${BASE_URL}/models?fields[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${formValues.make}&pagination[limit]=200`
       )
       .then((response) => {
         const modelObject = response.data.data;
-        let modelList: string[]=[]
+        let modelList: string[] = [];
 
-        console.log(modelObject)
-        modelObject.map((item: {id:number, attributes: {model:string, make:{data:{
-          id:number,attributes:{make:string}
-        }}}})=>{
-          modelList.push(item.attributes.model)
-        })
+        modelObject.map(
+          (item: {
+            id: number;
+            attributes: {
+              model: string;
+              make: {
+                data: {
+                  id: number;
+                  attributes: { make: string };
+                };
+              };
+            };
+          }) => {
+            modelList.push(item.attributes.model);
+          }
+        );
 
-        setModels(modelList)
+        setModels(modelList);
       })
       .catch((error) => {
         console.error(error);
       });
-  },[formValues.make])
-  
+  }, [formValues.make]);
+
   return (
     <form action="" className="form">
       <Select

@@ -43,12 +43,12 @@ export default function ResultModal({
       }
     }
 
-    result += "cardle.com"
+    result += "cardle.com";
     return result;
   }
 
   function shareResult() {
-    const shareData = { text: emojiGrid(score)};
+    const shareData = { text: emojiGrid(score) };
     if (navigator.share) {
       navigator
         .share(shareData)

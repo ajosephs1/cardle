@@ -10,7 +10,6 @@ import FormSubmit from "./components/FormSubmit";
 import "./App.scss";
 
 function App() {
-
   // state to display instructions modal
   const [help, setHelp] = useState(false);
   const [didWin, setDidWin] = useState("");
@@ -66,33 +65,49 @@ function App() {
     imageTwo: "",
     imageThree: "",
     imageFour: "",
-    imageFive: ""
-  })
+    imageFive: "",
+  });
 
-  const BASE_URL = 'http://localhost:1337/api'
+  const localDate = new Date().toLocaleDateString("en-GB");
+  const dateParts = localDate.split("/");
+  const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  const BASE_URL = "http://localhost:1337/api";
+
   useEffect(() => {
-    axios.get(`${BASE_URL}/test-answers/1?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats`).then((response) => {
-      // console.log(response.data.data);
-      const answerData = response.data.data.attributes
-      const make = answerData.make.data.attributes.make
-      const model = answerData.model.data.attributes.model
-      const year = answerData.year.data.attributes.year
-      const imageFull = answerData.imageFull.data.attributes.formats.medium.url
-      const imageOne = answerData.imageOne.data.attributes.formats.thumbnail.url
-      const imageTwo = answerData.imageTwo.data.attributes.formats.thumbnail.url
-      const imageThree = answerData.imageThree.data.attributes.formats.thumbnail.url
-      const imageFour = answerData.imageFour.data.attributes.formats.thumbnail.url
-      const imageFive = answerData.imageFive.data.attributes.formats.thumbnail.url
-      
-      // console.log(`${make}\n${model}\n${year}\n${imageFull}\n${imageOne}\n${imageTwo}\n${imageThree}\n${imageFour}\n${imageFive}`);
-      setAnswer({make, model, year} )
-      setCarImages({imageFull, imageOne, imageTwo, imageThree, imageFour, imageFive})
-    });
+    axios
+      .get(
+        `${BASE_URL}/test-answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
+      )
+      .then((response) => {
+        const answerData = response.data.data[0].attributes;
+        const make = answerData.make.data.attributes.make;
+        const model = answerData.model.data.attributes.model;
+        const year = answerData.year.data.attributes.year;
+        const imageFull =
+          answerData.imageFull.data.attributes.formats.medium.url;
+        const imageOne =
+          answerData.imageOne.data.attributes.formats.thumbnail.url;
+        const imageTwo =
+          answerData.imageTwo.data.attributes.formats.thumbnail.url;
+        const imageThree =
+          answerData.imageThree.data.attributes.formats.thumbnail.url;
+        const imageFour =
+          answerData.imageFour.data.attributes.formats.thumbnail.url;
+        const imageFive =
+          answerData.imageFive.data.attributes.formats.thumbnail.url;
 
+        setAnswer({ make, model, year });
+        setCarImages({
+          imageFull,
+          imageOne,
+          imageTwo,
+          imageThree,
+          imageFour,
+          imageFive,
+        });
+      });
   }, []);
 
-
-  console.log(answer)
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
     let addPoints = round.currentPoints;
