@@ -13,6 +13,8 @@ function App() {
   // state to display instructions modal
   const [help, setHelp] = useState(false);
   const [didWin, setDidWin] = useState("");
+  const [answerStreak, setAnswerStreak] = useState(Number);
+  const [allTimeScore, setAllTimeScore] = useState(Number);
   // state for round
   const [round, setRound] = useState({
     currentRound: 1,
@@ -72,6 +74,7 @@ function App() {
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
   const BASE_URL = "http://localhost:1337/api";
+  const totalPoints = round.currentPoints * (round.multiplier + 1);
 
   useEffect(() => {
     axios
@@ -83,18 +86,27 @@ function App() {
         const make = answerData.make.data.attributes.make;
         const model = answerData.model.data.attributes.model;
         const year = answerData.year.data.attributes.year;
-        const imageFull =
-          answerData.imageFull.data.attributes.formats.medium.url;
-        const imageOne =
-          answerData.imageOne.data.attributes.formats.thumbnail.url;
-        const imageTwo =
-          answerData.imageTwo.data.attributes.formats.thumbnail.url;
-        const imageThree =
-          answerData.imageThree.data.attributes.formats.thumbnail.url;
-        const imageFour =
-          answerData.imageFour.data.attributes.formats.thumbnail.url;
-        const imageFive =
-          answerData.imageFive.data.attributes.formats.thumbnail.url;
+
+        const placeHolderImg =
+          "https://placehold.jp/000000/ffffff/300x200.png?text=%F0%9F%8F%8E";
+        const imageFull = response
+          ? answerData.imageFull.data.attributes.formats.medium.url
+          : placeHolderImg;
+        const imageOne = response
+          ? answerData.imageOne.data.attributes.formats.thumbnail.url
+          : placeHolderImg;
+        const imageTwo = response
+          ? answerData.imageTwo.data.attributes.formats.thumbnail.url
+          : placeHolderImg;
+        const imageThree = response
+          ? answerData.imageThree.data.attributes.formats.thumbnail.url
+          : placeHolderImg;
+        const imageFour = response
+          ? answerData.imageFour.data.attributes.formats.thumbnail.url
+          : placeHolderImg;
+        const imageFive = response
+          ? answerData.imageFive.data.attributes.formats.thumbnail.url
+          : placeHolderImg;
 
         setAnswer({ make, model, year });
         setCarImages({
@@ -106,6 +118,21 @@ function App() {
           imageFive,
         });
       });
+  }, []);
+
+  useEffect(() => {
+    // localStorage.setItem('answerStreak', '0')
+    const answerStreakString = localStorage.getItem("answerStreak");
+    const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
+
+    setAnswerStreak(answerStreak);
+
+    const allTimeScoreString = localStorage.getItem("allTimeScore");
+    const allTimeLocalScore = allTimeScoreString
+      ? parseInt(allTimeScoreString)
+      : 0;
+
+    setAllTimeScore(allTimeLocalScore);
   }, []);
 
   function updateScore(nR: number, nM: number) {
@@ -175,10 +202,28 @@ function App() {
     setFormVals(newFormVals);
 
     if (addPoints === 3) {
+      localStorage.setItem("answerStreak", `${answerStreak + 1}`);
+      setAnswerStreak(answerStreak + 1);
+
+      console.log(totalPoints);
+      localStorage.setItem(
+        "allTimeScore",
+        `${allTimeScore + (6 - currentRound) * addPoints}`
+      );
+      setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
+
       setTimeout(() => setDidWin("win"), 2750);
     }
 
     if (currentRound === 5 && addPoints !== 3) {
+      localStorage.setItem("answerStreak", `0`);
+
+      localStorage.setItem(
+        "allTimeScore",
+        `${allTimeScore + (6 - currentRound) * addPoints}`
+      );
+      setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
+
       setTimeout(() => setDidWin("lose"), 2750);
     }
   }
@@ -197,8 +242,6 @@ function App() {
   const helpClick = (bool: boolean) => {
     setHelp(bool);
   };
-
-  const totalPoints = round.currentPoints * (round.multiplier + 1);
 
   return (
     <div className="App">
@@ -228,7 +271,10 @@ function App() {
             result={didWin}
             round={round.currentRound}
             total={totalPoints}
+            allTimeScore={allTimeScore}
             closeModal={() => setDidWin("")}
+            answer={answer}
+            imageFull={carImages.imageFull}
           />
         )}
       </main>
