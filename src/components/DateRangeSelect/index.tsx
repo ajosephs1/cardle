@@ -6,10 +6,10 @@ type SelectOption = {
   value: string;
 };
 
-type DateRangeProps ={
+type DateRangeProps = {
   updateForm: (valtype: string, val: string) => void;
   selType: string;
-}
+};
 
 const generateDateRangeOptions = (): SelectOption[] => {
   const currentYear = new Date().getFullYear();
@@ -29,11 +29,15 @@ const generateDateRangeOptions = (): SelectOption[] => {
   return options;
 };
 
-export default function DateRangeSelect({updateForm, selType}: DateRangeProps) {
+export default function DateRangeSelect({
+  updateForm,
+  selType,
+}: DateRangeProps) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
+    updateForm(selType, event.target.value);
   };
 
   const dateRangeOptions = generateDateRangeOptions();
@@ -53,7 +57,6 @@ export default function DateRangeSelect({updateForm, selType}: DateRangeProps) {
             key={option.value}
             value={option.value}
             className="select-data__value"
-            onClick={()=> {updateForm(selType, option.value)}}
           >
             {option.label}
           </option>

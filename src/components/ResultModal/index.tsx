@@ -22,7 +22,7 @@ type ResultModalProps = {
     make: string;
     model: string;
     year: string;
-  }
+  };
 };
 
 export default function ResultModal({
@@ -53,7 +53,7 @@ export default function ResultModal({
       }
     }
 
-    result += "cardle.com";
+    result += "cardle-front-end-4dd6695ccc13.herokuapp.com/";
     return result;
   }
 
