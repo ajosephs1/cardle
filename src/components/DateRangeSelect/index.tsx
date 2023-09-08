@@ -34,10 +34,12 @@ export default function DateRangeSelect({updateForm, selType}: DateRangeProps) {
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
+    updateForm(selType, event.target.value)
   };
 
   const dateRangeOptions = generateDateRangeOptions();
 
+// console.log(selectedOption)
   return (
     <div className="select-data">
       <select
@@ -53,7 +55,6 @@ export default function DateRangeSelect({updateForm, selType}: DateRangeProps) {
             key={option.value}
             value={option.value}
             className="select-data__value"
-            onClick={()=> {updateForm(selType, option.value)}}
           >
             {option.label}
           </option>
