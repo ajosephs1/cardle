@@ -73,25 +73,26 @@ function App() {
   const localDate = new Date().toLocaleDateString("en-GB");
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  const BASE_URL = "http://localhost:1337/api";
+  const BASE_URL = "https://cardle-strapi-api-0030dbf64eee.herokuapp.com/api";
   const totalPoints = round.currentPoints * (round.multiplier + 1);
 
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/test-answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
+        `${BASE_URL}/answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
       )
       .then((response) => {
+
         const answerData = response.data.data[0].attributes;
         const make = answerData.make.data.attributes.make;
         const model = answerData.model.data.attributes.model;
         const year = answerData.year.data.attributes.year;
 
         const placeHolderImg =
-          "https://placehold.jp/000000/ffffff/300x200.png?text=%F0%9F%8F%8E";
+        "https://placehold.jp/000000/ffffff/300x200.png?text=%F0%9F%8F%8E";
         const imageFull = response
-          ? answerData.imageFull.data.attributes.formats.medium.url
-          : placeHolderImg;
+        ? answerData.imageFull.data[0].attributes.formats.medium.url
+        : placeHolderImg;
         const imageOne = response
           ? answerData.imageOne.data.attributes.formats.thumbnail.url
           : placeHolderImg;
@@ -205,7 +206,6 @@ function App() {
       localStorage.setItem("answerStreak", `${answerStreak + 1}`);
       setAnswerStreak(answerStreak + 1);
 
-      console.log(totalPoints);
       localStorage.setItem(
         "allTimeScore",
         `${allTimeScore + (6 - currentRound) * addPoints}`
