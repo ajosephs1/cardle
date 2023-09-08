@@ -82,31 +82,35 @@ function App() {
         `${BASE_URL}/answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
       )
       .then((response) => {
-
         const answerData = response.data.data[0].attributes;
         const make = answerData.make.data.attributes.make;
         const model = answerData.model.data.attributes.model;
         const year = answerData.year.data.attributes.year;
 
-        
-        const imageFull = answerData.imageFull.data.attributes.formats.hasOwnProperty('large')
-        ? answerData.imageFull.data.attributes.formats.large.url
-        : answerData.imageFull.data.attributes.formats.thumbnail.url;
-        const imageOne = answerData.imageOne.data.attributes.formats.hasOwnProperty('small')
-          ? answerData.imageOne.data.attributes.formats.small.url
-          : answerData.imageOne.data.attributes.formats.thumbnail.url;
-        const imageTwo = answerData.imageTwo.data.attributes.formats.hasOwnProperty('small')
-          ? answerData.imageTwo.data.attributes.formats.small.url
-          : answerData.imageTwo.data.attributes.formats.thumbnail.url;
-        const imageThree = answerData.imageThree.data.attributes.formats.hasOwnProperty('small')
-          ? answerData.imageThree.data.attributes.formats.small.url
-          : answerData.imageThree.data.attributes.formats.thumbnail.url;
-        const imageFour = answerData.imageFour.data.attributes.formats.hasOwnProperty('small')
-          ? answerData.imageFour.data.attributes.formats.small.url
-          : answerData.imageFour.data.attributes.formats.thumbnail.url;
-        const imageFive = answerData.imageFive.data.attributes.formats.hasOwnProperty('small')
-          ? answerData.imageFive.data.attributes.formats.small.url
-          : answerData.imageFive.data.attributes.formats.thumbnail.url;
+        const imageFull =
+          answerData.imageFull.data.attributes.formats.hasOwnProperty("large")
+            ? answerData.imageFull.data.attributes.formats.large.url
+            : answerData.imageFull.data.attributes.formats.thumbnail.url;
+        const imageOne =
+          answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
+            ? answerData.imageOne.data.attributes.formats.small.url
+            : answerData.imageOne.data.attributes.formats.thumbnail.url;
+        const imageTwo =
+          answerData.imageTwo.data.attributes.formats.hasOwnProperty("small")
+            ? answerData.imageTwo.data.attributes.formats.small.url
+            : answerData.imageTwo.data.attributes.formats.thumbnail.url;
+        const imageThree =
+          answerData.imageThree.data.attributes.formats.hasOwnProperty("small")
+            ? answerData.imageThree.data.attributes.formats.small.url
+            : answerData.imageThree.data.attributes.formats.thumbnail.url;
+        const imageFour =
+          answerData.imageFour.data.attributes.formats.hasOwnProperty("small")
+            ? answerData.imageFour.data.attributes.formats.small.url
+            : answerData.imageFour.data.attributes.formats.thumbnail.url;
+        const imageFive =
+          answerData.imageFive.data.attributes.formats.hasOwnProperty("small")
+            ? answerData.imageFive.data.attributes.formats.small.url
+            : answerData.imageFive.data.attributes.formats.thumbnail.url;
 
         setAnswer({ make, model, year });
         setCarImages({
@@ -178,7 +182,6 @@ function App() {
     } else {
       newFormVals.year = "";
     }
-    console.log(newFormVals)
 
     setScore({ ...score, [currentRound]: roundBools });
     setRound({
@@ -242,8 +245,6 @@ function App() {
   const helpClick = (bool: boolean) => {
     setHelp(bool);
   };
-
-  console.log(formVals)
 
   return (
     <div className="App">
