@@ -1,0 +1,68 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.nav {
+  max-width: 64rem;
+  margin: auto;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    height: 2.5rem;
+
+    &--img {
+      height: 100%;
+    }
+  }
+
+  &__header {
+    @include header-mobile;
+
+    &--tiny{
+      font-size: 0.5em;
+      color: $bb-pink
+    }
+
+    &--link {
+      text-decoration: none;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__links {
+    height: 100%;
+    display: flex;
+  }
+
+  &__link {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 0.25rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    background-color: $bb-grey;
+    border-radius: 100%;
+    margin: 0 0.5rem;
+    transition: 0.2s, linear;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+  }
+
+  &__icon {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    color: $bb-white;
+  }
+}

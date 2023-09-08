@@ -1,0 +1,16 @@
+@mixin tablet {
+  @media (min-width: $min-width-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $max-width-desktop) {
+    @content;
+  }
+}
+
+$min-width-tablet: 48rem;
+$padding-dt: 0 2.25rem;
+$padding-headline-dt: 2.25rem 0 1.5rem;
+$max-width-desktop: 80rem;

@@ -1,0 +1,57 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: inherit;
+
+  &__info {
+    border: 2px solid $bb-white;
+    margin: auto;
+    width: 85%;
+    height: 90%;
+    background-color: $bb-grey;
+    padding: 0 2rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+  }
+
+  &__icon{
+    height: 1rem;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  &__subheading {
+    text-decoration: underline;
+    margin: 0.5rem 0;
+  }
+
+  h1{
+    @include header-mobile
+  }
+
+  h2{
+    @include header-mobile
+  }
+
+  ul {
+    @include body-mobile;
+  padding-left: 1.25rem;
+    line-height: 1.25rem;
+  }
+}

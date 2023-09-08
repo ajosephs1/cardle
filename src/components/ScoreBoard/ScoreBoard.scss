@@ -1,0 +1,120 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.scoreboard {
+  margin: 0 2.5rem;
+  &__headings {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    width: 30%;
+    text-align: center;
+    @include sub-header-mobile;
+  }
+
+  &__row {
+    border-bottom: 2px solid $bb-grey;
+    padding: 0.425rem 0;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    &:nth-child(5) {
+      border-bottom: 2px solid $bb-white;
+    }
+  }
+
+  &__light {
+    height: 1.125rem;
+    margin: 0 auto;
+    width: 1.125rem;
+    border: 1px solid $bb-white;
+    border-radius: 100%;
+
+    @keyframes lightWrong {
+      from {
+        box-shadow: none;
+      }
+      to {
+        box-shadow: inset 0 0 20px hsl(0, 79%, 61%), inset 8px 0 32px #f00,
+          inset -8px 0 32px #f00, inset 8px 0 120px #f00,
+          inset -8px 0 120px #f00, 0 0 20px #fff, -4px 0 32px #f00,
+          4px 0 32px #f00;
+      }
+    }
+
+    @keyframes lightRight {
+      from {
+        box-shadow: none;
+      }
+      to {
+        box-shadow: inset 0 0 20px #41f962, inset 8px 0 32px #0f0,
+          inset -8px 0 32px #0f0, inset 8px 0 120px #0f0,
+          inset -8px 0 120px #0f0, 0 0 20px #fff, -4px 0 32px #0f0,
+          4px 0 32px #0f0;
+      }
+    }
+
+    &--make {
+      &--red {
+        animation: lightWrong 1s forwards;
+        animation-delay: 0.5s;
+      }
+
+      &--green {
+        animation: lightRight 1s forwards;
+        animation-delay: 0.5s;
+      }
+    }
+
+    &--model {
+      &--red {
+        animation: lightWrong 1s forwards;
+        animation-delay: 1s;
+      }
+
+      &--green {
+        animation: lightRight 1s forwards;
+        animation-delay: 1s;
+      }
+    }
+
+    &--year {
+      &--red {
+        animation: lightWrong 1s forwards;
+        animation-delay: 1.5s;
+      }
+
+      &--green {
+        animation: lightRight 1s forwards;
+        animation-delay: 1.5s;
+      }
+    }
+
+    &__container {
+      width: 30%;
+      text-align: center;
+    }
+  }
+
+  &__tally {
+    padding: 0.5rem 0;
+    &-row {
+      display: flex;
+      justify-content: space-between;
+      @include body-mobile;
+
+      &:nth-child(2) {
+        padding: 0.5rem 0;
+      }
+
+      &:nth-child(3) {
+        padding-top: 0.5rem;
+        border-top: 2px solid $bb-white;
+      }
+    }
+  }
+}

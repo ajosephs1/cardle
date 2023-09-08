@@ -1,0 +1,20 @@
+@use "./colours" as *;
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@500&display=swap');
+
+@mixin header-mobile {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  color: $bb-white;
+}
+
+@mixin sub-header-mobile {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.825rem;
+  color: $bb-white;
+}
+
+@mixin body-mobile {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.825rem;
+  color: $bb-white;
+}

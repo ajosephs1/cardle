@@ -1,0 +1,56 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.select {
+  width: 100%;
+  position: relative;
+  margin-bottom: 0.425rem;
+
+  &__input {
+    width: 100%;
+    height: fit-content;
+    border: 2px solid $bb-white;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: white;
+    outline: none;
+    padding: 0.25rem 0.5rem;
+    background: none;
+
+    &::placeholder {
+      color: $bb-white;
+    }
+
+    &:hover {
+      border-color: $bb-grey;
+    }
+  }
+
+  &__data {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: 1.8rem;
+    list-style-type: none;
+    padding: 0.25rem 0.5rem;
+    min-height: 2rem;
+    max-height: 5rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    border: 2px solid $bb-white;
+    border-top: none;
+    border-radius: 0 0 0.25rem 0.25rem;
+    scroll-behavior: smooth;
+    background-color: $bb-black;
+  }
+
+  &__value {
+    &:hover {
+      background-color: $bb-grey;
+      cursor: pointer;
+    }
+  }
+}

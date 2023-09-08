@@ -1,0 +1,168 @@
+@use "../../styles/partials/_layout.scss" as *;
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/typography" as *;
+
+.result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+
+  &__modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 85%;
+    background-color: $bb-grey;
+    padding: 1.5rem;
+    border: 2px solid $bb-white;
+  }
+
+  &__exit {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    height: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    @include header-mobile;
+    margin: 0.5rem 0;
+  }
+
+  &__image {
+    width: 90%;
+  }
+
+  &__headings {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    width: 30%;
+    text-align: center;
+    border-bottom: 2px solid $bb-white;
+    @include sub-header-mobile;
+  }
+
+  &__row {
+    width: 100%;
+    border-bottom: 2px solid $bb-grey;
+    padding: 0.525rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  &__light {
+    height: 1.125rem;
+    margin: 0 auto;
+    width: 1.125rem;
+    border: 1px solid $bb-white;
+    border-radius: 100%;
+
+    &-container {
+      width: 100%;
+    }
+
+    &--red {
+      box-shadow: inset 0 0 20px hsl(0, 79%, 61%), inset 8px 0 32px #f00,
+        inset -8px 0 32px #f00, inset 8px 0 120px #f00, inset -8px 0 120px #f00,
+        0 0 20px #fff, -4px 0 32px #f00, 4px 0 32px #f00;
+    }
+
+    &--green {
+      box-shadow: inset 0 0 20px #41f962, inset 8px 0 32px #0f0,
+        inset -8px 0 32px #0f0, inset 8px 0 120px #0f0, inset -8px 0 120px #0f0,
+        0 0 20px #fff, -4px 0 32px #0f0, 4px 0 32px #0f0;
+    }
+
+    &__container {
+      width: 30%;
+      text-align: center;
+    }
+  }
+
+  &__summary {
+    width: 100%;
+    margin: 0.5rem 0;
+
+    &__text {
+      @include body-mobile;
+      border-bottom: 1px solid $bb-white;
+    }
+  }
+
+  &__value {
+    @include body-mobile;
+    margin-top: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__copied {
+    @include body-mobile;
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 1rem;
+    width: fit-content;
+    margin: auto;
+    border: 1px solid $bb-white;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &--visible {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  &__share {
+    display: flex;
+    border: 2px solid $bb-white;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    &-text {
+      @include body-mobile;
+      margin-right: 0.5rem;
+    }
+
+    &-icon {
+      height: 1rem;
+    }
+
+    &-text{
+      @include body-mobile;
+      margin-right: 0.5rem;
+    }
+
+    &-icon{
+      height: 1rem;
+    }
+    
+  }
+}
