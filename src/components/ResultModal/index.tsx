@@ -22,7 +22,7 @@ type ResultModalProps = {
     make: string;
     model: string;
     year: string;
-  }
+  };
 };
 
 export default function ResultModal({
