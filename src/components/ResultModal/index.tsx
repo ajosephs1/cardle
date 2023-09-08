@@ -1,12 +1,13 @@
 import { useState } from "react";
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
-import fullImage from "../../data/images/bmwe30.png";
+// import fullImage from "../../data/images/bmwe30.png";
 import "./ResultModal.scss";
 
 type ResultModalProps = {
   result: string;
   total: number;
+  allTimeScore: number;
   round: number;
   closeModal: () => void;
   score: {
@@ -16,6 +17,12 @@ type ResultModalProps = {
       year: null | boolean;
     };
   };
+  imageFull: string;
+  answer: {
+    make: string;
+    model: string;
+    year: string;
+  }
 };
 
 export default function ResultModal({
@@ -23,6 +30,9 @@ export default function ResultModal({
   round,
   score,
   total,
+  allTimeScore,
+  imageFull,
+  answer,
   closeModal,
 }: ResultModalProps) {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
@@ -43,12 +53,12 @@ export default function ResultModal({
       }
     }
 
-    result += "cardle.com"
+    result += "cardle.com";
     return result;
   }
 
   function shareResult() {
-    const shareData = { text: emojiGrid(score)};
+    const shareData = { text: emojiGrid(score) };
     if (navigator.share) {
       navigator
         .share(shareData)
@@ -84,9 +94,9 @@ export default function ResultModal({
           onClick={closeModal}
         />
         <h1 className="result__title">
-          {result === "win" ? "Winner!" : "BMW M3 E30"}
+          {result === "win" ? "Winner!" : `${answer.make} ${answer.model}`}
         </h1>
-        <img src={fullImage} alt="full car image" className="result__image" />
+        <img src={imageFull} alt="full car image" className="result__image" />
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>
           <h2 className="result__heading">Model</h2>
@@ -277,7 +287,7 @@ export default function ResultModal({
           </div>
           <div className="result__value">
             <p className="result__value--text">All-time:</p>
-            <p className="result__value--value">-</p>
+            <p className="result__value--value">{`${allTimeScore}`}</p>
           </div>
         </div>
         <p

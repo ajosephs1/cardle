@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { carData } from "../../data/mock-car-data";
 import Select from "../Select";
 import DateRangeSelect from "../DateRangeSelect";
-// import axios from "axios";
+import axios from "axios";
 import "./FormSubmit.scss";
 
 type FormProps = {
@@ -20,17 +19,63 @@ export default function FormSubmit({
   updateForm,
   updateRound,
 }: FormProps) {
-  const makes = [...new Set(carData.map((item) => item.make))].sort();
-  const models = [
-    ...new Set(
-      carData
-        .filter((item) => item.make == formValues.make)
-        .map((item) => item.model)
-    ),
-  ].sort();
+  const [makes, setMakes] = useState<string[]>([]);
+  const [models, setModels] = useState<string[]>([]);
 
-  // get value from selected makes and set model state
-  // years will be year ranges
+  const BASE_URL = "http://localhost:1337/api";
+
+  useEffect(() => {
+    axios
+      .get(
+        `${BASE_URL}/makes/?fields[0]=id&fields[1]=make&sort[1]=make&pagination[start]=0&pagination[limit]=200`
+      )
+      .then((response) => {
+        const makeObject = response.data.data;
+        let makeList: string[] = [];
+
+        makeObject.map((item: { id: number; attributes: { make: string } }) => {
+          makeList.push(item.attributes.make);
+        });
+
+        setMakes(makeList);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${BASE_URL}/models?fields[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${formValues.make}&pagination[limit]=200`
+      )
+      .then((response) => {
+        const modelObject = response.data.data;
+        let modelList: string[] = [];
+
+        modelObject.map(
+          (item: {
+            id: number;
+            attributes: {
+              model: string;
+              make: {
+                data: {
+                  id: number;
+                  attributes: { make: string };
+                };
+              };
+            };
+          }) => {
+            modelList.push(item.attributes.model);
+          }
+        );
+
+        setModels(modelList);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [formValues.make]);
 
   return (
     <form action="" className="form">
@@ -54,8 +99,8 @@ export default function FormSubmit({
         className="form__submit"
         // onSubmit={updateRound}
         onClick={(e) => {
-          e.preventDefault()
-          updateRound()
+          e.preventDefault();
+          updateRound();
         }}
       >
         submit

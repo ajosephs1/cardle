@@ -5,20 +5,31 @@ import "./CarImage.scss";
 
 type CarImageProps = {
   round: number;
+  images: {
+    imageFull: string;
+    imageOne: string;
+    imageTwo: string;
+    imageThree: string;
+    imageFour: string;
+    imageFive: string;
+  };
 };
-export default function CarImage({ round }: CarImageProps) {
+export default function CarImage({ round, images }: CarImageProps) {
   const [imageModal, showImageModal] = useState(false);
-  const [carImages, setCarImages] = useState(null);
 
-  const imagePath = require(`../../data/images/bmwe30${round}.png`);
-  useEffect(() => {
-    axios
-      .get("http://localhost:1337/api/answers/1?populate=%2A")
-      .then((response) => {
-        const imgObj = {}
-        console.log(response.data.data.attributes.carImages);
-      });
-  }, []);
+  const imagePath =
+    round === 1
+      ? images.imageOne
+      : round === 2
+      ? images.imageTwo
+      : round === 3
+      ? images.imageThree
+      : round === 4
+      ? images.imageFour
+      : round === 5
+      ? images.imageFive
+      : "";
+
   return (
     <div className="image-container">
       <img
