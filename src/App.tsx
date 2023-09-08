@@ -73,7 +73,7 @@ function App() {
   const localDate = new Date().toLocaleDateString("en-GB");
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  const BASE_URL = "https://cardle-strapi-api-0030dbf64eee.herokuapp.com/api";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const totalPoints = round.currentPoints * (round.multiplier + 1);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ function App() {
         const placeHolderImg =
         "https://placehold.jp/000000/ffffff/300x200.png?text=%F0%9F%8F%8E";
         const imageFull = response
-        ? answerData.imageFull.data[0].attributes.formats.medium.url
+        ? answerData.imageFull.data.attributes.formats.medium.url
         : placeHolderImg;
         const imageOne = response
           ? answerData.imageOne.data.attributes.formats.thumbnail.url
