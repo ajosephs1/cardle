@@ -178,6 +178,7 @@ function App() {
     } else {
       newFormVals.year = "";
     }
+    console.log(newFormVals)
 
     setScore({ ...score, [currentRound]: roundBools });
     setRound({
@@ -241,6 +242,8 @@ function App() {
   const helpClick = (bool: boolean) => {
     setHelp(bool);
   };
+
+  console.log(formVals)
 
   return (
     <div className="App">
