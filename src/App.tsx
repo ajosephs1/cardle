@@ -73,7 +73,7 @@ function App() {
   const localDate = new Date().toLocaleDateString("en-GB");
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  const BASE_URL = "https://cardle-strapi-api-0030dbf64eee.herokuapp.com/api";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const totalPoints = round.currentPoints * (round.multiplier + 1);
 
   useEffect(() => {
@@ -88,26 +88,25 @@ function App() {
         const model = answerData.model.data.attributes.model;
         const year = answerData.year.data.attributes.year;
 
-        const placeHolderImg =
-        "https://placehold.jp/000000/ffffff/300x200.png?text=%F0%9F%8F%8E";
-        const imageFull = response
-        ? answerData.imageFull.data[0].attributes.formats.medium.url
-        : placeHolderImg;
-        const imageOne = response
-          ? answerData.imageOne.data.attributes.formats.thumbnail.url
-          : placeHolderImg;
-        const imageTwo = response
-          ? answerData.imageTwo.data.attributes.formats.thumbnail.url
-          : placeHolderImg;
-        const imageThree = response
-          ? answerData.imageThree.data.attributes.formats.thumbnail.url
-          : placeHolderImg;
-        const imageFour = response
-          ? answerData.imageFour.data.attributes.formats.thumbnail.url
-          : placeHolderImg;
-        const imageFive = response
-          ? answerData.imageFive.data.attributes.formats.thumbnail.url
-          : placeHolderImg;
+        
+        const imageFull = answerData.imageFull.data.attributes.formats.hasOwnProperty('large')
+        ? answerData.imageFull.data.attributes.formats.large.url
+        : answerData.imageFull.data.attributes.formats.thumbnail.url;
+        const imageOne = answerData.imageOne.data.attributes.formats.hasOwnProperty('small')
+          ? answerData.imageOne.data.attributes.formats.small.url
+          : answerData.imageOne.data.attributes.formats.thumbnail.url;
+        const imageTwo = answerData.imageTwo.data.attributes.formats.hasOwnProperty('small')
+          ? answerData.imageTwo.data.attributes.formats.small.url
+          : answerData.imageTwo.data.attributes.formats.thumbnail.url;
+        const imageThree = answerData.imageThree.data.attributes.formats.hasOwnProperty('small')
+          ? answerData.imageThree.data.attributes.formats.small.url
+          : answerData.imageThree.data.attributes.formats.thumbnail.url;
+        const imageFour = answerData.imageFour.data.attributes.formats.hasOwnProperty('small')
+          ? answerData.imageFour.data.attributes.formats.small.url
+          : answerData.imageFour.data.attributes.formats.thumbnail.url;
+        const imageFive = answerData.imageFive.data.attributes.formats.hasOwnProperty('small')
+          ? answerData.imageFive.data.attributes.formats.small.url
+          : answerData.imageFive.data.attributes.formats.thumbnail.url;
 
         setAnswer({ make, model, year });
         setCarImages({

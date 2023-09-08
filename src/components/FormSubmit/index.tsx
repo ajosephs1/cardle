@@ -22,7 +22,7 @@ export default function FormSubmit({
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
 
-  const BASE_URL = "http://localhost:1337/api";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     axios
