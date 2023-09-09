@@ -88,8 +88,8 @@ function App() {
         const year = answerData.year.data.attributes.year;
 
         const imageFull =
-          answerData.imageFull.data.attributes.formats.hasOwnProperty("large")
-            ? answerData.imageFull.data.attributes.formats.large.url
+          answerData.imageFull.data.attributes.formats.hasOwnProperty("medium")
+            ? answerData.imageFull.data.attributes.formats.medium.url
             : answerData.imageFull.data.attributes.formats.thumbnail.url;
         const imageOne =
           answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
@@ -125,7 +125,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem('answerStreak', '0')
     const answerStreakString = localStorage.getItem("answerStreak");
     const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
 
