@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { images } from "../../data/images";
 import "./CarImage.scss";
 
 type CarImageProps = {
