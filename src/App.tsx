@@ -8,6 +8,7 @@ import CarImage from "./components/CarImage";
 import ScoreBoard from "./components/ScoreBoard";
 import FormSubmit from "./components/FormSubmit";
 import "./App.scss";
+import { error } from "console";
 
 function App() {
   // state to display instructions modal
@@ -82,45 +83,76 @@ function App() {
         `${BASE_URL}/answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
       )
       .then((response) => {
-        const answerData = response.data.data[0].attributes;
-        const make = answerData.make.data.attributes.make;
-        const model = answerData.model.data.attributes.model;
-        const year = answerData.year.data.attributes.year;
+        if (response.data.data.length) {
+          const answerData = response.data.data[0].attributes;
+          const make = answerData.make.data.attributes.make;
+          const model = answerData.model.data.attributes.model;
+          const year = answerData.year.data.attributes.year;
 
-        const imageFull =
-          answerData.imageFull.data.attributes.formats.hasOwnProperty("medium")
-            ? answerData.imageFull.data.attributes.formats.medium.url
-            : answerData.imageFull.data.attributes.formats.thumbnail.url;
-        const imageOne =
-          answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
-            ? answerData.imageOne.data.attributes.formats.small.url
-            : answerData.imageOne.data.attributes.formats.thumbnail.url;
-        const imageTwo =
-          answerData.imageTwo.data.attributes.formats.hasOwnProperty("small")
-            ? answerData.imageTwo.data.attributes.formats.small.url
-            : answerData.imageTwo.data.attributes.formats.thumbnail.url;
-        const imageThree =
-          answerData.imageThree.data.attributes.formats.hasOwnProperty("small")
-            ? answerData.imageThree.data.attributes.formats.small.url
-            : answerData.imageThree.data.attributes.formats.thumbnail.url;
-        const imageFour =
-          answerData.imageFour.data.attributes.formats.hasOwnProperty("small")
-            ? answerData.imageFour.data.attributes.formats.small.url
-            : answerData.imageFour.data.attributes.formats.thumbnail.url;
-        const imageFive =
-          answerData.imageFive.data.attributes.formats.hasOwnProperty("small")
-            ? answerData.imageFive.data.attributes.formats.small.url
-            : answerData.imageFive.data.attributes.formats.thumbnail.url;
+          const imageFull =
+            answerData.imageFull.data.attributes.formats.hasOwnProperty(
+              "medium"
+            )
+              ? answerData.imageFull.data.attributes.formats.medium.url
+              : answerData.imageFull.data.attributes.formats.thumbnail.url;
+          const imageOne =
+            answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
+              ? answerData.imageOne.data.attributes.formats.small.url
+              : answerData.imageOne.data.attributes.formats.thumbnail.url;
+          const imageTwo =
+            answerData.imageTwo.data.attributes.formats.hasOwnProperty("small")
+              ? answerData.imageTwo.data.attributes.formats.small.url
+              : answerData.imageTwo.data.attributes.formats.thumbnail.url;
+          const imageThree =
+            answerData.imageThree.data.attributes.formats.hasOwnProperty(
+              "small"
+            )
+              ? answerData.imageThree.data.attributes.formats.small.url
+              : answerData.imageThree.data.attributes.formats.thumbnail.url;
+          const imageFour =
+            answerData.imageFour.data.attributes.formats.hasOwnProperty("small")
+              ? answerData.imageFour.data.attributes.formats.small.url
+              : answerData.imageFour.data.attributes.formats.thumbnail.url;
+          const imageFive =
+            answerData.imageFive.data.attributes.formats.hasOwnProperty("small")
+              ? answerData.imageFive.data.attributes.formats.small.url
+              : answerData.imageFive.data.attributes.formats.thumbnail.url;
 
-        setAnswer({ make, model, year });
-        setCarImages({
-          imageFull,
-          imageOne,
-          imageTwo,
-          imageThree,
-          imageFour,
-          imageFive,
-        });
+          setAnswer({ make, model, year });
+          setCarImages({
+            imageFull,
+            imageOne,
+            imageTwo,
+            imageThree,
+            imageFour,
+            imageFive,
+          });
+        } else {
+          const make = "";
+          const model = "";
+          const year = "";
+
+          const placeholderURL =
+            "https://placehold.jp/0f0a10/ffffff/300x200.png?text=%F0%9F%8F%8E";
+          const imageFull = placeholderURL;
+          const imageOne = placeholderURL;
+          const imageTwo = placeholderURL;
+          const imageThree = placeholderURL;
+          const imageFour = placeholderURL;
+          const imageFive = placeholderURL;
+
+          setAnswer({ make, model, year });
+          setCarImages({
+            imageFull,
+            imageOne,
+            imageTwo,
+            imageThree,
+            imageFour,
+            imageFive,
+          });
+        }
+      }).catch((error)=>{
+        console.error(error)
       });
   }, []);
 
