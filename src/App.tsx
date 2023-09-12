@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
@@ -8,7 +7,6 @@ import CarImage from "./components/CarImage";
 import ScoreBoard from "./components/ScoreBoard";
 import FormSubmit from "./components/FormSubmit";
 import "./App.scss";
-import { error } from "console";
 
 function App() {
   // state to display instructions modal
