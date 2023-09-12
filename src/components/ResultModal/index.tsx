@@ -1,7 +1,6 @@
 import { useState } from "react";
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
-// import fullImage from "../../data/images/bmwe30.png";
 import "./ResultModal.scss";
 
 type ResultModalProps = {
@@ -94,8 +93,11 @@ export default function ResultModal({
           onClick={closeModal}
         />
         <h1 className="result__title">
-          {result === "win" ? "Winner!" : `${answer.make} ${answer.model}`}
+          {result === "win" ? "WINNER!" : `BETTER LUCK NEXT TIME`}
         </h1>
+        <p className="result__answer">
+        { `${answer.make} ${answer.model}`}
+        </p>
         <img src={imageFull} alt="full car image" className="result__image" />
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>

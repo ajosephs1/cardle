@@ -9,15 +9,14 @@
 
 .container{
   margin: 0 auto;
-  padding: 0.5rem 0 0;
   background-color: $bb-black;
   position: relative;
   max-width: 450px;
   color: $bb-white;
-  height: fit-content;
+  height: calc(100% - 3rem);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   
 }
 

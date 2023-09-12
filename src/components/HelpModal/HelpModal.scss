@@ -6,7 +6,7 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -14,18 +14,25 @@
 
   &__info {
     border: 2px solid $bb-white;
-    margin: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow-y: scroll;
     width: 85%;
-    height: 90%;
+    height: fit-content;
     background-color: $bb-grey;
     padding: 0 2rem;
   }
-
+  
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 1rem 0;
+  }
+
+  &__instructions{
+    height: fit-content;
+    margin-bottom: 1rem;
   }
 
   &__icon{
