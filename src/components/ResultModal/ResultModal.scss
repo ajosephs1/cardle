@@ -41,6 +41,11 @@
     margin: 0.5rem 0;
   }
 
+  &__answer{
+    @include body-mobile;
+    margin-bottom: 0.5rem;
+  }
+
   &__image {
     width: 90%;
   }
