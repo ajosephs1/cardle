@@ -22,10 +22,14 @@
     outline: none;
     padding: 0.25rem 0.5rem;
     background: none;
-
     &:hover {
-      border-color: $bb-grey;
       cursor: pointer;
+    }
+
+    @include desktop {
+      &:hover {
+        border-color: $bb-coolgrey;
+      }
     }
   }
 
