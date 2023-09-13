@@ -97,11 +97,11 @@ export default function FormSubmit({
       <button
         type="submit"
         className="form__submit"
-        // onSubmit={updateRound}
         onClick={(e) => {
           e.preventDefault();
           updateRound();
         }}
+        disabled={!(formValues.make && formValues.model && formValues.year)}
       >
         submit
       </button>

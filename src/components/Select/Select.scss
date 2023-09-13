@@ -23,8 +23,10 @@
       color: $bb-white;
     }
 
-    &:hover {
-      border-color: $bb-grey;
+    @include desktop {
+      &:hover {
+        border-color: $bb-coolgrey;
+      }
     }
   }
 

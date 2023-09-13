@@ -55,6 +55,8 @@ function App() {
     model: "",
     year: "",
   });
+  console.log(formVals);
+
   const [answer, setAnswer] = useState({
     make: "",
     model: "",
@@ -73,9 +75,14 @@ function App() {
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const totalPoints = round.currentPoints * round.multiplier;
+  const totalPoints =
+    round.currentPoints *
+    (round.multiplier === 5
+      ? 5
+      : round.multiplier === 1
+      ? 1
+      : round.multiplier + 1);
 
-  console.log(round.currentRound)
   useEffect(() => {
     axios
       .get(
