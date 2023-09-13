@@ -1,3 +1,21 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .image {
   margin-top: 1rem;
   width: 100%;
@@ -13,6 +31,18 @@
 
   &:hover {
     cursor: pointer;
+  }
+
+  &--transition{
+    transition: opacity 0.5s ease-in-out;
+
+    &.fadeIn {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    &.fadeOut {
+      animation: fadeOut 0.5s ease-in-out;
+    }
   }
 
   &--modal {

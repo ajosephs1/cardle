@@ -73,8 +73,9 @@ function App() {
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const totalPoints = round.currentPoints * (round.multiplier + 1);
+  const totalPoints = round.currentPoints * round.multiplier;
 
+  console.log(round.currentRound)
   useEffect(() => {
     axios
       .get(
@@ -149,8 +150,9 @@ function App() {
             imageFive,
           });
         }
-      }).catch((error)=>{
-        console.error(error)
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }, []);
 
@@ -213,25 +215,29 @@ function App() {
     }
 
     setScore({ ...score, [currentRound]: roundBools });
-    setRound({
-      ...round,
-      currentPoints: addPoints,
-      currentRound:
-        round.currentPoints === 3
-          ? round.currentRound
-          : round.currentRound === 5
-          ? 5
-          : nR,
-      multiplier:
-        round.currentPoints === 3
-          ? round.multiplier
-          : round.multiplier === 1
-          ? 1
-          : nM,
-      make: roundBools.make,
-      model: roundBools.model,
-      year: roundBools.year,
-    });
+    setTimeout(
+      () =>
+        setRound({
+          ...round,
+          currentPoints: addPoints,
+          currentRound:
+            round.currentPoints === 3
+              ? round.currentRound
+              : round.currentRound === 5
+              ? 5
+              : nR,
+          multiplier:
+            round.currentPoints === 3
+              ? round.multiplier
+              : round.multiplier === 1
+              ? 1
+              : nM,
+          make: roundBools.make,
+          model: roundBools.model,
+          year: roundBools.year,
+        }),
+      1750
+    );
     setFormVals(newFormVals);
 
     if (addPoints === 3) {
@@ -244,7 +250,7 @@ function App() {
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
 
-      setTimeout(() => setDidWin("win"), 2750);
+      setTimeout(() => setDidWin("win"), 2000);
     }
 
     if (currentRound === 5 && addPoints !== 3) {
@@ -256,7 +262,7 @@ function App() {
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
 
-      setTimeout(() => setDidWin("lose"), 2750);
+      setTimeout(() => setDidWin("lose"), 2000);
     }
   }
 
@@ -283,7 +289,6 @@ function App() {
       <main className="container">
         <CarImage round={round.currentRound} images={carImages} />
         <ScoreBoard
-          currentRound={round.currentRound}
           multiplier={round.multiplier}
           currentPoints={round.currentPoints}
           score={score}

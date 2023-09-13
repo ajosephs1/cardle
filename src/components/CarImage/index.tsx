@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import "./CarImage.scss";
 
@@ -29,12 +28,15 @@ export default function CarImage({ round, images }: CarImageProps) {
       ? images.imageFive
       : "";
 
+  const initialImageClass =
+    round === 1 ? "image image--transition fadeIn" : "image image--transition";
+
   return (
     <div className="image-container">
       <img
         src={imagePath}
         alt="car image placeholder"
-        className="image"
+        className={initialImageClass}
         onClick={() => showImageModal(true)}
       />
       {imageModal && (
