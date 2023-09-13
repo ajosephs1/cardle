@@ -39,10 +39,9 @@
         box-shadow: none;
       }
       to {
-        box-shadow: inset 0 0 20px hsl(0, 79%, 61%), inset 8px 0 32px #f00,
-          inset -8px 0 32px #f00, inset 8px 0 120px #f00,
-          inset -8px 0 120px #f00, 0 0 20px #fff, -4px 0 32px #f00,
-          4px 0 32px #f00;
+        border: 1px solid rgb(254, 191, 191);
+        background-color: rgb(255, 52, 52);
+        box-shadow: 0 0 5px rgba(251, 207, 207, 1);
       }
     }
 
@@ -51,46 +50,44 @@
         box-shadow: none;
       }
       to {
-        box-shadow: inset 0 0 20px #41f962, inset 8px 0 32px #0f0,
-          inset -8px 0 32px #0f0, inset 8px 0 120px #0f0,
-          inset -8px 0 120px #0f0, 0 0 20px #fff, -4px 0 32px #0f0,
-          4px 0 32px #0f0;
+        background-color: #41f962;
+        box-shadow: 0 0 5px rgb(126, 255, 150);
       }
     }
 
     &--make {
       &--red {
-        animation: lightWrong 1s forwards;
-        animation-delay: 0.5s;
+        animation: lightWrong 0.75s forwards;
+        animation-delay: 0.25s;
       }
 
       &--green {
-        animation: lightRight 1s forwards;
-        animation-delay: 0.5s;
+        animation: lightRight 0.75s forwards;
+        animation-delay: 0.25s;
       }
     }
 
     &--model {
       &--red {
-        animation: lightWrong 1s forwards;
-        animation-delay: 1s;
+        animation: lightWrong 0.75s forwards;
+        animation-delay: 0.5s;
       }
 
       &--green {
-        animation: lightRight 1s forwards;
-        animation-delay: 1s;
+        animation: lightRight 0.75s forwards;
+        animation-delay: 0.5s;
       }
     }
 
     &--year {
       &--red {
-        animation: lightWrong 1s forwards;
-        animation-delay: 1.5s;
+        animation: lightWrong 0.75s forwards;
+        animation-delay: 0.75s;
       }
 
       &--green {
-        animation: lightRight 1s forwards;
-        animation-delay: 1.5s;
+        animation: lightRight 0.75s forwards;
+        animation-delay: 0.75s;
       }
     }
 

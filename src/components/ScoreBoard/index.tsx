@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import "./ScoreBoard.scss";
 
 type ScoreBoardProps = {
-  currentRound: number;
   multiplier: number;
   currentPoints: number;
   score: {
@@ -17,7 +15,6 @@ type ScoreBoardProps = {
 // add animation delay for each light 1s
 //
 export default function ScoreBoard({
-  currentRound,
   multiplier,
   currentPoints,
   score,

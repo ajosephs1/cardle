@@ -41,7 +41,7 @@
     margin: 0.5rem 0;
   }
 
-  &__answer{
+  &__answer {
     @include body-mobile;
     margin-bottom: 0.5rem;
   }
@@ -60,7 +60,6 @@
   &__heading {
     width: 30%;
     text-align: center;
-    border-bottom: 2px solid $bb-white;
     @include sub-header-mobile;
   }
 
@@ -85,15 +84,14 @@
     }
 
     &--red {
-      box-shadow: inset 0 0 20px hsl(0, 79%, 61%), inset 8px 0 32px #f00,
-        inset -8px 0 32px #f00, inset 8px 0 120px #f00, inset -8px 0 120px #f00,
-        0 0 20px #fff, -4px 0 32px #f00, 4px 0 32px #f00;
+      border: 1px solid rgb(254, 191, 191);
+      background-color: rgb(255, 52, 52);
+      box-shadow: 0 0 5px rgba(251, 207, 207, 1);
     }
 
     &--green {
-      box-shadow: inset 0 0 20px #41f962, inset 8px 0 32px #0f0,
-        inset -8px 0 32px #0f0, inset 8px 0 120px #0f0, inset -8px 0 120px #0f0,
-        0 0 20px #fff, -4px 0 32px #0f0, 4px 0 32px #0f0;
+      background-color: #41f962;
+      box-shadow: 0 0 5px rgb(126, 255, 150);
     }
 
     &__container {
@@ -108,7 +106,6 @@
 
     &__text {
       @include body-mobile;
-      border-bottom: 1px solid $bb-white;
     }
   }
 
@@ -160,14 +157,13 @@
       height: 1rem;
     }
 
-    &-text{
+    &-text {
       @include body-mobile;
       margin-right: 0.5rem;
     }
 
-    &-icon{
+    &-icon {
       height: 1rem;
     }
-    
   }
 }

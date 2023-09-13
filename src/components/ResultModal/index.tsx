@@ -52,7 +52,7 @@ export default function ResultModal({
       }
     }
 
-    result += "cardle-front-end-4dd6695ccc13.herokuapp.com/";
+    result += "https://cardle-front-end-4dd6695ccc13.herokuapp.com/";
     return result;
   }
 
@@ -67,7 +67,7 @@ export default function ResultModal({
         .catch((err) => {
           console.error(err);
         });
-    } else {
+    } else if (navigator.clipboard) {
       navigator.clipboard
         .writeText(shareData.text)
         .then(() => {
@@ -80,6 +80,8 @@ export default function ResultModal({
         .catch((err) => {
           console.error(err);
         });
+    } else {
+      console.error("score not shared\n", shareData.text);
     }
   }
 
@@ -95,9 +97,7 @@ export default function ResultModal({
         <h1 className="result__title">
           {result === "win" ? "WINNER!" : `BETTER LUCK NEXT TIME`}
         </h1>
-        <p className="result__answer">
-        { `${answer.make} ${answer.model}`}
-        </p>
+        <p className="result__answer">{`${answer.make} ${answer.model}`}</p>
         <img src={imageFull} alt="full car image" className="result__image" />
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>
