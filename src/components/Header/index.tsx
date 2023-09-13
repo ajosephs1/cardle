@@ -9,10 +9,13 @@ interface HeaderProps {
 }
 
 export default function Header({ handleClick }: HeaderProps) {
-
   return (
     <nav className="nav">
-      <a href="https://boxbox.autos/" target="blank" className="nav__header--link">
+      <a
+        href="https://boxbox.autos/"
+        target="blank"
+        className="nav__header--link"
+      >
         <h1 className="nav__header">CAR-DLE</h1>
         <p className="nav__header--tiny">powered by BoxBox</p>
       </a>
@@ -26,9 +29,6 @@ export default function Header({ handleClick }: HeaderProps) {
         </a>
         <div className="nav__link" onClick={() => handleClick(true)}>
           <img src={question} alt="question icon" className="nav__icon" />
-        </div>
-        <div className="nav__link">
-          <img src={chart} alt="chart icon" className="nav__icon" />
         </div>
       </div>
     </nav>
