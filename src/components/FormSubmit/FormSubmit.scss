@@ -22,6 +22,15 @@
         border: 2px solid $bb-white;
         border-radius: 1rem;
         cursor: pointer;
+
+        &:disabled{
+           opacity: 0.4125;
+        }
+        @include desktop{
+            &:hover{
+                border-color: $bb-coolgrey;
+            }
+        }
     }
 }
 

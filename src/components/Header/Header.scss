@@ -21,14 +21,14 @@
   &__header {
     @include header-mobile;
 
-    &--tiny{
+    &--tiny {
       font-size: 0.5em;
-      color: $bb-pink
+      color: $bb-pink;
     }
 
     &--link {
       text-decoration: none;
-      &:hover{
+      &:hover {
         cursor: pointer;
       }
     }
@@ -48,7 +48,6 @@
     min-height: 1.5rem;
     max-width: 1.5rem;
     max-height: 1.5rem;
-    background-color: $bb-grey;
     border-radius: 100%;
     margin: 0 0.5rem;
     transition: 0.2s, linear;
