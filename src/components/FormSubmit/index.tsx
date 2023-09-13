@@ -12,12 +12,14 @@ type FormProps = {
   };
   updateForm: (valtype: string, val: string) => void;
   updateRound: () => void;
+  isPlayed: boolean
 };
 
 export default function FormSubmit({
   formValues,
   updateForm,
   updateRound,
+  isPlayed
 }: FormProps) {
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
@@ -101,7 +103,7 @@ export default function FormSubmit({
           e.preventDefault();
           updateRound();
         }}
-        disabled={!(formValues.make && formValues.model && formValues.year)}
+        disabled={!(formValues.make && formValues.model && formValues.year || isPlayed)}
       >
         submit
       </button>

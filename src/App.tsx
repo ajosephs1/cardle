@@ -11,6 +11,7 @@ import "./App.scss";
 function App() {
   // state to display instructions modal
   const [help, setHelp] = useState(false);
+  const [gamePlayed, setGamePlayed] = useState(false);
   const [didWin, setDidWin] = useState("");
   const [answerStreak, setAnswerStreak] = useState(Number);
   const [allTimeScore, setAllTimeScore] = useState(Number);
@@ -55,7 +56,6 @@ function App() {
     model: "",
     year: "",
   });
-  console.log(formVals);
 
   const [answer, setAnswer] = useState({
     make: "",
@@ -245,6 +245,7 @@ function App() {
         }),
       1750
     );
+
     setFormVals(newFormVals);
 
     if (addPoints === 3) {
@@ -256,24 +257,34 @@ function App() {
         `${allTimeScore + (6 - currentRound) * addPoints}`
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
-
+      setGamePlayed(true);
       setTimeout(() => setDidWin("win"), 2000);
     }
 
     if (currentRound === 5 && addPoints !== 3) {
-      localStorage.setItem("answerStreak", `0`);
+      localStorage.setItem("answerStreak", "0");
 
       localStorage.setItem(
         "allTimeScore",
         `${allTimeScore + (6 - currentRound) * addPoints}`
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
-
+        setGamePlayed(true)
       setTimeout(() => setDidWin("lose"), 2000);
     }
   }
 
   function updateRound() {
+    // show result modal if the game has already been played
+    if (round.currentPoints === 3 && gamePlayed) {
+      setDidWin("win");
+      return;
+    }
+    if (round.currentPoints !== 3 && gamePlayed) {
+      setDidWin("lose");
+      return;
+    }
+
     const nextRound = round.currentRound + 1;
     const nextMultiplier = round.multiplier - 1;
 
@@ -304,6 +315,7 @@ function App() {
           formValues={formVals}
           updateForm={updateForm}
           updateRound={updateRound}
+          isPlayed={gamePlayed}
         />
         {/* <div className="advertisement">
           <p>Ads placement</p>
