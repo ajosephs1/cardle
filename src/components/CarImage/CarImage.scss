@@ -23,6 +23,7 @@
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: opacity 0.5s ease-in-out;
 
   &-container {
     margin: 1rem auto;
@@ -34,7 +35,6 @@
   }
 
   &--transition{
-    transition: opacity 0.5s ease-in-out;
 
     &.fadeIn {
       animation: fadeIn 0.5s ease-in-out;
