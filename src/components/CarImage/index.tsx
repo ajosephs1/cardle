@@ -31,6 +31,10 @@ export default function CarImage({ round, images }: CarImageProps) {
   const initialImageClass =
     round === 1 ? "image image--transition fadeIn" : "image image--transition";
 
+
+    // store all images in an array 
+    //change image when round changes and add animation 
+    //have 2 image components 1 has the previous and 2 has the next when stae updates add class to slide out one and slide in 2 2 then becomes one and 3 becomes 2 
   return (
     <div className="image-container">
       <img

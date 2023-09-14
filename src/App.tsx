@@ -79,9 +79,10 @@ function App() {
     round.currentPoints *
     (round.multiplier === 5
       ? 5
-      : round.multiplier === 1
+      : round.multiplier === 0
       ? 1
       : round.multiplier + 1);
+      console.log(round.multiplier)
 
   useEffect(() => {
     axios
@@ -236,7 +237,7 @@ function App() {
           multiplier:
             round.currentPoints === 3
               ? round.multiplier
-              : round.multiplier === 1
+              : round.multiplier === 0
               ? 1
               : nM,
           make: roundBools.make,
