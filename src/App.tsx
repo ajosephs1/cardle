@@ -82,7 +82,6 @@ function App() {
       : round.multiplier === 0
       ? 1
       : round.multiplier + 1);
-      console.log(round.multiplier)
 
   useEffect(() => {
     axios

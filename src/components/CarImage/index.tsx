@@ -14,7 +14,29 @@ type CarImageProps = {
 };
 export default function CarImage({ round, images }: CarImageProps) {
   const [imageModal, showImageModal] = useState(false);
+  const [carImages, setCarImages] = useState([""]);
+  const [currRound, setCurrRound] = useState([""]);
 
+  console.log(images);
+
+  useEffect(() => {
+    setCarImages([
+      images.imageOne,
+      images.imageTwo,
+      images.imageThree,
+      images.imageFour,
+      images.imageFive,
+    ]);
+  }, []);
+
+  
+  const imageSlider = useEffect(() => {
+    // if round = 1 no animation just display image and return one image object
+    // on round change return two image elements 
+    /* 1st element has slide out animation
+    2nd element has slide in animation 
+    every re-render element 1 is prev round element 2 is round  */
+  }, [round]);
   const imagePath =
     round === 1
       ? images.imageOne
@@ -31,14 +53,15 @@ export default function CarImage({ round, images }: CarImageProps) {
   const initialImageClass =
     round === 1 ? "image image--transition fadeIn" : "image image--transition";
 
+  // store all images in an array
+  //change image when round changes and add animation
+  //have 2 image components 1 has the previous and 2 has the next when stae updates add class to slide out one and slide in 2 2 then becomes one and 3 becomes 2
 
-    // store all images in an array 
-    //change image when round changes and add animation 
-    //have 2 image components 1 has the previous and 2 has the next when stae updates add class to slide out one and slide in 2 2 then becomes one and 3 becomes 2 
+  // 2 components slide out and slide in
   return (
     <div className="image-container">
       <img
-        src={imagePath}
+        src="image"
         alt="car image placeholder"
         className={initialImageClass}
         onClick={() => showImageModal(true)}

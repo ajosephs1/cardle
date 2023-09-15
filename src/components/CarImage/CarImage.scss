@@ -1,18 +1,18 @@
-@keyframes fadeIn {
+@keyframes SlideIn {
   0% {
-    opacity: 0;
+    transform: translateX(100%);
   }
   100% {
-    opacity: 1;
+    transform: translateX(0%);
   }
 }
 
-@keyframes fadeOut {
+@keyframes SlideOut {
   0% {
-    opacity: 1;
+    transform: translateX(0%);
   }
   100% {
-    opacity: 0;
+    transform: translateX(-100%);
   }
 }
 
@@ -23,7 +23,7 @@
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 
   &-container {
     margin: 1rem auto;
@@ -32,17 +32,6 @@
 
   &:hover {
     cursor: pointer;
-  }
-
-  &--transition{
-
-    &.fadeIn {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    &.fadeOut {
-      animation: fadeOut 0.5s ease-in-out;
-    }
   }
 
   &--modal {
