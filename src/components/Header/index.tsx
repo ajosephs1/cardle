@@ -1,7 +1,6 @@
 // import bbLogo from "../../assets/images/boxbox_logo.svg";
 import instagram from "../../assets/icons/instagram-icon.svg";
 import question from "../../assets/icons/question-icon.svg";
-import chart from "../../assets/icons/chart-icon.svg";
 import "./Header.scss";
 
 interface HeaderProps {
