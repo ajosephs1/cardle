@@ -1,4 +1,4 @@
-@keyframes SlideIn {
+@keyframes slideIn {
   0% {
     transform: translateX(100%);
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes SlideOut {
+@keyframes slideOut {
   0% {
     transform: translateX(0%);
   }
@@ -21,17 +21,34 @@
   width: 100%;
   aspect-ratio: 3 / 2;
   border-radius: 0.25rem;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  transition: opacity 0.5s ease-in-out;
 
   &-container {
+    // position: relative;
     margin: 1rem auto;
     width: 30vh;
   }
 
   &:hover {
     cursor: pointer;
+  }
+
+  &__slider {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &--next {
+    position: absolute;
+  }
+
+  &--slide-out {
+    animation: slideOut 0.5s ease-in-out forwards;
+    position: absolute;
+  }
+  &--slide-in {
+    animation: slideIn 0.5s ease-in-out forwards;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   }
 
   &--modal {

@@ -14,62 +14,80 @@ type CarImageProps = {
 };
 export default function CarImage({ round, images }: CarImageProps) {
   const [imageModal, showImageModal] = useState(false);
-  const [carImages, setCarImages] = useState([""]);
-  const [currRound, setCurrRound] = useState([""]);
-
-  console.log(images);
+  const [imageAnimation, setImageAnimation] = useState({
+    1: "",
+    2: "image--next",
+    3: "image--next",
+    4: "image--next",
+    5: "image--next",
+  });
 
   useEffect(() => {
-    setCarImages([
-      images.imageOne,
-      images.imageTwo,
-      images.imageThree,
-      images.imageFour,
-      images.imageFive,
-    ]);
-  }, []);
-
-  
-  const imageSlider = useEffect(() => {
-    // if round = 1 no animation just display image and return one image object
-    // on round change return two image elements 
-    /* 1st element has slide out animation
-    2nd element has slide in animation 
-    every re-render element 1 is prev round element 2 is round  */
+    if (round === 1) {
+      return;
+    } else {
+      setImageAnimation({
+        ...imageAnimation,
+        [round - 1]: "image--slide-out",
+        [round]: "image--slide-in",
+      });
+    }
   }, [round]);
-  const imagePath =
-    round === 1
-      ? images.imageOne
-      : round === 2
-      ? images.imageTwo
-      : round === 3
-      ? images.imageThree
-      : round === 4
-      ? images.imageFour
-      : round === 5
-      ? images.imageFive
-      : "";
 
-  const initialImageClass =
-    round === 1 ? "image image--transition fadeIn" : "image image--transition";
-
-  // store all images in an array
-  //change image when round changes and add animation
-  //have 2 image components 1 has the previous and 2 has the next when stae updates add class to slide out one and slide in 2 2 then becomes one and 3 becomes 2
-
-  // 2 components slide out and slide in
   return (
     <div className="image-container">
-      <img
-        src="image"
-        alt="car image placeholder"
-        className={initialImageClass}
-        onClick={() => showImageModal(true)}
-      />
+      <div className="image__slider">
+        <img
+          src={images.imageOne}
+          alt="car image placeholder"
+          className={`image image--one ${imageAnimation[1]}`}
+          onClick={() => showImageModal(true)}
+        />
+        <img
+          src={images.imageTwo}
+          alt="car image placeholder"
+          className={`image ${imageAnimation[2]}`}
+          onClick={() => showImageModal(true)}
+        />
+        <img
+          src={images.imageThree}
+          alt="car image placeholder"
+          className={`image ${imageAnimation[3]}`}
+          onClick={() => showImageModal(true)}
+          loading="lazy"
+        />
+        <img
+          src={images.imageFour}
+          alt="car image placeholder"
+          className={`image ${imageAnimation[4]}`}
+          onClick={() => showImageModal(true)}
+          loading="lazy"
+        />
+        <img
+          src={images.imageFive}
+          alt="car image placeholder"
+          className={`image ${imageAnimation[5]}`}
+          onClick={() => showImageModal(true)}
+          loading="lazy"
+        />
+      </div>
+
       {imageModal && (
         <div className="image--modal" onClick={() => showImageModal(false)}>
           <img
-            src={imagePath}
+            src={
+              round === 1
+                ? images.imageOne
+                : round === 2
+                ? images.imageTwo
+                : round === 3
+                ? images.imageThree
+                : round === 4
+                ? images.imageFour
+                : round === 5
+                ? images.imageFive
+                : ""
+            }
             alt="car image placeholder"
             className="image--modal-content"
           />

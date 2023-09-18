@@ -217,7 +217,7 @@ export default function ScoreBoard({
         </div>
         <div className="scoreboard__tally-row">
           <p className="scoreboard__text">Final Score Multiplier:</p>
-          <p className="scoreboard__text scoreboard__text--multiplier">{`x${multiplier}`}</p>
+          <p className="scoreboard__text scoreboard__text--multiplier">{`x${multiplier === 0? 1: multiplier}`}</p>
         </div>
       </section>
     </section>
