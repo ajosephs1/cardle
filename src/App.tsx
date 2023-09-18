@@ -258,7 +258,7 @@ function App() {
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
       setGamePlayed(true);
-      setTimeout(() => setDidWin("win"), 2000);
+      setTimeout(() => setDidWin("win"), 2500);
     }
 
     if (currentRound === 5 && addPoints !== 3) {
@@ -269,8 +269,8 @@ function App() {
         `${allTimeScore + (6 - currentRound) * addPoints}`
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
-        setGamePlayed(true)
-      setTimeout(() => setDidWin("lose"), 2000);
+      setGamePlayed(true);
+      setTimeout(() => setDidWin("lose"), 2500);
     }
   }
 

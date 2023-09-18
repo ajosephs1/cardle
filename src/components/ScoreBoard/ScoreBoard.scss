@@ -127,6 +127,27 @@
       }
     }
   }
+  &__current-score {
+    &-scroll {
+      position: relative;
+      overflow-y: hidden;
+
+      &--value {
+        text-align: right;
+        width: 0.5rem;
+        &-next {
+          position: absolute;
+          transform: translateY(100%);
+        }
+        &-out {
+          animation: scoreSlideOut 0.5s ease-in-out;
+        }
+        &-in {
+          animation: scoreSlideIn 0.5s ease-in-out forwards;
+        }
+      }
+    }
+  }
   &__multiplier {
     &-container {
       display: flex;

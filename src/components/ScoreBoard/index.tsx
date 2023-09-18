@@ -13,8 +13,6 @@ type ScoreBoardProps = {
   };
 };
 
-// add animation delay for each light 1s
-//
 export default function ScoreBoard({
   multiplier,
   currentPoints,
@@ -25,11 +23,40 @@ export default function ScoreBoard({
     valueOut: 5,
     valueIn: 4,
   });
-
+  const [scoreVals, setScoreVals] = useState({
+    animation: false,
+    valueOut: 0,
+    valueIn: 0,
+  });
   useEffect(() => {
-    /* 
-    
-    */ if (multiplier === 5 || multiplier === 0) {
+    // trigger animation for current score
+    if (currentPoints !== scoreVals.valueOut) {
+      setScoreVals((prevScoreVals) => {
+        return {
+          ...prevScoreVals,
+          valueIn: currentPoints,
+        };
+      });
+      setScoreVals((prevScoreVals) => {
+        return {
+          ...prevScoreVals,
+          animation: true,
+        };
+      });
+
+      setTimeout(() => {
+        setScoreVals((prevScoreVals) => {
+          return {
+            ...prevScoreVals,
+            animation: false,
+            valueOut: prevScoreVals.valueIn,
+          };
+        });
+      }, 450);
+    }
+
+    //  trigger animation for score multiplier
+    if (multiplier === 5 || multiplier === 0 || currentPoints === 3) {
       return;
     } else {
       setMultiplierVals((prevMultiplierVals) => {
@@ -59,7 +86,6 @@ export default function ScoreBoard({
         <h2 className="scoreboard__heading">Model</h2>
         <h2 className="scoreboard__heading">Year</h2>
       </div>
-      {/* each light will be given class name depending on value for respective round add delay appropriately for each light 1s 2s 3s */}
       <section className="scoreboard__light-container ">
         <div className="scoreboard__row">
           <div className="scoreboard__light__container">
@@ -242,19 +268,32 @@ export default function ScoreBoard({
           <p className="scoreboard__text scoreboard__text--current">
             Current Score:
           </p>
-          <p className="scoreboard__text scoreboard__text--current">
-            {currentPoints === 0 ? `-` : currentPoints}
-          </p>
+          <div className="scoreboard__current-score-scroll">
+            <p
+              className={`scoreboard__current-score-scroll--value scoreboard__multiplier-scroll--value-next ${
+                scoreVals.animation
+                  ? "scoreboard__current-score-scroll--value-in"
+                  : "scoreboard__current-score-scroll--value-next"
+              }`}
+            >
+              {scoreVals.valueIn}
+            </p>
+            <p
+              className={`scoreboard__current-score-scroll--value ${
+                scoreVals.animation
+                  ? "scoreboard__current-score-scroll--value-out"
+                  : ""
+              }`}
+            >
+              {scoreVals.valueOut}
+            </p>
+          </div>
         </div>
         <div className="scoreboard__tally-row">
           <p className="scoreboard__text">Final Score Multiplier:</p>
           <div className="scoreboard__multiplier-container">
             <p className="scoreboard__text">x</p>
-            {/* create a dive with two possible values
-              one showing the next round and the current round 
-              when the current round is over number scrolls down and next round comes in 
-              then next round is added to queue
-            */}
+
             <div className="scoreboard__multiplier-scroll">
               <p
                 className={`scoreboard__multiplier-scroll--value scoreboard__multiplier-scroll--value-next ${
