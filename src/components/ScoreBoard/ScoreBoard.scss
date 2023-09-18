@@ -2,6 +2,24 @@
 @use "../../styles/partials/colours" as *;
 @use "../../styles/partials/typography" as *;
 
+@keyframes scoreSlideIn {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes scoreSlideOut {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
 .scoreboard {
   margin: 0 2.5rem;
   &__headings {
@@ -107,10 +125,29 @@
       &:nth-child(2) {
         padding: 0.5rem 0;
       }
+    }
+  }
+  &__multiplier {
+    &-container {
+      display: flex;
+    }
+    &-scroll {
+      position: relative;
+      overflow-y: hidden;
 
-      &:nth-child(3) {
-        padding-top: 0.5rem;
-        border-top: 2px solid $bb-white;
+      &--value {
+        text-align: right;
+        width: 0.5rem;
+        &-next {
+          position: absolute;
+          transform: translateY(100%);
+        }
+        &-out {
+          animation: scoreSlideOut 0.5s ease-in-out;
+        }
+        &-in {
+          animation: scoreSlideIn 0.5s ease-in-out forwards;
+        }
       }
     }
   }

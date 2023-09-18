@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "./ScoreBoard.scss";
 
 type ScoreBoardProps = {
@@ -19,8 +20,38 @@ export default function ScoreBoard({
   currentPoints,
   score,
 }: ScoreBoardProps) {
+  const [multiplierVals, setMultiplierVals] = useState({
+    animation: false,
+    valueOut: 5,
+    valueIn: 4,
+  });
 
-  // create function for row to make more DRY
+  useEffect(() => {
+    /* 
+    
+    */ if (multiplier === 5 || multiplier === 0) {
+      return;
+    } else {
+      setMultiplierVals((prevMultiplierVals) => {
+        return {
+          ...prevMultiplierVals,
+          animation: true,
+        };
+      });
+
+      setTimeout(() => {
+        setMultiplierVals((prevMultiplierVals) => {
+          return {
+            ...prevMultiplierVals,
+            animation: false,
+            valueOut: multiplier,
+            valueIn: multiplier - 1,
+          };
+        });
+      }, 450);
+    }
+  }, [multiplier]);
+
   return (
     <section className="scoreboard">
       <div className="scoreboard__headings">
@@ -217,7 +248,34 @@ export default function ScoreBoard({
         </div>
         <div className="scoreboard__tally-row">
           <p className="scoreboard__text">Final Score Multiplier:</p>
-          <p className="scoreboard__text scoreboard__text--multiplier">{`x${multiplier === 0? 1: multiplier}`}</p>
+          <div className="scoreboard__multiplier-container">
+            <p className="scoreboard__text">x</p>
+            {/* create a dive with two possible values
+              one showing the next round and the current round 
+              when the current round is over number scrolls down and next round comes in 
+              then next round is added to queue
+            */}
+            <div className="scoreboard__multiplier-scroll">
+              <p
+                className={`scoreboard__multiplier-scroll--value scoreboard__multiplier-scroll--value-next ${
+                  multiplierVals.animation
+                    ? "scoreboard__multiplier-scroll--value-in"
+                    : "scoreboard__multiplier-scroll--value-next"
+                }`}
+              >
+                {multiplierVals.valueIn}
+              </p>
+              <p
+                className={`scoreboard__multiplier-scroll--value ${
+                  multiplierVals.animation
+                    ? "scoreboard__multiplier-scroll--value-out"
+                    : ""
+                }`}
+              >
+                {multiplierVals.valueOut}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </section>
