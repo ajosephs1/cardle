@@ -10,17 +10,17 @@
   &__input {
     width: 100%;
     height: fit-content;
-    border: 2px solid $bb-white;
+    border: 2px solid $bb-black;
     border-radius: 0.25rem;
     font-family: inherit;
     font-size: inherit;
-    color: white;
+    color: $bb-black;
     outline: none;
     padding: 0.25rem 0.5rem;
     background: none;
 
     &::placeholder {
-      color: $bb-white;
+      color: $bb-black;
     }
 
     @include desktop {
@@ -34,7 +34,7 @@
     z-index: 1;
     position: absolute;
     width: 100%;
-    top: 1.8rem;
+    top: 1.7rem;
     list-style-type: none;
     padding: 0.25rem 0.5rem;
     min-height: 2rem;
@@ -42,11 +42,11 @@
     overflow: scroll;
     overflow-x: hidden;
     scrollbar-width: thin;
-    border: 2px solid $bb-white;
+    border: 2px solid $bb-black;
     border-top: none;
     border-radius: 0 0 0.25rem 0.25rem;
     scroll-behavior: smooth;
-    background-color: $bb-black;
+    background-color: $bb-white;
   }
 
   &__value {

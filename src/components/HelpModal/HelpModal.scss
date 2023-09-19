@@ -6,20 +6,20 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
   font-family: inherit;
 
   &__info {
-    border: 2px solid $bb-white;
-    margin: 0 auto;
+    border: 2px solid $bb-black;
+    margin: auto 1.5rem;
     overflow: hidden;
     overflow-y: scroll;
-    width: 85%;
+    width: 100%;
     height: fit-content;
-    background-color: $bb-grey;
+    background-color: $bb-coolgrey;
     padding: 0 2rem;
   }
 
