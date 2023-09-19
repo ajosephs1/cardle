@@ -301,39 +301,39 @@ function App() {
 
   return (
     <div className="App">
-      <header className="header">
-        <Header handleClick={helpClick} />
-      </header>
-      <main className="container">
-        <CarImage round={round.currentRound} images={carImages} />
-        <ScoreBoard
-          multiplier={round.multiplier}
-          currentPoints={round.currentPoints}
-          score={score}
-        />
-        <FormSubmit
-          formValues={formVals}
-          updateForm={updateForm}
-          updateRound={updateRound}
-          isPlayed={gamePlayed}
-        />
-        {/* <div className="advertisement">
-          <p>Ads placement</p>
-        </div> */}
-        {help && <HelpModal handleClick={helpClick} />}
-        {didWin && (
-          <ResultModal
+      <section className="cardle-content">
+        <header className="header">
+          <Header handleClick={helpClick} />
+        </header>
+        <main className="main">
+          <CarImage round={round.currentRound} images={carImages} />
+          <ScoreBoard
+            multiplier={round.multiplier}
+            currentPoints={round.currentPoints}
             score={score}
-            result={didWin}
-            round={round.currentRound}
-            total={totalPoints}
-            allTimeScore={allTimeScore}
-            closeModal={() => setDidWin("")}
-            answer={answer}
-            imageFull={carImages.imageFull}
           />
-        )}
-      </main>
+          <FormSubmit
+            formValues={formVals}
+            updateForm={updateForm}
+            updateRound={updateRound}
+            isPlayed={gamePlayed}
+          />
+
+          {help && <HelpModal handleClick={helpClick} />}
+          {didWin && (
+            <ResultModal
+              score={score}
+              result={didWin}
+              round={round.currentRound}
+              total={totalPoints}
+              allTimeScore={allTimeScore}
+              closeModal={() => setDidWin("")}
+              answer={answer}
+              imageFull={carImages.imageFull}
+            />
+          )}
+        </main>
+      </section>
     </div>
   );
 }
