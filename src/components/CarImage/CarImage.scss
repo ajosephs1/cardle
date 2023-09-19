@@ -18,14 +18,19 @@
 
 .image {
   display: block;
+  flex: 1;
   width: 100%;
   aspect-ratio: 3 / 2;
   border-radius: 0.25rem;
 
   &-container {
-    margin: 1rem auto;
+    margin: 1svh auto;
     width: 100%;
     padding: 0 1.5rem;
+
+    @media screen and (height <= 550px ) {
+      max-width: 50%;
+    }
   }
 
   &:hover {
