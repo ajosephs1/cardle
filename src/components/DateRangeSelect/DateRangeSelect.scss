@@ -14,11 +14,11 @@
     left: 0;
     width: 100%;
     height: fit-content;
-    border: 2px solid $bb-white;
+    border: 2px solid $bb-black;
     border-radius: 0.25rem;
     font-family: inherit;
     font-size: inherit;
-    color: white;
+    color: $bb-black;
     outline: none;
     padding: 0.25rem 0.5rem;
     background: none;
@@ -35,7 +35,7 @@
 
   &__value {
     @include body-mobile;
-    background-color: $bb-black;
+    background-color: $bb-white;
     font-size: inherit;
 
     &:hover {
