@@ -2,20 +2,20 @@
 @use "./styles/partials/colours" as *;
 
 .App {
-  background-color: $bb-grey;
+  background-color: $bb-white;
   height: 100vh;
 }
 
 .container {
   margin: 0 auto;
-  background-color: $bb-grey;
+  background-color: $bb-white;
   position: relative;
   max-width: 450px;
   color: $bb-white;
-  height: calc(100% - 3rem);
+  height: calc(100% - 4rem);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-evenly;
 }
 
 .advertisement {

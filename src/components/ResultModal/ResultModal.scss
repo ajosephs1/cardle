@@ -11,18 +11,17 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
 
   &__modal {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    width: 85%;
-    background-color: $bb-grey;
+    margin: auto 1.5rem;
+    background-color: $bb-coolgrey;
     padding: 1.5rem;
-    border: 2px solid $bb-white;
+    border: 2px solid $bb-black;
   }
 
   &__exit {
@@ -47,7 +46,10 @@
   }
 
   &__image {
-    width: 90%;
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 0.25rem;
   }
 
   &__headings {
@@ -65,7 +67,6 @@
 
   &__row {
     width: 100%;
-    border-bottom: 2px solid $bb-grey;
     padding: 0.525rem 0 0;
     display: flex;
     justify-content: space-between;
@@ -137,7 +138,7 @@
 
   &__share {
     display: flex;
-    border: 2px solid $bb-white;
+    border: 2px solid $bb-black;
     justify-content: center;
     align-items: center;
     padding: 0.5rem 1rem;
