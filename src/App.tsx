@@ -257,6 +257,7 @@ function App() {
         `${allTimeScore + (6 - currentRound) * addPoints}`
       );
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
+      localStorage.setItem("gamePlayed", "true");
       setGamePlayed(true);
       setTimeout(() => setDidWin("win"), 2500);
     }
@@ -268,6 +269,7 @@ function App() {
         "allTimeScore",
         `${allTimeScore + (6 - currentRound) * addPoints}`
       );
+      localStorage.setItem("gamePlayed", "true");
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
       setGamePlayed(true);
       setTimeout(() => setDidWin("lose"), 2500);
