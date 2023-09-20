@@ -52,7 +52,7 @@ export default function ResultModal({
       }
     }
 
-    result += "https://cardle-front-end-4dd6695ccc13.herokuapp.com/";
+    result += "cardle.boxbox.autos";
     return result;
   }
 
