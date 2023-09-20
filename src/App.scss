@@ -20,7 +20,13 @@
   color: $bb-white;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content:flex-start;
+  row-gap: 2%;
   flex-grow: 1;
-}
+
+  @media (width >= 480px){
+    justify-content: flex-start;
+  }
+    
+  }
 
