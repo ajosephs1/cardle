@@ -14,25 +14,25 @@
 
   &__info {
     border: 2px solid $bb-black;
-    margin: auto 1.5rem;
+    margin: 0.425rem 1.5rem;
     overflow: hidden;
-    overflow-y: scroll;
     width: 100%;
     height: fit-content;
     background-color: $bb-coolgrey;
-    padding: 0 2rem;
+    padding: 0 0.425rem;
   }
-
+  
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 0;
+    margin: 0.5rem 0 0.75rem;
   }
-
+  
   &__instructions {
-    height: fit-content;
+    height: 100%;
     margin-bottom: 1rem;
+    overflow-y: scroll;
   }
 
   &__icon {
@@ -45,7 +45,7 @@
 
   &__subheading {
     text-decoration: underline;
-    margin: 0.5rem 0;
+    margin: 0.425rem 0 0;
   }
 
   h1 {

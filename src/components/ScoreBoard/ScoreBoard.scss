@@ -35,7 +35,7 @@
 
   &__row {
     border-bottom: 2px solid $bb-black;
-    padding: 0.425rem 0;
+    padding: 0.385rem 0;
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -117,14 +117,14 @@
   }
 
   &__tally {
-    padding: 0.5rem 0;
+    padding: 0.425rem 0;
     &-row {
       display: flex;
       justify-content: space-between;
       @include body-mobile;
 
       &:nth-child(2) {
-        padding: 0.5rem 0;
+        padding: 0.425rem 0 0;
       }
     }
   }
