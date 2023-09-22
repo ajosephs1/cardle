@@ -56,6 +56,12 @@ export default function ResultModal({
     return result;
   }
 
+  function trueRow(rnd: number) {
+    if ((score[rnd].make !== null && score[rnd].model !== null && score[rnd].year !==null)) {
+      return true;
+    }
+  }
+
   function shareResult() {
     const shareData = { text: emojiGrid(score) };
     if (navigator.share) {
@@ -105,7 +111,7 @@ export default function ResultModal({
           <h2 className="result__heading">Year</h2>
         </div>
         <section className="result__light-container ">
-          <div className="result__row">
+          <div className={trueRow(1)?`result__row`:''}>
             <div className="result__light__container">
               <div
                 className={
@@ -140,7 +146,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className="result__row">
+          <div className={trueRow(2)?`result__row`:''}>
             <div className="result__light__container">
               <div
                 className={
@@ -175,7 +181,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className="result__row">
+          <div className={trueRow(3)?`result__row`:''}>
             <div className="result__light__container">
               <div
                 className={
@@ -210,7 +216,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className="result__row">
+          <div className={trueRow(4)?`result__row`:''}>
             <div className="result__light__container">
               <div
                 className={
@@ -245,7 +251,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className="result__row">
+          <div className={trueRow(5)?`result__row`:''}>
             <div className="result__light__container">
               <div
                 className={

@@ -174,7 +174,6 @@ function App() {
       setRound(JSON.parse(localStorageRound));
     }
     
-    console.log(formVals)
     const answerStreakString = localStorage.getItem("answerStreak");
     const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
 
@@ -220,7 +219,11 @@ function App() {
       if (!round.make) {
         addPoints += 1;
       }
-    } else {
+    }
+    // else if(formVals.make && !round.make){
+    //   newFormVals.make = formVals.make
+    // } 
+    else {
       newFormVals.make = "";
     }
 

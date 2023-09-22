@@ -35,10 +35,8 @@ export default function FormSubmit({
     const localStorageFormVals: string | null =
       localStorage.getItem("gameFormVals");
 
-      
     if (localStorageFormVals) {
       setLocalFormVals(JSON.parse(localStorageFormVals));
-      console.log(JSON.parse(localStorageFormVals));
     }
   }, []);
 
@@ -65,9 +63,10 @@ export default function FormSubmit({
 
   // get model inputValues
   useEffect(() => {
+    const currentMake = formValues.make ? formValues.make : localFormVals.make;
     axios
       .get(
-        `${BASE_URL}/models?fields[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${formValues.make}&pagination[limit]=200`
+        `${BASE_URL}/models?fields[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${currentMake}&pagination[limit]=200`
       )
       .then((response) => {
         const modelObject = response.data.data;
