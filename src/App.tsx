@@ -183,6 +183,9 @@ function App() {
     if (localStorageDate !== currentDate) {
       localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem("gamePlayed", "false");
+      localStorage.removeItem("gameScore")
+      localStorage.removeItem("gameRound")
+      localStorage.removeItem("gameFormVals")
     }
 
     if (localStorageGamePlayed === "true") {

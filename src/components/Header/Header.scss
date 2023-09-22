@@ -11,14 +11,9 @@
   justify-content: space-between;
 
   &__header {
+    margin-left: 0.5rem;
     height: 1.5rem;
     display: block;
-
-    &--tiny {
-      margin-left: 0.1rem;
-      font-size: 0.5em;
-      color: $bb-pink;
-    }
 
     &--link {
       text-decoration: none;
@@ -43,7 +38,7 @@
     max-width: 1.5rem;
     max-height: 1.5rem;
     border-radius: 100%;
-    margin: 0 0.5rem;
+    margin: 0 0.25rem 0 0.5rem;
     transition: 0.2s, linear;
 
     &:hover {
