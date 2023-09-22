@@ -36,6 +36,12 @@ export default function DateRangeSelect({
 }: DateRangeProps) {
   const [selectedOption, setSelectedOption] = useState("");
 
+    // update current imput value if localStorage contains values && reload
+    useEffect(() => {
+      if (localFormVal) {
+        setSelectedOption(localFormVal);
+      }
+    }, [localFormVal]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
