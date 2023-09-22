@@ -173,7 +173,8 @@ function App() {
     if (localStorageRound) {
       setRound(JSON.parse(localStorageRound));
     }
-    const localStorageFormVals: string | null = localStorage.getItem("gameFormVals");
+    const localStorageFormVals: string | null =
+      localStorage.getItem("gameFormVals");
     if (localStorageFormVals) {
       setFormVals(JSON.parse(localStorageFormVals));
     }
@@ -187,9 +188,9 @@ function App() {
     if (localStorageDate !== currentDate) {
       localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem("gamePlayed", "false");
-      localStorage.removeItem("gameScore")
-      localStorage.removeItem("gameRound")
-      localStorage.removeItem("gameFormVals")
+      localStorage.removeItem("gameScore");
+      localStorage.removeItem("gameRound");
+      localStorage.removeItem("gameFormVals");
     }
 
     if (localStorageGamePlayed === "true") {
@@ -205,8 +206,6 @@ function App() {
 
     setAllTimeScore(allTimeLocalScore);
   }, []);
-
-  console.log(formVals)
 
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
@@ -232,7 +231,7 @@ function App() {
     }
     // else if(formVals.make && !round.make){
     //   newFormVals.make = formVals.make
-    // } 
+    // }
     else {
       newFormVals.make = "";
     }
@@ -308,7 +307,7 @@ function App() {
     }, 1750);
 
     setFormVals(newFormVals);
-    localStorage.setItem('gameFormVals', JSON.stringify(newFormVals))
+    localStorage.setItem("gameFormVals", JSON.stringify(newFormVals));
 
     // Update win/lose state
     if (addPoints === 3) {

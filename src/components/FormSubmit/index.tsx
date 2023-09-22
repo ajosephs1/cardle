@@ -40,8 +40,6 @@ export default function FormSubmit({
     }
   }, [formValues]);
 
-  console.log(localFormVals)
-
   // get make inputValues
   useEffect(() => {
     axios

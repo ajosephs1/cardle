@@ -27,7 +27,7 @@ export default function CarImage({ round, images }: CarImageProps) {
       setImageAnimation({ ...imageAnimation, [1]: "image--slide-out" });
     }
   });
-  
+
   useEffect(() => {
     if (round === 1) {
       return;
@@ -49,33 +49,41 @@ export default function CarImage({ round, images }: CarImageProps) {
           className={`image image--one ${imageAnimation[1]}`}
           onClick={() => showImageModal(true)}
         />
-        <img
-          src={images.imageTwo}
-          alt="car image placeholder"
-          className={`image ${imageAnimation[2]}`}
-          onClick={() => showImageModal(true)}
-        />
-        <img
-          src={images.imageThree}
-          alt="car image placeholder"
-          className={`image ${imageAnimation[3]}`}
-          onClick={() => showImageModal(true)}
-          loading="lazy"
-        />
-        <img
-          src={images.imageFour}
-          alt="car image placeholder"
-          className={`image ${imageAnimation[4]}`}
-          onClick={() => showImageModal(true)}
-          loading="lazy"
-        />
-        <img
-          src={images.imageFive}
-          alt="car image placeholder"
-          className={`image ${imageAnimation[5]}`}
-          onClick={() => showImageModal(true)}
-          loading="lazy"
-        />
+        {round >= 2 && (
+          <img
+            src={images.imageTwo}
+            alt="car image placeholder"
+            className={`image ${imageAnimation[2]}`}
+            onClick={() => showImageModal(true)}
+          />
+        )}
+        {round >= 3 && (
+          <img
+            src={images.imageThree}
+            alt="car image placeholder"
+            className={`image ${imageAnimation[3]}`}
+            onClick={() => showImageModal(true)}
+            loading="lazy"
+          />
+        )}
+        {round >= 4 && (
+          <img
+            src={images.imageFour}
+            alt="car image placeholder"
+            className={`image ${imageAnimation[4]}`}
+            onClick={() => showImageModal(true)}
+            loading="lazy"
+          />
+        )}
+        {round >= 5 && (
+          <img
+            src={images.imageFive}
+            alt="car image placeholder"
+            className={`image ${imageAnimation[5]}`}
+            onClick={() => showImageModal(true)}
+            loading="lazy"
+          />
+        )}
       </div>
 
       {imageModal && (
