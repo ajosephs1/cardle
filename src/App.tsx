@@ -173,7 +173,11 @@ function App() {
     if (localStorageRound) {
       setRound(JSON.parse(localStorageRound));
     }
-    
+    const localStorageFormVals: string | null = localStorage.getItem("gameFormVals");
+    if (localStorageFormVals) {
+      setFormVals(JSON.parse(localStorageFormVals));
+    }
+
     const answerStreakString = localStorage.getItem("answerStreak");
     const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
 
@@ -202,6 +206,8 @@ function App() {
     setAllTimeScore(allTimeLocalScore);
   }, []);
 
+  console.log(formVals)
+
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
     let addPoints = round.currentPoints;
@@ -210,6 +216,7 @@ function App() {
       model: false,
       year: false,
     };
+
     let newFormVals = {
       make: formVals.make,
       model: formVals.model,

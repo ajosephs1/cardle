@@ -23,12 +23,12 @@ export default function Select(props: SelectProps) {
 
   const selectRef = useRef<HTMLDivElement>(null);
 
+  // update current imput value if localStorage contains values && reload
   useEffect(() => {
     if (props.localFormVal) {
       setInputValue(props.localFormVal);
     }
-  },[]);
-
+  }, [props.localFormVal]);
 
   useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
