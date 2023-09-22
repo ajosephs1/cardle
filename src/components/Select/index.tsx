@@ -5,6 +5,7 @@ export type SelectProps = {
   data: string[];
   name: string;
   class: string;
+  localFormVal: string;
   updateForm: (valtype: string, val: string) => void;
   selType: string;
 };
@@ -23,6 +24,9 @@ export default function Select(props: SelectProps) {
   const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (props.localFormVal) {
+      setInputValue(props.localFormVal);
+    }
     setSelectType({ ...selectType, [props.selType]: true });
   }, []);
 

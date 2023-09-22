@@ -10,18 +10,12 @@
   align-items: center;
   justify-content: space-between;
 
-  &__logo {
-    height: 2.5rem;
-
-    &--img {
-      height: 100%;
-    }
-  }
-
   &__header {
-    @include header-mobile;
+    height: 1.5rem;
+    display: block;
 
     &--tiny {
+      margin-left: 0.1rem;
       font-size: 0.5em;
       color: $bb-pink;
     }

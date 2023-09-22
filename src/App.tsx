@@ -83,6 +83,7 @@ function App() {
       ? 1
       : round.multiplier + 1);
 
+  // API requests to strapi
   useEffect(() => {
     axios
       .get(
@@ -162,10 +163,32 @@ function App() {
         console.error(error);
       });
   }, []);
-
+  // handle all data in localStorage
   useEffect(() => {
+    const localStorageScore: string | null = localStorage.getItem("gameScore");
+    if (localStorageScore) {
+      setScore(JSON.parse(localStorageScore));
+    }
+    const localStorageRound: string | null = localStorage.getItem("gameRound");
+    if (localStorageRound) {
+      setRound(JSON.parse(localStorageRound));
+    }
+    
+    console.log(formVals)
     const answerStreakString = localStorage.getItem("answerStreak");
     const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
+
+    const localStorageDate = localStorage.getItem("lastPlayed");
+    const localStorageGamePlayed = localStorage.getItem("gamePlayed");
+
+    if (localStorageDate !== currentDate) {
+      localStorage.setItem("lastPlayed", currentDate);
+      localStorage.setItem("gamePlayed", "false");
+    }
+
+    if (localStorageGamePlayed === "true") {
+      setGamePlayed(true);
+    }
 
     setAnswerStreak(answerStreak);
 
@@ -222,9 +245,15 @@ function App() {
     }
 
     setScore({ ...score, [currentRound]: roundBools });
-    setTimeout(
-      () =>
-        setRound({
+    localStorage.setItem(
+      "gameScore",
+      JSON.stringify({ ...score, [currentRound]: roundBools })
+    );
+
+    setTimeout(() => {
+      localStorage.setItem(
+        "gameRound",
+        JSON.stringify({
           ...round,
           currentPoints: addPoints,
           currentRound:
@@ -242,12 +271,33 @@ function App() {
           make: roundBools.make,
           model: roundBools.model,
           year: roundBools.year,
-        }),
-      1750
-    );
+        })
+      );
+      setRound({
+        ...round,
+        currentPoints: addPoints,
+        currentRound:
+          round.currentPoints === 3
+            ? round.currentRound
+            : round.currentRound === 5
+            ? 5
+            : nR,
+        multiplier:
+          round.currentPoints === 3
+            ? round.multiplier
+            : round.multiplier === 0
+            ? 1
+            : nM,
+        make: roundBools.make,
+        model: roundBools.model,
+        year: roundBools.year,
+      });
+    }, 1750);
 
     setFormVals(newFormVals);
+    localStorage.setItem('gameFormVals', JSON.stringify(newFormVals))
 
+    // Update win/lose state
     if (addPoints === 3) {
       localStorage.setItem("answerStreak", `${answerStreak + 1}`);
       setAnswerStreak(answerStreak + 1);
@@ -259,6 +309,7 @@ function App() {
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
       localStorage.setItem("gamePlayed", "true");
       setGamePlayed(true);
+
       setTimeout(() => setDidWin("win"), 2500);
     }
 
@@ -272,6 +323,7 @@ function App() {
       localStorage.setItem("gamePlayed", "true");
       setAllTimeScore(allTimeScore + (6 - currentRound) * addPoints);
       setGamePlayed(true);
+
       setTimeout(() => setDidWin("lose"), 2500);
     }
   }

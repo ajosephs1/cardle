@@ -37,7 +37,7 @@ export default function ResultModal({
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   function emojiGrid(obj: ResultModalProps["score"]) {
-    let result = `Car-dle ${round - 1}/5\n\n`;
+    let result = `Cardle ${round - 1}/5\n\n`;
 
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -47,12 +47,12 @@ export default function ResultModal({
           const modelStatus = model ? "🟢" : "🔴";
           const yearStatus = year ? "🟢" : "🔴";
 
-          result += `${makeStatus} ${modelStatus} ${yearStatus}\n`;
+          result += `${makeStatus}\u00A0${modelStatus}\u00A0${yearStatus}\n`;
         }
       }
     }
 
-    result += "cardle.boxbox.autos";
+    result += "https://cardle.boxbox.autos";
     return result;
   }
 
