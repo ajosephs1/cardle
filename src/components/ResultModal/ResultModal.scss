@@ -55,6 +55,7 @@
   &__headings {
     width: 100%;
     margin-top: 0.5rem;
+    padding: 0 1.25rem;
     display: flex;
     justify-content: space-between;
   }
@@ -67,7 +68,7 @@
 
   &__row {
     width: 100%;
-    padding: 0.525rem 0 0;
+    padding: 0.525rem 1.25rem 0;
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -94,6 +95,7 @@
       background-color: #41f962;
       box-shadow: 0 0 5px rgb(126, 255, 150);
     }
+
 
     &__container {
       width: 30%;

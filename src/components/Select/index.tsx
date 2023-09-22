@@ -27,6 +27,10 @@ export default function Select(props: SelectProps) {
     if (props.localFormVal) {
       setInputValue(props.localFormVal);
     }
+  },[]);
+
+
+  useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
   }, []);
 
