@@ -1,4 +1,3 @@
-// import bbLogo from "../../assets/images/boxbox_logo.svg";
 import cardleLogo from '../../assets/images/cardle-logo.png'
 import instagram from "../../assets/icons/instagram-icon.svg";
 import question from "../../assets/icons/question-icon.svg";

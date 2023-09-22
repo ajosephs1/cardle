@@ -228,11 +228,7 @@ function App() {
       if (!round.make) {
         addPoints += 1;
       }
-    }
-    // else if(formVals.make && !round.make){
-    //   newFormVals.make = formVals.make
-    // }
-    else {
+    } else {
       newFormVals.make = "";
     }
 

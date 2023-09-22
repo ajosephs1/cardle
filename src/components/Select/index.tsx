@@ -11,7 +11,6 @@ export type SelectProps = {
 };
 
 export default function Select(props: SelectProps) {
-  // add state for type of select and pass down through props
   const [selectType, setSelectType] = useState({
     make: false,
     model: false,
@@ -76,7 +75,6 @@ export default function Select(props: SelectProps) {
   }
 
   return (
-    // may have to return a different div for each typeof element
     <div className="select" ref={selectRef}>
       <input
         type="text"
