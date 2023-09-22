@@ -36,11 +36,7 @@ export default function DateRangeSelect({
 }: DateRangeProps) {
   const [selectedOption, setSelectedOption] = useState("");
 
-  useEffect(()=>{
-if(localFormVal){
-  setSelectedOption(localFormVal)
-} 
-  })
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     updateForm(selType, event.target.value);
