@@ -38,7 +38,7 @@ export default function FormSubmit({
     if (localStorageFormVals) {
       setLocalFormVals(JSON.parse(localStorageFormVals));
     }
-  }, []);
+  }, [formValues]);
 
   // get make inputValues
   useEffect(() => {

@@ -11,7 +11,6 @@ export type SelectProps = {
 };
 
 export default function Select(props: SelectProps) {
-  // add state for type of select and pass down through props
   const [selectType, setSelectType] = useState({
     make: false,
     model: false,
@@ -23,12 +22,12 @@ export default function Select(props: SelectProps) {
 
   const selectRef = useRef<HTMLDivElement>(null);
 
+  // update current imput value if localStorage contains values && reload
   useEffect(() => {
     if (props.localFormVal) {
       setInputValue(props.localFormVal);
     }
-  },[]);
-
+  }, [props.localFormVal]);
 
   useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
@@ -76,11 +75,10 @@ export default function Select(props: SelectProps) {
   }
 
   return (
-    // may have to return a different div for each typeof element
     <div className="select" ref={selectRef}>
       <input
         type="text"
-        id="cardle-select"
+        id={`cardle-select-${props.selType}`}
         className={`select__input ${props.class}`}
         placeholder={props.name}
         onChange={handleInputChange}
