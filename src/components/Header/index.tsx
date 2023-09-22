@@ -1,4 +1,5 @@
 // import bbLogo from "../../assets/images/boxbox_logo.svg";
+import cardleLogo from '../../assets/images/cardle-logo.png'
 import instagram from "../../assets/icons/instagram-icon.svg";
 import question from "../../assets/icons/question-icon.svg";
 import "./Header.scss";
@@ -15,7 +16,7 @@ export default function Header({ handleClick }: HeaderProps) {
         target="blank"
         className="nav__header--link"
       >
-        <h1 className="nav__header">CAR-DLE</h1>
+        <img className="nav__header "src={cardleLogo} alt="cardle" />
         <p className="nav__header--tiny">powered by BoxBox</p>
       </a>
       <div className="nav__links">

@@ -23,24 +23,28 @@
 .scoreboard {
   margin: 0 1.5rem;
   &__headings {
+    margin: 0 1.25rem;
     display: flex;
     justify-content: space-between;
   }
-
+  
   &__heading {
     width: 30%;
     text-align: center;
     @include sub-header-mobile;
   }
-
+  
   &__row {
-    border-bottom: 2px solid $bb-black;
-    padding: 0.385rem 0;
+    border-bottom: 2px solid $bb-coolgrey;
+    margin: 0 1.25rem;
+    padding: 0.25rem 0;
     display: flex;
     justify-content: space-between;
     text-align: center;
-
+    
     &:nth-child(5) {
+      padding: 0.25rem 1.25rem;
+      margin: 0;
       border-bottom: 2px solid $bb-black;
     }
   }
@@ -51,6 +55,8 @@
     width: 1.125rem;
     border: 1px solid $bb-black;
     border-radius: 100%;
+
+    margin: 0 rem;
 
     @keyframes lightWrong {
       from {

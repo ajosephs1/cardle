@@ -23,6 +23,12 @@ export default function CarImage({ round, images }: CarImageProps) {
   });
 
   useEffect(() => {
+    if (round !== 1 && imageAnimation[1] === "") {
+      setImageAnimation({ ...imageAnimation, [1]: "image--slide-out" });
+    }
+  });
+  
+  useEffect(() => {
     if (round === 1) {
       return;
     } else {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DateRangeSelect.scss";
 
 type SelectOption = {
@@ -9,6 +9,7 @@ type SelectOption = {
 type DateRangeProps = {
   updateForm: (valtype: string, val: string) => void;
   selType: string;
+  localFormVal: string;
 };
 
 const generateDateRangeOptions = (): SelectOption[] => {
@@ -31,10 +32,15 @@ const generateDateRangeOptions = (): SelectOption[] => {
 
 export default function DateRangeSelect({
   updateForm,
-  selType,
+  selType, localFormVal
 }: DateRangeProps) {
   const [selectedOption, setSelectedOption] = useState("");
 
+  useEffect(()=>{
+if(localFormVal){
+  setSelectedOption(localFormVal)
+} 
+  })
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     updateForm(selType, event.target.value);
