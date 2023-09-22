@@ -17,7 +17,6 @@ export default function Header({ handleClick }: HeaderProps) {
         className="nav__header--link"
       >
         <img className="nav__header "src={cardleLogo} alt="cardle" />
-        <p className="nav__header--tiny">powered by BoxBox</p>
       </a>
       <div className="nav__links">
         <a
