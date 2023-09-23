@@ -165,25 +165,9 @@ function App() {
   }, []);
   // handle all data in localStorage
   useEffect(() => {
-    const localStorageScore: string | null = localStorage.getItem("gameScore");
-    if (localStorageScore) {
-      setScore(JSON.parse(localStorageScore));
-    }
-    const localStorageRound: string | null = localStorage.getItem("gameRound");
-    if (localStorageRound) {
-      setRound(JSON.parse(localStorageRound));
-    }
-    const localStorageFormVals: string | null =
-      localStorage.getItem("gameFormVals");
-    if (localStorageFormVals) {
-      setFormVals(JSON.parse(localStorageFormVals));
-    }
-
-    const answerStreakString = localStorage.getItem("answerStreak");
-    const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
-
-    const localStorageDate = localStorage.getItem("lastPlayed");
+    // clear gamestate from previous day or retain game state after reload
     const localStorageGamePlayed = localStorage.getItem("gamePlayed");
+    const localStorageDate = localStorage.getItem("lastPlayed");
 
     if (localStorageDate !== currentDate) {
       localStorage.setItem("lastPlayed", currentDate);
@@ -191,19 +175,36 @@ function App() {
       localStorage.removeItem("gameScore");
       localStorage.removeItem("gameRound");
       localStorage.removeItem("gameFormVals");
+    } else {
+      const localStorageScore: string | null =
+        localStorage.getItem("gameScore");
+      if (localStorageScore) {
+        setScore(JSON.parse(localStorageScore));
+      }
+      const localStorageRound: string | null =
+        localStorage.getItem("gameRound");
+      if (localStorageRound) {
+        setRound(JSON.parse(localStorageRound));
+      }
+      const localStorageFormVals: string | null =
+        localStorage.getItem("gameFormVals");
+      if (localStorageFormVals) {
+        setFormVals(JSON.parse(localStorageFormVals));
+      }
     }
 
     if (localStorageGamePlayed === "true") {
       setGamePlayed(true);
     }
 
+    const answerStreakString = localStorage.getItem("answerStreak");
+    const answerStreak = answerStreakString ? parseInt(answerStreakString) : 0;
     setAnswerStreak(answerStreak);
 
     const allTimeScoreString = localStorage.getItem("allTimeScore");
     const allTimeLocalScore = allTimeScoreString
       ? parseInt(allTimeScoreString)
       : 0;
-
     setAllTimeScore(allTimeLocalScore);
   }, []);
 
