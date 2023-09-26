@@ -31,6 +31,9 @@ export default function HelpModal({ handleClick }: ModalProps) {
             <li>
               You have 5 tries to correctly identify the pictured car’s make,
               model, and year
+              <ul>
+                <li>You may enlarge the picture by tapping on it</li>
+              </ul>
             </li>
             <li>Each category (make, model, and year) is worth 1 point</li>
             <li>
@@ -38,33 +41,33 @@ export default function HelpModal({ handleClick }: ModalProps) {
               car
             </li>
             <li>
-              Every time you guess incorrectly, the multiplier will drop by 1
+              The multiplier is added to your final score and goes down by 1
+              after each incorrect guess
               <ul>
                 <li>
-                  Points scored on the first guess will be multiplied by 5,
-                  points scored on the second guess will be multiplied by 4 and
-                  so on
+                  For example, if you guess the make, model, and year correctly
+                  on your first attempt you will score 15 points total (1 for
+                  each make, model, and year multiplied by 5). If you guess the
+                  make, model, and year correctly on your second attempt you
+                  will score 12 points, and so on
                 </li>
               </ul>
             </li>
-            <li>New cars are released daily at midnight</li>
+            <li>New quizzes are released daily at midnight</li>
           </ul>
           <h2 className="modal__subheading">User Stats</h2>
           <ul>
             <li>
-              To keep track of your score and climb the leaderboard, create a
-              free account by entering your email and choosing a username
-            </li>
-            <li>
-              Click on the bar graph in the top right corner to view your stats
-              and the leaderboard each day
+              Be sure to play Cardle on the same device & browser each day to
+              add to your score from previous games. Soon we’ll add a global
+              leaderboard for all users to see how they stack up!
             </li>
           </ul>
           <h2 className="modal__subheading">Contact Us</h2>
           <ul>
             <li>
-              If you have any questions or concerns, contact us at
-              cardle@boxbox.auto
+              If you have any feedback, questions or concerns, or if you’d like
+              to advertise with us, please contact us at cardle.game@gmail.com
             </li>
           </ul>
         </section>
