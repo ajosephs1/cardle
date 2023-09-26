@@ -175,6 +175,7 @@ function App() {
       localStorage.removeItem("gameScore");
       localStorage.removeItem("gameRound");
       localStorage.removeItem("gameFormVals");
+      setHelp(true)
     } else {
       const localStorageScore: string | null =
         localStorage.getItem("gameScore");
