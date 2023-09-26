@@ -1,3 +1,5 @@
+@use "../../styles/partials/colours" as *;
+
 @keyframes slideIn {
   0% {
     transform: translateX(100%);
@@ -21,17 +23,17 @@
   width: 100%;
   aspect-ratio: 3 / 2;
   border-radius: 0.25rem;
-  
+
   &-container {
     flex-shrink: 1;
     margin: 0.25rem auto;
-    width: calc(0.32*100vh)
+    width: calc(0.32 * 100vh);
   }
-  
+
   &:hover {
     cursor: pointer;
   }
-  
+
   &__slider {
     width: 100%;
     position: relative;
@@ -51,12 +53,27 @@
   }
   &--slide-in {
     animation: slideIn 0.5s ease-in-out forwards;
- 
+
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
 
+  &__enlarge-message {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.5em;
+    background-color: $bb-coolgrey;
+    color: $bb-black;
+    border-radius:0 0 0.25rem 0.25rem;
+    padding: 0.125rem 0.25rem;
+    opacity: 0.45;
+  }
   &--modal {
     z-index: 1;
     top: 0;

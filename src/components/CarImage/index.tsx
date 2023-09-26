@@ -84,6 +84,7 @@ export default function CarImage({ round, images }: CarImageProps) {
             loading="lazy"
           />
         )}
+        {round === 1 && <p className="image__enlarge-message">tap to enlarge</p>}
       </div>
 
       {imageModal && (
