@@ -5,7 +5,7 @@
 .select-data {
   width: 100%;
   position: relative;
-  margin-bottom: 0.425rem;
+  margin-bottom: 0.4rem;
   font-family: inherit;
   font-size: inherit;
 
@@ -17,10 +17,10 @@
     border: 2px solid $bb-black;
     border-radius: 0.25rem;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 1.025em;
     color: $bb-black;
     outline: none;
-    padding: 0.25rem 0.5rem;
+    padding: 0.4rem 0.5rem;
     background: none;
     &:hover {
       cursor: pointer;
@@ -36,7 +36,8 @@
   &__value {
     @include body-mobile;
     background-color: $bb-white;
-    font-size: inherit;
+    font-size: 1.025em;
+
 
     &:hover {
       background-color: $bb-grey;
