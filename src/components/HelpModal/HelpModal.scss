@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100svh;
+  height: 100%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   font-family: inherit;
@@ -20,6 +20,7 @@
     height: fit-content;
     background-color: $bb-coolgrey;
     padding: 0 0.425rem;
+    z-index: 2;
   }
   
   &__header {
@@ -27,6 +28,10 @@
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0 0.75rem;
+
+    &-text{
+      @include header-mobile
+    }
   }
   
   &__instructions {
@@ -37,7 +42,7 @@
   }
 
   &__icon {
-    height: 1rem;
+    height: 1.125rem;
 
     &:hover {
       cursor: pointer;
@@ -55,7 +60,7 @@
   }
 
   h2 {
-    @include header-mobile;
+    @include sub-header-mobile;
   }
 
   ul {

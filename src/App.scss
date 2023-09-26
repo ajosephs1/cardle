@@ -25,7 +25,7 @@
   flex-grow: 1;
   
   @media (height >= 620px){
-    row-gap: 5%;
+    row-gap: 3%;
   }
   @media (width >= 480px){
     justify-content: flex-start;

@@ -8,16 +8,16 @@ interface ModalProps {
 
 export default function HelpModal({ handleClick }: ModalProps) {
   return (
-    <div className="modal">
+    <div className="modal" onClick={() => handleClick(false)}>
       <section className="modal__info">
-        <div className="modal__header">
+        <div className="modal__header" >
           <img
             src={question}
             alt="question mark"
             className="modal__icon"
             onClick={() => handleClick(false)}
           />
-          <h1>Help</h1>
+          <h1 className="modal__header-text">Welcome to Cardle!</h1>
           <img
             src={exit}
             alt="question mark"
