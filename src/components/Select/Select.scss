@@ -5,7 +5,7 @@
 .select {
   width: 100%;
   position: relative;
-  margin-bottom: 0.425rem;
+  margin-bottom: 0.4rem;
 
   &__input {
     width: 100%;
@@ -13,10 +13,10 @@
     border: 2px solid $bb-black;
     border-radius: 0.25rem;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 1.025em;
     color: $bb-black;
     outline: none;
-    padding: 0.25rem 0.5rem;
+    padding: 0.4rem 0.5rem;
     background: none;
 
     &::placeholder {
@@ -50,6 +50,7 @@
   }
 
   &__value {
+    font-size: 1.025em;
     &:hover {
       background-color: $bb-grey;
       cursor: pointer;
