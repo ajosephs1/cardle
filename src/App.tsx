@@ -169,13 +169,16 @@ function App() {
     const localStorageGamePlayed = localStorage.getItem("gamePlayed");
     const localStorageDate = localStorage.getItem("lastPlayed");
 
+    if (localStorageDate === null) {
+      setHelp(true);
+    }
+
     if (localStorageDate !== currentDate) {
       localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem("gamePlayed", "false");
       localStorage.removeItem("gameScore");
       localStorage.removeItem("gameRound");
       localStorage.removeItem("gameFormVals");
-      setHelp(true)
     } else {
       const localStorageScore: string | null =
         localStorage.getItem("gameScore");

@@ -17,10 +17,10 @@
     border: 2px solid $bb-black;
     border-radius: 0.25rem;
     font-family: inherit;
-    font-size: 1.025em;
+    font-size: inherit;
     color: $bb-black;
     outline: none;
-    padding: 0.4rem 0.5rem;
+    padding: 0.45rem 0.5rem;
     background: none;
     &:hover {
       cursor: pointer;
