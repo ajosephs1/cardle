@@ -11,29 +11,32 @@
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   font-family: inherit;
+  overflow-y: scroll;
+  padding-bottom: 1rem;
 
   &__info {
     border: 2px solid $bb-black;
-    margin: 0.425rem 1.5rem;
-    overflow: hidden;
+    margin: auto 1.5rem;
+    // overflow-y: scroll;
+    height: 100%;
     width: 100%;
     height: fit-content;
     background-color: $bb-coolgrey;
     padding: 0 0.425rem;
     z-index: 2;
   }
-  
+
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0 0.75rem;
 
-    &-text{
-      @include header-mobile
+    &-text {
+      @include header-mobile;
     }
   }
-  
+
   &__instructions {
     height: 100%;
     // padding: 0 0.5rem;

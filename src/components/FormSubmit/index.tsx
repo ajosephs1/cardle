@@ -23,24 +23,8 @@ export default function FormSubmit({
 }: FormProps) {
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
-  const [localFormVals, setLocalFormVals] = useState({
-    make: "",
-    model: "",
-    year: "",
-  });
-
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-  useEffect(() => {
-    const localStorageFormVals: string | null =
-      localStorage.getItem("gameFormVals");
-
-    if (localStorageFormVals) {
-      setLocalFormVals(JSON.parse(localStorageFormVals));
-    }
-  }, [formValues]);
-
-  // get make inputValues
   useEffect(() => {
     axios
       .get(
@@ -63,7 +47,8 @@ export default function FormSubmit({
 
   // get model inputValues
   useEffect(() => {
-    const currentMake = formValues.make ? formValues.make : localFormVals.make;
+    // const currentMake = formValues.make ? formValues.make : localFormVals.make;
+    const currentMake = formValues.make ? formValues.make : "";
     axios
       .get(
         `${BASE_URL}/models?fields[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${currentMake}&pagination[limit]=200`
@@ -104,7 +89,7 @@ export default function FormSubmit({
         data={makes}
         updateForm={updateForm}
         selType="make"
-        localFormVal={localFormVals.make}
+        localFormVal={formValues.make}
       />
       <Select
         class="select__input--model"
@@ -112,12 +97,12 @@ export default function FormSubmit({
         data={models}
         updateForm={updateForm}
         selType="model"
-        localFormVal={localFormVals.model}
+        localFormVal={formValues.model}
       />
       <DateRangeSelect
         selType="year"
         updateForm={updateForm}
-        localFormVal={localFormVals.year}
+        localFormVal={formValues.year}
       />
       <button
         type="submit"
