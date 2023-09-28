@@ -45,46 +45,48 @@ export default function CarImage({ round, images }: CarImageProps) {
       <div className="image__slider">
         <img
           src={images.imageOne}
-          alt="car image placeholder"
+          alt="car one"
           className={`image image--one ${imageAnimation[1]}`}
           onClick={() => showImageModal(true)}
         />
-        {round >= 2 && (
+        {round >= 1 && (
           <img
             src={images.imageTwo}
-            alt="car image placeholder"
+            alt="car two"
             className={`image ${imageAnimation[2]}`}
             onClick={() => showImageModal(true)}
           />
         )}
-        {round >= 3 && (
+        {round >= 2 && (
           <img
             src={images.imageThree}
-            alt="car image placeholder"
+            alt="car three"
             className={`image ${imageAnimation[3]}`}
+            onClick={() => showImageModal(true)}
+            loading="lazy"
+          />
+        )}
+        {round >= 3 && (
+          <img
+            src={images.imageFour}
+            alt="car four"
+            className={`image ${imageAnimation[4]}`}
             onClick={() => showImageModal(true)}
             loading="lazy"
           />
         )}
         {round >= 4 && (
           <img
-            src={images.imageFour}
-            alt="car image placeholder"
-            className={`image ${imageAnimation[4]}`}
-            onClick={() => showImageModal(true)}
-            loading="lazy"
-          />
-        )}
-        {round >= 5 && (
-          <img
             src={images.imageFive}
-            alt="car image placeholder"
+            alt="car five"
             className={`image ${imageAnimation[5]}`}
             onClick={() => showImageModal(true)}
             loading="lazy"
           />
         )}
-        {round === 1 && <p className="image__enlarge-message">tap to enlarge</p>}
+        {round === 1 && (
+          <p className="image__enlarge-message">tap to enlarge</p>
+        )}
       </div>
 
       {imageModal && (
@@ -103,7 +105,7 @@ export default function CarImage({ round, images }: CarImageProps) {
                 ? images.imageFive
                 : ""
             }
-            alt="car image placeholder"
+            alt="car full"
             className="image--modal-content"
           />
         </div>

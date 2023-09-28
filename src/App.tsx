@@ -164,9 +164,10 @@ function App() {
       });
   }, []);
   // handle all data in localStorage
+
   useEffect(() => {
     // clear gamestate from previous day or retain game state after reload
-    const localStorageGamePlayed = localStorage.getItem("gamePlayed");
+    let localStorageGamePlayed = localStorage.getItem("gamePlayed");
     const localStorageDate = localStorage.getItem("lastPlayed");
 
     if (localStorageDate === null) {
@@ -176,6 +177,7 @@ function App() {
     if (localStorageDate !== currentDate) {
       localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem("gamePlayed", "false");
+      localStorageGamePlayed = "false";
       localStorage.removeItem("gameScore");
       localStorage.removeItem("gameRound");
       localStorage.removeItem("gameFormVals");
