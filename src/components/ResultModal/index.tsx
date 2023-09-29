@@ -36,8 +36,18 @@ export default function ResultModal({
 }: ResultModalProps) {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
+  function isRoundFive() {
+    if (
+      score[5].make !== null &&
+      score[5].model !== null &&
+      score[5].year !== null
+    ) {
+      return true;
+    }
+  }
+
   function emojiGrid(obj: ResultModalProps["score"]) {
-    let result = `Cardle ${round - 1}/5\n\n`;
+    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\n\n`;
 
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -57,7 +67,11 @@ export default function ResultModal({
   }
 
   function trueRow(rnd: number) {
-    if ((score[rnd].make !== null && score[rnd].model !== null && score[rnd].year !==null)) {
+    if (
+      score[rnd].make !== null &&
+      score[rnd].model !== null &&
+      score[rnd].year !== null
+    ) {
       return true;
     }
   }
@@ -68,7 +82,7 @@ export default function ResultModal({
       navigator
         .share(shareData)
         .then(() => {
-          console.log(`thanks for sharing \n\n ${shareData.text} `);
+          console.log(`thanks for sharing \n${shareData.text} `);
         })
         .catch((err) => {
           console.error(err);
@@ -111,7 +125,7 @@ export default function ResultModal({
           <h2 className="result__heading">Year</h2>
         </div>
         <section className="result__light-container ">
-          <div className={trueRow(1)?`result__row`:''}>
+          <div className={trueRow(1) ? `result__row` : ""}>
             <div className="result__light__container">
               <div
                 className={
@@ -146,7 +160,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className={trueRow(2)?`result__row`:''}>
+          <div className={trueRow(2) ? `result__row` : ""}>
             <div className="result__light__container">
               <div
                 className={
@@ -181,7 +195,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className={trueRow(3)?`result__row`:''}>
+          <div className={trueRow(3) ? `result__row` : ""}>
             <div className="result__light__container">
               <div
                 className={
@@ -216,7 +230,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className={trueRow(4)?`result__row`:''}>
+          <div className={trueRow(4) ? `result__row` : ""}>
             <div className="result__light__container">
               <div
                 className={
@@ -251,7 +265,7 @@ export default function ResultModal({
               />
             </div>
           </div>
-          <div className={trueRow(5)?`result__row`:''}>
+          <div className={trueRow(5) ? `result__row` : ""}>
             <div className="result__light__container">
               <div
                 className={

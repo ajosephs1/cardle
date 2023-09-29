@@ -8,6 +8,8 @@ export type SelectProps = {
   localFormVal: string;
   updateForm: (valtype: string, val: string) => void;
   selType: string;
+  round: number;
+  isPlayed: boolean;
 };
 
 export default function Select(props: SelectProps) {
@@ -22,12 +24,14 @@ export default function Select(props: SelectProps) {
 
   const selectRef = useRef<HTMLDivElement>(null);
 
-  // update current imput value if localStorage contains values && reload
+  // update current input value if localStorage contains values && reload
   useEffect(() => {
     if (props.localFormVal) {
       setInputValue(props.localFormVal);
+    } else {
+      setInputValue("");
     }
-  }, [props.localFormVal]);
+  }, [props.round]);
 
   useEffect(() => {
     setSelectType({ ...selectType, [props.selType]: true });
@@ -84,6 +88,7 @@ export default function Select(props: SelectProps) {
         onChange={handleInputChange}
         onFocus={() => setFocus(true)}
         value={inputVal}
+        disabled={props.isPlayed}
       />
       {focus && (
         <ul className="select__data">
