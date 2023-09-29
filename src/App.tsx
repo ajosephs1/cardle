@@ -163,8 +163,8 @@ function App() {
         console.error(error);
       });
   }, []);
-  // handle all data in localStorage
 
+  // handle all data in localStorage
   useEffect(() => {
     // clear gamestate from previous day or retain game state after reload
     let localStorageGamePlayed = localStorage.getItem("gamePlayed");
@@ -212,7 +212,7 @@ function App() {
       ? parseInt(allTimeScoreString)
       : 0;
     setAllTimeScore(allTimeLocalScore);
-  }, []);
+  }, [answer]);
 
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
