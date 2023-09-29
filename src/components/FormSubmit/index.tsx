@@ -13,6 +13,7 @@ type FormProps = {
   updateForm: (valtype: string, val: string) => void;
   updateRound: () => void;
   isPlayed: boolean;
+  round: number;
 };
 
 export default function FormSubmit({
@@ -20,6 +21,7 @@ export default function FormSubmit({
   updateForm,
   updateRound,
   isPlayed,
+  round,
 }: FormProps) {
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
@@ -90,6 +92,8 @@ export default function FormSubmit({
         updateForm={updateForm}
         selType="make"
         localFormVal={formValues.make}
+        round={round}
+        isPlayed={isPlayed}
       />
       <Select
         class="select__input--model"
@@ -98,11 +102,15 @@ export default function FormSubmit({
         updateForm={updateForm}
         selType="model"
         localFormVal={formValues.model}
+        round={round}
+        isPlayed={isPlayed}
       />
       <DateRangeSelect
         selType="year"
         updateForm={updateForm}
         localFormVal={formValues.year}
+        round={round}
+        isPlayed={isPlayed}
       />
       <button
         type="submit"

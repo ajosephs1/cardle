@@ -26,6 +26,10 @@
       cursor: pointer;
     }
 
+    &:disabled {
+      opacity: 0.4125;
+    }
+
     @include desktop {
       &:hover {
         border-color: $bb-coolgrey;

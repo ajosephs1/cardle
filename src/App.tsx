@@ -56,7 +56,6 @@ function App() {
     model: "",
     year: "",
   });
-
   const [answer, setAnswer] = useState({
     make: "",
     model: "",
@@ -386,6 +385,7 @@ function App() {
             updateForm={updateForm}
             updateRound={updateRound}
             isPlayed={gamePlayed}
+            round={round.currentRound}
           />
 
           {help && <HelpModal handleClick={helpClick} />}

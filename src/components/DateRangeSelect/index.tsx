@@ -10,6 +10,8 @@ type DateRangeProps = {
   updateForm: (valtype: string, val: string) => void;
   selType: string;
   localFormVal: string;
+  round: number;
+  isPlayed: boolean;
 };
 
 const generateDateRangeOptions = (): SelectOption[] => {
@@ -32,22 +34,26 @@ const generateDateRangeOptions = (): SelectOption[] => {
 
 export default function DateRangeSelect({
   updateForm,
-  selType, localFormVal
+  selType,
+  localFormVal,
+  round,
+  isPlayed,
 }: DateRangeProps) {
   const [selectedOption, setSelectedOption] = useState("");
 
-    // update current imput value if localStorage contains values && reload
-    useEffect(() => {
-      if (localFormVal) {
-        setSelectedOption(localFormVal);
-      }
-    }, [localFormVal]);
+  // update current imput value if localStorage contains values && reload
+  useEffect(() => {
+    if (localFormVal) {
+      setSelectedOption(localFormVal);
+    } else {
+      setSelectedOption("");
+    }
+  }, [round]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     updateForm(selType, event.target.value);
   };
-
   const dateRangeOptions = generateDateRangeOptions();
 
   return (
@@ -56,6 +62,7 @@ export default function DateRangeSelect({
         value={selectedOption}
         onChange={handleSelectChange}
         className="select-data__input"
+        disabled={isPlayed}
       >
         <option value="" className="select-data__value">
           Year range

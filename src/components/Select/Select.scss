@@ -19,6 +19,10 @@
     padding: 0.45rem 0.5rem;
     background: none;
 
+    &:disabled {
+      opacity: 0.4125;
+    }
+
     &::placeholder {
       color: $bb-black;
     }
