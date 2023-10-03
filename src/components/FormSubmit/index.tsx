@@ -53,7 +53,7 @@ export default function FormSubmit({
     const currentMake = formValues.make ? formValues.make : "";
     axios
       .get(
-        `${BASE_URL}/models?fields[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${currentMake}&pagination[limit]=200`
+        `${BASE_URL}/models?fields[0]=model&sort[0]=model&populate[make][fields][0]=make&filters[make][make][$eqi]=${currentMake}&pagination[limit]=200`
       )
       .then((response) => {
         const modelObject = response.data.data;
