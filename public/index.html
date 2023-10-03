@@ -60,12 +60,10 @@
     -->
     <script>
       // Check if the environment is not development (or any other condition)
-      if (process.env.NODE_ENV !== "development") {
         if (window.location.protocol === "http:") {
           window.location.href =
             "https://" + window.location.host + window.location.pathname;
         }
-      }
     </script>
   </body>
 </html>
