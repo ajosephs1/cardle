@@ -13,6 +13,6 @@ Cars are updated daily. After completion check your current score streak and sha
 
 ## API Reference
 
-The application uses [Strapi](https://strapi.io/) for API references and for content management in the backend to update car data.
+The application uses the [Cardle API](https://github.com/ajosephs1/cardle-strapi-api) for API references and for content management in the backend to update car data.
 
 Data was programatically migrated from [NHSTA's vehicle API](https://vpic.nhtsa.dot.gov/api/) to the PostgreSQL database to initialize data for the inputs.
