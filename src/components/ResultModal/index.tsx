@@ -118,7 +118,7 @@ export default function ResultModal({
         <h1 className="result__title">
           {result === "win" ? "WINNER!" : `BETTER LUCK NEXT TIME`}
         </h1>
-        <p className="result__answer">{`${answer.make} ${answer.model} ${answer.answerYear}`}</p>
+        <p className="result__answer">{`${answer.make} ${answer.model} ${answer.answerYear? answer.answerYear: ''}`}</p>
         <img src={imageFull} alt="full car " className="result__image" />
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>
