@@ -60,6 +60,7 @@ function App() {
     make: "",
     model: "",
     year: "",
+    answerYear: "",
   });
   const [carImages, setCarImages] = useState({
     imageFull: "",
@@ -86,7 +87,7 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
+        `${BASE_URL}/answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&[fields][1]=answerYear&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
       )
       .then((response) => {
         if (response.data.data.length) {
@@ -94,13 +95,12 @@ function App() {
           const make = answerData.make.data.attributes.make;
           const model = answerData.model.data.attributes.model;
           const year = answerData.year.data.attributes.year;
+          const answerYear = answerData.answerYear;
 
           const imageFull =
-            answerData.imageFull.data.attributes.formats.hasOwnProperty(
-              "medium"
-            )
-              ? answerData.imageFull.data.attributes.formats.medium.url
-              : answerData.imageFull.data.attributes.formats.thumbnail.url;
+            answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
+              ? answerData.imageFull.data.attributes.formats.small.url
+              : answerData.imageFull.data.attributes.formats.medium.url;
           const imageOne =
             answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageOne.data.attributes.formats.small.url
@@ -124,7 +124,7 @@ function App() {
               ? answerData.imageFive.data.attributes.formats.small.url
               : answerData.imageFive.data.attributes.formats.thumbnail.url;
 
-          setAnswer({ make, model, year });
+          setAnswer({ make, model, year, answerYear });
           setCarImages({
             imageFull,
             imageOne,
@@ -137,6 +137,7 @@ function App() {
           const make = "";
           const model = "";
           const year = "";
+          const answerYear = "";
 
           const placeholderURL =
             "https://placehold.jp/0f0a10/ffffff/300x200.png?text=%F0%9F%8F%8E";
@@ -147,7 +148,7 @@ function App() {
           const imageFour = placeholderURL;
           const imageFive = placeholderURL;
 
-          setAnswer({ make, model, year });
+          setAnswer({ make, model, year, answerYear });
           setCarImages({
             imageFull,
             imageOne,
