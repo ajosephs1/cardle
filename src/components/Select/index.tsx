@@ -84,7 +84,7 @@ export default function Select(props: SelectProps) {
         type="text"
         id={`cardle-select-${props.selType}`}
         className={`select__input ${props.class}`}
-        placeholder={props.name}
+        placeholder={focus? "": props.name}
         onChange={handleInputChange}
         onFocus={() => setFocus(true)}
         value={inputVal}
