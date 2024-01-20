@@ -248,10 +248,6 @@ function App() {
         addPoints += 1;
       }
     } 
-    // adding the else clause removes incorrect answers from updating localStorage 
-    // else {
-    //   newFormVals.model = "";
-    // }
 
     if (formVals.year === answer.year) {
       roundBools.year = true;
@@ -260,10 +256,6 @@ function App() {
         addPoints += 1;
       }
     } 
-    // adding the else clause removes incorrect answers from updating localStorage 
-    // else {
-    //   newFormVals.year = "";
-    // }
 
     setScore({ ...score, [currentRound]: roundBools });
     localStorage.setItem(
@@ -404,6 +396,7 @@ function App() {
               round={round.currentRound}
               total={totalPoints}
               allTimeScore={allTimeScore}
+              streak={answerStreak}
               closeModal={() => setDidWin("")}
               answer={answer}
               imageFull={carImages.imageFull}
