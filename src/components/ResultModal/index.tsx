@@ -2,7 +2,6 @@ import { useState } from "react";
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
 import fire from "../../assets/icons/fire-icon.svg";
-import fireTwo from "../../assets/icons/fire-icon2.svg";
 import "./ResultModal.scss";
 
 type ResultModalProps = {
@@ -317,7 +316,7 @@ export default function ResultModal({
                   Streak: &nbsp;
                 </p>
                 <img
-                  src={fireTwo}
+                  src={fire}
                   className="result__summary__heading--icon"
                   alt="fire icon"
                 />
