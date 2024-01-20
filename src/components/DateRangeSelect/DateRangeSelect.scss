@@ -22,6 +22,12 @@
     outline: none;
     padding: 0.45rem 0.5rem;
     background: none;
+
+    &--error {
+      color: red;
+      border-color: red;
+    }
+
     &:hover {
       cursor: pointer;
     }
@@ -41,7 +47,6 @@
     @include body-mobile;
     background-color: $bb-white;
     font-size: 1.025em;
-
 
     &:hover {
       background-color: $bb-grey;

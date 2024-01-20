@@ -19,6 +19,11 @@
     padding: 0.45rem 0.5rem;
     background: none;
 
+    &--error{
+      color: red;
+      border-color: red;
+    }
+
     &:disabled {
       opacity: 0.4125;
     }

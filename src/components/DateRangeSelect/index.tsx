@@ -11,6 +11,7 @@ type DateRangeProps = {
   selType: string;
   localFormVal: string;
   round: number;
+  roundBool: boolean;
   isPlayed: boolean;
 };
 
@@ -38,8 +39,11 @@ export default function DateRangeSelect({
   localFormVal,
   round,
   isPlayed,
+  roundBool,
 }: DateRangeProps) {
   const [selectedOption, setSelectedOption] = useState("");
+  const [errorState, setErrorState] = useState(false);
+
 
   // update current imput value if localStorage contains values && reload
   useEffect(() => {
@@ -48,11 +52,16 @@ export default function DateRangeSelect({
     } else {
       setSelectedOption("");
     }
+
+    if (!roundBool && round !== 1) {
+      setErrorState(true);
+    }
   }, [round]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     updateForm(selType, event.target.value);
+    setErrorState(false)
   };
   const dateRangeOptions = generateDateRangeOptions();
 
@@ -61,7 +70,9 @@ export default function DateRangeSelect({
       <select
         value={selectedOption}
         onChange={handleSelectChange}
-        className="select-data__input"
+        className={`select-data__input ${
+          errorState && "select-data__input--error"
+        } `}
         disabled={isPlayed}
       >
         <option value="" className="select-data__value">

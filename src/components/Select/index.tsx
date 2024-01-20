@@ -9,6 +9,7 @@ export type SelectProps = {
   updateForm: (valtype: string, val: string) => void;
   selType: string;
   round: number;
+  roundBool: boolean;
   isPlayed: boolean;
 };
 
@@ -21,6 +22,7 @@ export default function Select(props: SelectProps) {
   const [search, setSearch] = useState("");
   const [focus, setFocus] = useState(false);
   const [inputVal, setInputValue] = useState("");
+  const [errorState, setErrorState] = useState(false);
 
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -30,6 +32,11 @@ export default function Select(props: SelectProps) {
       setInputValue(props.localFormVal);
     } else {
       setInputValue("");
+    }
+    // state will change depending on reload or current gameplay
+    // if reloaded fill only with local storage vals
+    if (!props.roundBool && props.round !== 1) {
+      setErrorState(true);
     }
   }, [props.round]);
 
@@ -63,7 +70,9 @@ export default function Select(props: SelectProps) {
   // clear input value if value selected isn't desired
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setInputValue(e.target.value);
+    // setInputValue("");
     setSearch(e.target.value);
+    setErrorState(false);
   }
 
   // select option to update input value
@@ -75,6 +84,7 @@ export default function Select(props: SelectProps) {
       setSearch("");
       setFocus(false);
       props.updateForm(`${props.selType}`, liValue);
+      setErrorState(false);
     }
   }
 
@@ -83,10 +93,14 @@ export default function Select(props: SelectProps) {
       <input
         type="text"
         id={`cardle-select-${props.selType}`}
-        className={`select__input ${props.class}`}
-        placeholder={focus? "": props.name}
+        className={`select__input ${props.class} ${
+          errorState && "select__input--error"
+        }`}
+        placeholder={focus ? "" : props.name}
         onChange={handleInputChange}
-        onFocus={() => setFocus(true)}
+        onFocus={() => {
+          setFocus(true);
+        }}
         value={inputVal}
         disabled={props.isPlayed}
       />
