@@ -1,12 +1,14 @@
 import { useState } from "react";
 import exit from "../../assets/icons/xmark-solid.svg";
 import share from "../../assets/icons/share-icon.svg";
+import fire from "../../assets/icons/fire-icon.svg";
 import "./ResultModal.scss";
 
 type ResultModalProps = {
   result: string;
   total: number;
   allTimeScore: number;
+  streak: number;
   round: number;
   closeModal: () => void;
   score: {
@@ -21,7 +23,7 @@ type ResultModalProps = {
     make: string;
     model: string;
     year: string;
-    answerYear: string
+    answerYear: string;
   };
 };
 
@@ -31,6 +33,7 @@ export default function ResultModal({
   score,
   total,
   allTimeScore,
+  streak,
   imageFull,
   answer,
   closeModal,
@@ -48,7 +51,7 @@ export default function ResultModal({
   }
 
   function emojiGrid(obj: ResultModalProps["score"]) {
-    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\n\n`;
+    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\nStreak ${streak}🔥\n`;
 
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -118,7 +121,9 @@ export default function ResultModal({
         <h1 className="result__title">
           {result === "win" ? "WINNER!" : `BETTER LUCK NEXT TIME`}
         </h1>
-        <p className="result__answer">{`${answer.make} ${answer.model} ${answer.answerYear? answer.answerYear: ''}`}</p>
+        <p className="result__answer">{`${answer.make} ${answer.model} ${
+          answer.answerYear ? answer.answerYear : ""
+        }`}</p>
         <img src={imageFull} alt="full car " className="result__image" />
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>
@@ -303,14 +308,31 @@ export default function ResultModal({
           </div>
         </section>
         <div className="result__summary">
-          <h2 className="result__summary__text">Points Summary</h2>
+          <div className="result__summary__heading">
+            <h2 className="result__summary__heading--text">Points Summary</h2>
+            {streak > 0 && (
+              <div className="result__summary__heading--streak">
+                <p className="result__summary__heading--value">
+                  Streak: &nbsp;
+                </p>
+                <img
+                  src={fire}
+                  className="result__summary__heading--icon"
+                  alt="fire icon"
+                />
+                <p className="result__summary__heading--value">
+                  &nbsp; {streak}
+                </p>
+              </div>
+            )}
+          </div>
           <div className="result__value">
             <p className="result__value--text">This round: </p>
-            <p className="result__value--value">{`${total}`}</p>
+            <p className="result__value--value">{total}</p>
           </div>
           <div className="result__value">
             <p className="result__value--text">All-time:</p>
-            <p className="result__value--value">{`${allTimeScore}`}</p>
+            <p className="result__value--value">{allTimeScore}</p>
           </div>
         </div>
         <p

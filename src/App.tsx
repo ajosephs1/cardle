@@ -235,9 +235,11 @@ function App() {
       if (!round.make) {
         addPoints += 1;
       }
-    } else {
-      newFormVals.make = "";
-    }
+    } 
+    // adding the else clause removes incorrect answers from updating localStorage   
+    // else {
+    //   newFormVals.make = "";
+    // }
 
     if (answer.model && formVals.model === answer.model) {
       roundBools.model = true;
@@ -245,9 +247,7 @@ function App() {
       if (!round.model) {
         addPoints += 1;
       }
-    } else {
-      newFormVals.model = "";
-    }
+    } 
 
     if (formVals.year === answer.year) {
       roundBools.year = true;
@@ -255,9 +255,7 @@ function App() {
       if (!round.year) {
         addPoints += 1;
       }
-    } else {
-      newFormVals.year = "";
-    }
+    } 
 
     setScore({ ...score, [currentRound]: roundBools });
     localStorage.setItem(
@@ -386,7 +384,8 @@ function App() {
             updateForm={updateForm}
             updateRound={updateRound}
             isPlayed={gamePlayed}
-            round={round.currentRound}
+            // round={round.currentRound}
+            round={round}
           />
 
           {help && <HelpModal handleClick={helpClick} />}
@@ -397,6 +396,7 @@ function App() {
               round={round.currentRound}
               total={totalPoints}
               allTimeScore={allTimeScore}
+              streak={answerStreak}
               closeModal={() => setDidWin("")}
               answer={answer}
               imageFull={carImages.imageFull}
