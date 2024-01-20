@@ -13,7 +13,14 @@ type FormProps = {
   updateForm: (valtype: string, val: string) => void;
   updateRound: () => void;
   isPlayed: boolean;
-  round: number;
+  round: {
+    currentRound: number;
+    multiplier: number;
+    currentPoints: number;
+    make: boolean;
+    model: boolean;
+    year: boolean;
+  };
 };
 
 export default function FormSubmit({
@@ -83,6 +90,10 @@ export default function FormSubmit({
       });
   }, [formValues.make]);
 
+  const errorState = () =>{
+
+  }
+
   return (
     <form action="" className="form">
       <Select
@@ -92,7 +103,8 @@ export default function FormSubmit({
         updateForm={updateForm}
         selType="make"
         localFormVal={formValues.make}
-        round={round}
+        round={round.currentRound}
+        roundBool = {round.make}
         isPlayed={isPlayed}
       />
       <Select
@@ -102,16 +114,24 @@ export default function FormSubmit({
         updateForm={updateForm}
         selType="model"
         localFormVal={formValues.model}
-        round={round}
+        round={round.currentRound}
+        roundBool = {round.model}
         isPlayed={isPlayed}
       />
       <DateRangeSelect
         selType="year"
         updateForm={updateForm}
         localFormVal={formValues.year}
-        round={round}
+        round={round.currentRound}
+        roundBool = {round.year}
         isPlayed={isPlayed}
       />
+      {/* 
+      if the error state is present button needs to be disabled
+      after animation plays show error state to red for each individual input 
+      make answer fields persist after animation and change when changed 
+      create previous answer bucket to disable options that have previously been selected 
+       */}
       <button
         type="submit"
         className="form__submit"

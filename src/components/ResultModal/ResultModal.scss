@@ -106,8 +106,24 @@
     width: 100%;
     margin: 0.5rem 0;
 
-    &__text {
-      @include body-mobile;
+    &__heading {
+      display: flex;
+      justify-content: space-between;
+
+      &--streak {
+        display: flex;
+      }
+
+      &--icon{
+        height: 1rem;
+        // margin: 0 0.75rem
+      }
+      &--text {
+        @include body-mobile;
+      }
+      &--value {
+        @include body-mobile;
+      }
     }
   }
 
