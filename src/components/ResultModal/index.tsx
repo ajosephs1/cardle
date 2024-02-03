@@ -24,6 +24,7 @@ type ResultModalProps = {
     model: string;
     year: string;
     answerYear: string;
+    photoCredit: string;
   };
 };
 
@@ -124,7 +125,10 @@ export default function ResultModal({
         <p className="result__answer">{`${answer.make} ${answer.model} ${
           answer.answerYear ? answer.answerYear : ""
         }`}</p>
-        <img src={imageFull} alt="full car " className="result__image" />
+        <div className="result__photo-container">
+          <img src={imageFull} alt="full car " className="result__image" />
+          {answer.photoCredit&& <a href={answer.photoCredit} target="_blank" className="result__photoCredit">photo cred</a> }
+        </div>
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>
           <h2 className="result__heading">Model</h2>
