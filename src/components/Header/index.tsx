@@ -19,7 +19,7 @@ export default function Header({ handleClick }: HeaderProps) {
       </a>
       <div className="nav__links">
         <a
-          href="https://www.instagram.com/boxbox_carclub/"
+          href="https://www.instagram.com/play_cardle"
           target="blank"
           className="nav__link"
         >

@@ -61,6 +61,7 @@ function App() {
     model: "",
     year: "",
     answerYear: "",
+    photoCredit: ""
   });
   const [carImages, setCarImages] = useState({
     imageFull: "",
@@ -87,7 +88,10 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/answers?[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&[fields][1]=answerYear&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
+        `${BASE_URL}/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
+        
+        // url for development environment ensure to change date yyyy-mm-dd
+        // "http://localhost:1337/api/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=2024-02-02"
       )
       .then((response) => {
         if (response.data.data.length) {
@@ -96,6 +100,7 @@ function App() {
           const model = answerData.model.data.attributes.model;
           const year = answerData.year.data.attributes.year;
           const answerYear = answerData.answerYear;
+          const photoCredit = answerData.photoCredit? answerData.photoCredit: ""
 
           const imageFull =
             answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
@@ -124,7 +129,7 @@ function App() {
               ? answerData.imageFive.data.attributes.formats.small.url
               : answerData.imageFive.data.attributes.formats.thumbnail.url;
 
-          setAnswer({ make, model, year, answerYear });
+          setAnswer({ make, model, year, answerYear, photoCredit });
           setCarImages({
             imageFull,
             imageOne,
@@ -138,6 +143,7 @@ function App() {
           const model = "";
           const year = "";
           const answerYear = "";
+          const photoCredit = ""
 
           const placeholderURL =
             "https://placehold.jp/0f0a10/ffffff/300x200.png?text=%F0%9F%8F%8E";
@@ -148,7 +154,7 @@ function App() {
           const imageFour = placeholderURL;
           const imageFive = placeholderURL;
 
-          setAnswer({ make, model, year, answerYear });
+          setAnswer({ make, model, year, answerYear, photoCredit });
           setCarImages({
             imageFull,
             imageOne,
@@ -235,8 +241,8 @@ function App() {
       if (!round.make) {
         addPoints += 1;
       }
-    } 
-    // adding the else clause removes incorrect answers from updating localStorage   
+    }
+    // adding the else clause removes incorrect answers from updating localStorage
     // else {
     //   newFormVals.make = "";
     // }
@@ -247,7 +253,7 @@ function App() {
       if (!round.model) {
         addPoints += 1;
       }
-    } 
+    }
 
     if (formVals.year === answer.year) {
       roundBools.year = true;
@@ -255,7 +261,7 @@ function App() {
       if (!round.year) {
         addPoints += 1;
       }
-    } 
+    }
 
     setScore({ ...score, [currentRound]: roundBools });
     localStorage.setItem(
