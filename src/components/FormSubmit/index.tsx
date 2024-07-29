@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ErrorState } from '../../types';
 import Select from "../Select";
 import DateRangeSelect from "../DateRangeSelect";
 import axios from "axios";
@@ -23,6 +24,7 @@ type FormProps = {
   };
 };
 
+
 export default function FormSubmit({
   formValues,
   updateForm,
@@ -32,8 +34,16 @@ export default function FormSubmit({
 }: FormProps) {
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
+  const [errorState, setErrorState] = useState<ErrorState>({
+    make: false,
+    model: false,
+    year: false,
+  });
+  // console.log(errorState)
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+  // get make inputValues
   useEffect(() => {
     axios
       .get(
@@ -90,48 +100,60 @@ export default function FormSubmit({
       });
   }, [formValues.make]);
 
-  const errorState = () =>{
 
-  }
+
+  // create date ranges 
+  useEffect(() => {
+
+    const currentYear = new Date().getFullYear();
+    const startYear = 1950;
+    const options = [];
+
+    for (let year = startYear; year <= currentYear; year++) {
+      options.push(year.toString())
+    }
+    setYears(options);
+  }, [])
 
   return (
     <form action="" className="form">
       <Select
-        class="select__input--make"
         name="Make"
         data={makes}
         updateForm={updateForm}
         selType="make"
         localFormVal={formValues.make}
         round={round.currentRound}
-        roundBool = {round.make}
+        roundBool={round.make}
         isPlayed={isPlayed}
+        errorState={errorState.make}
+        setErrorState={setErrorState}
       />
       <Select
-        class="select__input--model"
         name="Model"
         data={models}
         updateForm={updateForm}
         selType="model"
         localFormVal={formValues.model}
         round={round.currentRound}
-        roundBool = {round.model}
+        roundBool={round.model}
         isPlayed={isPlayed}
+        errorState={errorState.model}
+        setErrorState={setErrorState}
       />
-      <DateRangeSelect
-        selType="year"
+      <Select
+        name="Year"
+        data={years}
         updateForm={updateForm}
+        selType="year"
         localFormVal={formValues.year}
         round={round.currentRound}
-        roundBool = {round.year}
+        roundBool={round.year}
         isPlayed={isPlayed}
+        errorState={errorState.year}
+        setErrorState={setErrorState}
       />
-      {/* 
-      if the error state is present button needs to be disabled
-      after animation plays show error state to red for each individual input 
-      make answer fields persist after animation and change when changed 
-      create previous answer bucket to disable options that have previously been selected 
-       */}
+
       <button
         type="submit"
         className="form__submit"
@@ -139,10 +161,11 @@ export default function FormSubmit({
           e.preventDefault();
           updateRound();
         }}
+        // submit button is disabled if there are no values in the inputs or if the inputs aren't change from an incorrect answer
+        // if game is played submit button displays result modal
         disabled={
-          !(
-            (formValues.make && formValues.model && formValues.year) ||
-            isPlayed
+          !!(
+            !(formValues.make && formValues.model && formValues.year) || (errorState.make || errorState.model || errorState.year)
           )
         }
       >

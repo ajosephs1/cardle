@@ -32,6 +32,23 @@ const generateDateRangeOptions = (): SelectOption[] => {
 
   return options;
 };
+// const generateDateRangeOptions = (): SelectOption[] => {
+//   const currentYear = new Date().getFullYear();
+//   const startYear = 1950;
+//   const yearRange = 5;
+//   const options: SelectOption[] = [];
+
+//   for (let year = startYear; year <= currentYear; year += yearRange) {
+//     const rangeStart = year;
+//     const rangeEnd = Math.min(year + yearRange - 1, currentYear);
+//     options.push({
+//       label: `${rangeStart} - ${rangeEnd}`,
+//       value: `${rangeStart}-${rangeEnd}`,
+//     });
+//   }
+
+//   return options;
+// };
 
 export default function DateRangeSelect({
   updateForm,

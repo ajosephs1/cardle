@@ -1,19 +1,23 @@
 import { useState, useEffect, useRef } from "react";
+import { ErrorState, ErrorStateKeys } from '../../types';
+
 import "./Select.scss";
 
 export type SelectProps = {
   data: string[];
   name: string;
-  class: string;
   localFormVal: string;
   updateForm: (valtype: string, val: string) => void;
-  selType: string;
+  selType: ErrorStateKeys;
   round: number;
   roundBool: boolean;
   isPlayed: boolean;
+  errorState: boolean;
+  setErrorState: React.Dispatch<React.SetStateAction<ErrorState>>
 };
 
-export default function Select(props: SelectProps) {
+
+export default function Select({ data, name, localFormVal, updateForm, selType, round, roundBool, isPlayed, errorState, setErrorState }: SelectProps) {
   const [selectType, setSelectType] = useState({
     make: false,
     model: false,
@@ -22,26 +26,25 @@ export default function Select(props: SelectProps) {
   const [search, setSearch] = useState("");
   const [focus, setFocus] = useState(false);
   const [inputVal, setInputValue] = useState("");
-  const [errorState, setErrorState] = useState(false);
-
   const selectRef = useRef<HTMLDivElement>(null);
 
   // update current input value if localStorage contains values && reload
   useEffect(() => {
-    if (props.localFormVal) {
-      setInputValue(props.localFormVal);
+    if (localFormVal) {
+      setInputValue(localFormVal);
     } else {
       setInputValue("");
     }
     // state will change depending on reload or current gameplay
     // if reloaded fill only with local storage vals
-    if (!props.roundBool && props.round !== 1) {
-      setErrorState(true);
+    if (!roundBool && round !== 1) {
+      setErrorState(prevState => ({ ...prevState, [selType]: true }));
     }
-  }, [props.round]);
+  }, [round]);
+  // problem is roundbool is locally scoped and error state is passed down as 
 
   useEffect(() => {
-    setSelectType({ ...selectType, [props.selType]: true });
+    setSelectType({ ...selectType, [selType]: true });
   }, []);
 
   useEffect(() => {
@@ -63,7 +66,7 @@ export default function Select(props: SelectProps) {
     };
   }, []);
 
-  const filteredData: Array<string | number> = props.data.filter((item) =>
+  const filteredData: Array<string | number> = data.filter((item) =>
     item.toString().toLowerCase().includes(search.toLowerCase())
   );
 
@@ -72,7 +75,7 @@ export default function Select(props: SelectProps) {
     setInputValue(e.target.value);
     // setInputValue("");
     setSearch(e.target.value);
-    setErrorState(false);
+    setErrorState(prevState => ({ ...prevState, [selType]: false }))
   }
 
   // select option to update input value
@@ -83,8 +86,9 @@ export default function Select(props: SelectProps) {
       setInputValue(liValue);
       setSearch("");
       setFocus(false);
-      props.updateForm(`${props.selType}`, liValue);
-      setErrorState(false);
+      updateForm(`${selType}`, liValue);
+      setErrorState(prevState => ({ ...prevState, [selType]: false }));
+
     }
   }
 
@@ -92,17 +96,17 @@ export default function Select(props: SelectProps) {
     <div className="select" ref={selectRef}>
       <input
         type="text"
-        id={`cardle-select-${props.selType}`}
-        className={`select__input ${props.class} ${
-          errorState && "select__input--error"
-        }`}
-        placeholder={focus ? "" : props.name}
+        id={`cardle-select-${selType}`}
+        className={`select__input  ${errorState && "select__input--error"
+          }`}
+        placeholder={focus ? "" : name}
+        autoComplete="off"
         onChange={handleInputChange}
         onFocus={() => {
           setFocus(true);
         }}
         value={inputVal}
-        disabled={props.isPlayed}
+        disabled={isPlayed}
       />
       {focus && (
         <ul className="select__data">
