@@ -13,6 +13,12 @@
   font-family: inherit;
   overflow-y: scroll;
   padding-bottom: 1rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &__info {
     border: 2px solid $bb-black;
