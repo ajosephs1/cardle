@@ -28,6 +28,8 @@ export default function Select({ data, name, localFormVal, updateForm, selType, 
   const [inputVal, setInputValue] = useState("");
   const selectRef = useRef<HTMLDivElement>(null);
 
+  console.log(inputVal)
+
   // update current input value if localStorage contains values && reload
   useEffect(() => {
     if (localFormVal) {
@@ -72,10 +74,15 @@ export default function Select({ data, name, localFormVal, updateForm, selType, 
 
   // clear input value if value selected isn't desired
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setInputValue(e.target.value);
-    // setInputValue("");
-    setSearch(e.target.value);
-    setErrorState(prevState => ({ ...prevState, [selType]: false }))
+    
+      setInputValue(e.target.value);
+      // setInputValue("");
+      setSearch(e.target.value);
+      setErrorState(prevState => ({ ...prevState, [selType]: false }))
+
+      if(selType === 'year'){
+        updateForm('year', e.target.value)
+      }
   }
 
   // select option to update input value
@@ -99,16 +106,18 @@ export default function Select({ data, name, localFormVal, updateForm, selType, 
         id={`cardle-select-${selType}`}
         className={`select__input  ${errorState && "select__input--error"
           }`}
-        placeholder={focus ? "" : name}
+        placeholder={focus ? "" : selType === 'year' ? 'Year (guess within +-2 years)' : name}
         autoComplete="off"
         onChange={handleInputChange}
         onFocus={() => {
           setFocus(true);
+            if (errorState) setInputValue('')
+          
         }}
         value={inputVal}
         disabled={isPlayed}
       />
-      {focus && (
+      {focus && (selType === 'model' || selType === 'make') && (
         <ul className="select__data">
           {filteredData.map((item, index) => (
             <li

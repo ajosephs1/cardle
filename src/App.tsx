@@ -72,6 +72,10 @@ function App() {
     imageFour: "",
     imageFive: "",
   });
+  const [coordinates, setCoordinates] = useState({
+    x: 0, y: 0
+  })
+
 
   // global variables
   const localDate = new Date().toLocaleDateString("en-GB");
@@ -103,12 +107,21 @@ function App() {
           const model = answerData.model.data.attributes.model;
           // const year = answerData.year.data.attributes.year;
           const answerYear = answerData.answerYear;
+          const xCoordinate: number = answerData.xCoordinate
+          const yCoordinate: number = answerData.yCoordinate
           const photoCredit = answerData.photoCredit ? answerData.photoCredit : ""
 
+          // programaitcally create differnt versions of the car image cropped and zoomed to specific level
+          // change imageFull to include other attributes 
+
+          /*  const imageFull =
+             answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
+               ? answerData.imageFull.data.attributes.formats.small.url
+               : answerData.imageFull.data.attributes.formats.medium.url; */
           const imageFull =
             answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
-              ? answerData.imageFull.data.attributes.formats.small.url
-              : answerData.imageFull.data.attributes.formats.medium.url;
+              ? answerData.imageFull.data.attributes.formats.small
+              : answerData.imageFull.data.attributes.formats.medium;
           const imageOne =
             answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageOne.data.attributes.formats.small.url
@@ -141,6 +154,8 @@ function App() {
             imageFour,
             imageFive,
           });
+          setCoordinates({ x: xCoordinate, y: yCoordinate })
+
         } else {
           const make = "";
           const model = "";
@@ -166,6 +181,7 @@ function App() {
             imageFour,
             imageFive,
           });
+          setCoordinates({x: Math.random()* (900-1) +1, y: Math.random()* (600-1) +1})
         }
       })
       .catch((error) => {
@@ -246,7 +262,6 @@ function App() {
       year: false,
     };
 
-    console.log(roundBools)
     let newFormVals = {
       make: formVals.make,
       model: formVals.model,
@@ -393,7 +408,7 @@ function App() {
           <Header handleClick={helpClick} />
         </header>
         <main className="main">
-          <CarImage round={round.currentRound} images={carImages} />
+          <CarImage round={round.currentRound} images={carImages} coordinates = {coordinates}/>
           <ScoreBoard
             multiplier={round.multiplier}
             currentPoints={round.currentPoints}

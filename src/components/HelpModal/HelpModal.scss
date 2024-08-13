@@ -16,19 +16,21 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
 
   &__info {
     border: 2px solid $bb-black;
+    border-radius: 1rem;
     margin: auto 1.5rem;
     // overflow-y: scroll;
     height: 100%;
     width: 100%;
     height: fit-content;
     background-color: $bb-coolgrey;
-    padding: 0 0.425rem;
+    padding: 0.5rem;
     z-index: 2;
   }
 
