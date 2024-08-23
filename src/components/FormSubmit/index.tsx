@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ErrorState } from '../../types';
 import Select from "../Select";
-import DateRangeSelect from "../DateRangeSelect";
 import axios from "axios";
 import "./FormSubmit.scss";
 
@@ -40,7 +39,6 @@ export default function FormSubmit({
     model: false,
     year: false,
   });
-  // console.log(errorState)
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   // get make inputValues
@@ -51,11 +49,16 @@ export default function FormSubmit({
       )
       .then((response) => {
         const makeObject = response.data.data;
-        let makeList: string[] = [];
+        // let makeList: string[] = [];
 
-        makeObject.map((item: { id: number; attributes: { make: string } }) => {
-          makeList.push(item.attributes.make);
-        });
+        // makeObject.map((item: { id: number; attributes: { make: string } }) => {
+        //   makeList.push(item.attributes.make);
+        // });
+
+        let makeList: string[] = makeObject.map(
+          (item: { id: number; attributes: { make: string } }) => item.attributes.make
+        );
+        
 
         setMakes(makeList);
       })
@@ -99,8 +102,6 @@ export default function FormSubmit({
         console.error(error);
       });
   }, [formValues.make]);
-
-
 
   // create date ranges 
   useEffect(() => {
@@ -161,7 +162,7 @@ export default function FormSubmit({
           e.preventDefault();
           updateRound();
         }}
-        // submit button is disabled if there are no values in the inputs or if the inputs aren't change from an incorrect answer
+        // submit button is disabled if there are no values in the inputs or if the inputs aren't changed from an incorrect answer
         // if game is played submit button displays result modal
         disabled={
           !!(

@@ -1,4 +1,4 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { crop, fill } from "@cloudinary/url-gen/actions/resize";
 import "./CarImage.scss";
@@ -36,15 +36,15 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
     })
   ).current;
 
-  let xCoord = coordinates.x / 900
-  let yCoord = coordinates.y / 600
+  let xCoord = coordinates.x / 1800
+  let yCoord = coordinates.y / 1200
 
 
 
   useEffect(() => {
     // set images and transformed images in state from cloudinary transformations
     images.imageFull && setCldImageId(images.imageFull.provider_metadata.public_id)
-
+    // crop transformation zooming out by 5% each iteration via width and height
     const cldImage20 = cld.image(cldImageId).resize(crop().width(0.2).height(0.2).aspectRatio("3:2").gravity("xy_center").x(xCoord).y(yCoord))
       .resize(fill().width('iw').height('ih')).toURL();
 
@@ -61,13 +61,14 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
       .resize(fill().width('iw').height('ih')).toURL()
 
     setCldCroppedImg({ cldImageOne: cldImage20, cldImageTwo: cldImage25, cldImageThree: cldImage30, cldImageFour: cldImage35, cldImageFive: cldImage40, })
-  }, [images, images.imageFull])
+  }, [images, images.imageFull, cld, cldImageId, xCoord, yCoord])
 
   useEffect(() => {
     if (round !== 1 && imageAnimation[1] === "") {
       setImageAnimation({ ...imageAnimation, [1]: "image--slide-out" });
     }
   });
+  // add dependencies if necessary (round, imageAnimation)
 
   useEffect(() => {
     if (round === 1) {
@@ -81,8 +82,6 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
     }
   }, [round]);
 
-  // transformation include compass direction 
-  /* north_west, north, north_east, west, center, east, south_west, south, south_east */
   return (
     <div className="image-container">
       <div className="image__slider">

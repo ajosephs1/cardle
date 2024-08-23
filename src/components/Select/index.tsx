@@ -28,8 +28,6 @@ export default function Select({ data, name, localFormVal, updateForm, selType, 
   const [inputVal, setInputValue] = useState("");
   const selectRef = useRef<HTMLDivElement>(null);
 
-  console.log(inputVal)
-
   // update current input value if localStorage contains values && reload
   useEffect(() => {
     if (localFormVal) {

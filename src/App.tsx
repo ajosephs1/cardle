@@ -98,7 +98,7 @@ function App() {
         // `${BASE_URL}/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
 
         // url for development environment ensure to change date yyyy-mm-dd
-        "http://localhost:1337/api/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=2024-02-02"
+        `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
       )
       .then((response) => {
         if (response.data.data.length) {
@@ -111,39 +111,32 @@ function App() {
           const yCoordinate: number = answerData.yCoordinate
           const photoCredit = answerData.photoCredit ? answerData.photoCredit : ""
 
-          // programaitcally create differnt versions of the car image cropped and zoomed to specific level
-          // change imageFull to include other attributes 
-
-          /*  const imageFull =
-             answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
-               ? answerData.imageFull.data.attributes.formats.small.url
-               : answerData.imageFull.data.attributes.formats.medium.url; */
-          const imageFull =
-            answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
-              ? answerData.imageFull.data.attributes.formats.small
+          const imageFull = !!answerData.imageFull ? answerData.imageFull.data.attributes :
+            answerData.imageFull.data.attributes.formats.hasOwnProperty("large")
+              ? answerData.imageFull.data.attributes.formats.large
               : answerData.imageFull.data.attributes.formats.medium;
-          const imageOne =
+          const imageOne = !!answerData.imageOne.data ?
             answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageOne.data.attributes.formats.small.url
-              : answerData.imageOne.data.attributes.formats.thumbnail.url;
-          const imageTwo =
+              : answerData.imageOne.data.attributes.formats.thumbnail.url : "";
+          const imageTwo = !!answerData.imageTwo.data ?
             answerData.imageTwo.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageTwo.data.attributes.formats.small.url
-              : answerData.imageTwo.data.attributes.formats.thumbnail.url;
-          const imageThree =
+              : answerData.imageTwo.data.attributes.formats.thumbnail.url : "";
+          const imageThree = !!answerData.imageThree.data ?
             answerData.imageThree.data.attributes.formats.hasOwnProperty(
               "small"
             )
               ? answerData.imageThree.data.attributes.formats.small.url
-              : answerData.imageThree.data.attributes.formats.thumbnail.url;
-          const imageFour =
+              : answerData.imageThree.data.attributes.formats.thumbnail.url : "";
+          const imageFour = !!answerData.imageFour.data ?
             answerData.imageFour.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageFour.data.attributes.formats.small.url
-              : answerData.imageFour.data.attributes.formats.thumbnail.url;
-          const imageFive =
+              : answerData.imageFour.data.attributes.formats.thumbnail.url : "";
+          const imageFive = !!answerData.imageFive.data ?
             answerData.imageFive.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageFive.data.attributes.formats.small.url
-              : answerData.imageFive.data.attributes.formats.thumbnail.url;
+              : answerData.imageFive.data.attributes.formats.thumbnail.url : "";
 
           setAnswer({ make, model, answerYear, photoCredit });
           setCarImages({
@@ -181,7 +174,7 @@ function App() {
             imageFour,
             imageFive,
           });
-          setCoordinates({x: Math.random()* (900-1) +1, y: Math.random()* (600-1) +1})
+          setCoordinates({ x: Math.random() * (900 - 1) + 1, y: Math.random() * (600 - 1) + 1 })
         }
       })
       .catch((error) => {
@@ -251,7 +244,7 @@ function App() {
       ? parseInt(allTimeScoreString)
       : 0;
     setAllTimeScore(allTimeLocalScore);
-  }, [answer]);
+  }, [answer, currentDate]);
 
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
@@ -408,7 +401,7 @@ function App() {
           <Header handleClick={helpClick} />
         </header>
         <main className="main">
-          <CarImage round={round.currentRound} images={carImages} coordinates = {coordinates}/>
+          <CarImage round={round.currentRound} images={carImages} coordinates={coordinates} />
           <ScoreBoard
             multiplier={round.multiplier}
             currentPoints={round.currentPoints}

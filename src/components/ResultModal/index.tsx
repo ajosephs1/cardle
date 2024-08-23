@@ -22,7 +22,6 @@ type ResultModalProps = {
   answer: {
     make: string;
     model: string;
-    // year: string;
     answerYear: string;
     photoCredit: string;
   };
