@@ -18,11 +18,10 @@ type ResultModalProps = {
       year: null | boolean;
     };
   };
-  imageFull: string;
+  imageFull: any;
   answer: {
     make: string;
     model: string;
-    year: string;
     answerYear: string;
     photoCredit: string;
   };
@@ -52,7 +51,7 @@ export default function ResultModal({
   }
 
   function emojiGrid(obj: ResultModalProps["score"]) {
-    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\n${streak>0 ? "Streak "+streak+"🔥"+"\n": ""}\n`;
+    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\n${streak > 0 ? "Streak " + streak + "🔥" + "\n" : ""}${allTimeScore > 0 ? "Total Score " + allTimeScore : ""}\nCardle moved to a new site!\n`;
 
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -67,7 +66,7 @@ export default function ResultModal({
       }
     }
 
-    result += "https://cardle.boxbox.autos";
+    result += "playcardle.com";
     return result;
   }
 
@@ -122,12 +121,11 @@ export default function ResultModal({
         <h1 className="result__title">
           {result === "win" ? "WINNER!" : `BETTER LUCK NEXT TIME`}
         </h1>
-        <p className="result__answer">{`${answer.make} ${answer.model} ${
-          answer.answerYear ? answer.answerYear : ""
-        }`}</p>
+        <p className="result__answer">{`${answer.make} ${answer.model} ${answer.answerYear ? answer.answerYear : ""
+          }`}</p>
         <div className="result__photo-container">
-          <img src={imageFull} alt="full car " className="result__image" />
-          {answer.photoCredit&& <a href={answer.photoCredit} target="_blank" className="result__photoCredit">photo cred</a> }
+          <img src={imageFull && imageFull.url} alt="full car " className="result__image" />
+          {answer.photoCredit && <a href={answer.photoCredit} target="_blank" className="result__photoCredit">photo cred</a>}
         </div>
         <div className="result__headings">
           <h2 className="result__heading">Make</h2>
@@ -142,8 +140,8 @@ export default function ResultModal({
                   score[1].make
                     ? "result__light result__light--green"
                     : score[1].make === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -153,8 +151,8 @@ export default function ResultModal({
                   score[1].model
                     ? "result__light result__light--green"
                     : score[1].model === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -164,8 +162,8 @@ export default function ResultModal({
                   score[1].year
                     ? "result__light result__light--green"
                     : score[1].year === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -177,8 +175,8 @@ export default function ResultModal({
                   score[2].make
                     ? "result__light result__light--green"
                     : score[2].make === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -188,8 +186,8 @@ export default function ResultModal({
                   score[2].model
                     ? "result__light result__light--green"
                     : score[2].model === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -199,8 +197,8 @@ export default function ResultModal({
                   score[2].year
                     ? "result__light result__light--green"
                     : score[2].year === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -212,8 +210,8 @@ export default function ResultModal({
                   score[3].make
                     ? "result__light result__light--green"
                     : score[3].make === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -223,8 +221,8 @@ export default function ResultModal({
                   score[3].model
                     ? "result__light result__light--green"
                     : score[3].model === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -234,8 +232,8 @@ export default function ResultModal({
                   score[3].year
                     ? "result__light result__light--green"
                     : score[3].year === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -247,8 +245,8 @@ export default function ResultModal({
                   score[4].make
                     ? "result__light result__light--green"
                     : score[4].make === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -258,8 +256,8 @@ export default function ResultModal({
                   score[4].model
                     ? "result__light result__light--green"
                     : score[4].model === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -269,8 +267,8 @@ export default function ResultModal({
                   score[4].year
                     ? "result__light result__light--green"
                     : score[4].year === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -282,8 +280,8 @@ export default function ResultModal({
                   score[5].make
                     ? "result__light result__light--green"
                     : score[5].make === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -293,8 +291,8 @@ export default function ResultModal({
                   score[5].model
                     ? "result__light result__light--green"
                     : score[5].model === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -304,8 +302,8 @@ export default function ResultModal({
                   score[5].year
                     ? "result__light result__light--green"
                     : score[5].year === null
-                    ? ""
-                    : "result__light result__light--red"
+                      ? ""
+                      : "result__light result__light--red"
                 }
               />
             </div>
@@ -340,9 +338,8 @@ export default function ResultModal({
           </div>
         </div>
         <p
-          className={`result__copied ${
-            showCopiedMessage ? "result__copied--visible" : ""
-          }`}
+          className={`result__copied ${showCopiedMessage ? "result__copied--visible" : ""
+            }`}
         >
           coppied to clipboard 📋
         </p>

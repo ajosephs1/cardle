@@ -59,8 +59,9 @@ function App() {
   const [answer, setAnswer] = useState({
     make: "",
     model: "",
-    year: "",
+    // year: "",
     answerYear: "",
+    // remove year
     photoCredit: ""
   });
   const [carImages, setCarImages] = useState({
@@ -71,7 +72,12 @@ function App() {
     imageFour: "",
     imageFive: "",
   });
+  const [coordinates, setCoordinates] = useState({
+    x: 0, y: 0
+  })
 
+
+  // global variables
   const localDate = new Date().toLocaleDateString("en-GB");
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
@@ -81,55 +87,58 @@ function App() {
     (round.multiplier === 5
       ? 5
       : round.multiplier === 0
-      ? 1
-      : round.multiplier + 1);
+        ? 1
+        : round.multiplier + 1);
 
+  // change api request to only accept the year input 
   // API requests to strapi
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
+        `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
         
         // url for development environment ensure to change date yyyy-mm-dd
-        // "http://localhost:1337/api/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=2024-02-02"
+        // `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
       )
       .then((response) => {
         if (response.data.data.length) {
           const answerData = response.data.data[0].attributes;
           const make = answerData.make.data.attributes.make;
           const model = answerData.model.data.attributes.model;
-          const year = answerData.year.data.attributes.year;
+          // const year = answerData.year.data.attributes.year;
           const answerYear = answerData.answerYear;
-          const photoCredit = answerData.photoCredit? answerData.photoCredit: ""
+          const xCoordinate: number = answerData.xCoordinate
+          const yCoordinate: number = answerData.yCoordinate
+          const photoCredit = answerData.photoCredit ? answerData.photoCredit : ""
 
-          const imageFull =
-            answerData.imageFull.data.attributes.formats.hasOwnProperty("small")
-              ? answerData.imageFull.data.attributes.formats.small.url
-              : answerData.imageFull.data.attributes.formats.medium.url;
-          const imageOne =
+          const imageFull = !!answerData.imageFull ? answerData.imageFull.data.attributes :
+            answerData.imageFull.data.attributes.formats.hasOwnProperty("large")
+              ? answerData.imageFull.data.attributes.formats.large
+              : answerData.imageFull.data.attributes.formats.medium;
+          const imageOne = !!answerData.imageOne.data ?
             answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageOne.data.attributes.formats.small.url
-              : answerData.imageOne.data.attributes.formats.thumbnail.url;
-          const imageTwo =
+              : answerData.imageOne.data.attributes.formats.thumbnail.url : "";
+          const imageTwo = !!answerData.imageTwo.data ?
             answerData.imageTwo.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageTwo.data.attributes.formats.small.url
-              : answerData.imageTwo.data.attributes.formats.thumbnail.url;
-          const imageThree =
+              : answerData.imageTwo.data.attributes.formats.thumbnail.url : "";
+          const imageThree = !!answerData.imageThree.data ?
             answerData.imageThree.data.attributes.formats.hasOwnProperty(
               "small"
             )
               ? answerData.imageThree.data.attributes.formats.small.url
-              : answerData.imageThree.data.attributes.formats.thumbnail.url;
-          const imageFour =
+              : answerData.imageThree.data.attributes.formats.thumbnail.url : "";
+          const imageFour = !!answerData.imageFour.data ?
             answerData.imageFour.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageFour.data.attributes.formats.small.url
-              : answerData.imageFour.data.attributes.formats.thumbnail.url;
-          const imageFive =
+              : answerData.imageFour.data.attributes.formats.thumbnail.url : "";
+          const imageFive = !!answerData.imageFive.data ?
             answerData.imageFive.data.attributes.formats.hasOwnProperty("small")
               ? answerData.imageFive.data.attributes.formats.small.url
-              : answerData.imageFive.data.attributes.formats.thumbnail.url;
+              : answerData.imageFive.data.attributes.formats.thumbnail.url : "";
 
-          setAnswer({ make, model, year, answerYear, photoCredit });
+          setAnswer({ make, model, answerYear, photoCredit });
           setCarImages({
             imageFull,
             imageOne,
@@ -138,10 +147,12 @@ function App() {
             imageFour,
             imageFive,
           });
+          setCoordinates({ x: xCoordinate, y: yCoordinate })
+
         } else {
           const make = "";
           const model = "";
-          const year = "";
+          // const year = "";
           const answerYear = "";
           const photoCredit = ""
 
@@ -154,7 +165,7 @@ function App() {
           const imageFour = placeholderURL;
           const imageFive = placeholderURL;
 
-          setAnswer({ make, model, year, answerYear, photoCredit });
+          setAnswer({ make, model, answerYear, photoCredit });
           setCarImages({
             imageFull,
             imageOne,
@@ -163,6 +174,7 @@ function App() {
             imageFour,
             imageFive,
           });
+          setCoordinates({ x: Math.random() * (900 - 1) + 1, y: Math.random() * (600 - 1) + 1 })
         }
       })
       .catch((error) => {
@@ -178,8 +190,22 @@ function App() {
 
     if (localStorageDate === null) {
       setHelp(true);
+    } else {
+      // Function to convert a date string (yyyy-mm-dd) to a Date object
+      function parseDate(dateString: string) {
+        const [year, month, day] = dateString.split('-').map(Number);
+        return new Date(year, month - 1, day); // month is zero-based in JS Date
+      }
+      const lastPlayedDate = parseDate(localStorageDate);
+      const currentUnixDate = new Date();
+      const differenceInMilliseconds = currentUnixDate.getTime() - lastPlayedDate.getTime();
+      const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+      if (differenceInDays > 1) {
+        localStorage.setItem("answerStreak", "0")
+      }
     }
 
+    // reset game if new day
     if (localStorageDate !== currentDate) {
       localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem("gamePlayed", "false");
@@ -218,7 +244,7 @@ function App() {
       ? parseInt(allTimeScoreString)
       : 0;
     setAllTimeScore(allTimeLocalScore);
-  }, [answer]);
+  }, [answer, currentDate]);
 
   function updateScore(nR: number, nM: number) {
     let currentRound = round.currentRound;
@@ -242,10 +268,6 @@ function App() {
         addPoints += 1;
       }
     }
-    // adding the else clause removes incorrect answers from updating localStorage
-    // else {
-    //   newFormVals.make = "";
-    // }
 
     if (answer.model && formVals.model === answer.model) {
       roundBools.model = true;
@@ -255,7 +277,7 @@ function App() {
       }
     }
 
-    if (formVals.year === answer.year) {
+    if (parseInt(formVals.year) >= parseInt(answer.answerYear) - 3 && parseInt(formVals.year) <= parseInt(answer.answerYear) + 3) {
       roundBools.year = true;
 
       if (!round.year) {
@@ -279,14 +301,14 @@ function App() {
             round.currentPoints === 3
               ? round.currentRound
               : round.currentRound === 5
-              ? 5
-              : nR,
+                ? 5
+                : nR,
           multiplier:
             round.currentPoints === 3
               ? round.multiplier
               : round.multiplier === 0
-              ? 1
-              : nM,
+                ? 1
+                : nM,
           make: roundBools.make,
           model: roundBools.model,
           year: roundBools.year,
@@ -299,14 +321,14 @@ function App() {
           round.currentPoints === 3
             ? round.currentRound
             : round.currentRound === 5
-            ? 5
-            : nR,
+              ? 5
+              : nR,
         multiplier:
           round.currentPoints === 3
             ? round.multiplier
             : round.multiplier === 0
-            ? 1
-            : nM,
+              ? 1
+              : nM,
         make: roundBools.make,
         model: roundBools.model,
         year: roundBools.year,
@@ -379,7 +401,7 @@ function App() {
           <Header handleClick={helpClick} />
         </header>
         <main className="main">
-          <CarImage round={round.currentRound} images={carImages} />
+          <CarImage round={round.currentRound} images={carImages} coordinates={coordinates} />
           <ScoreBoard
             multiplier={round.multiplier}
             currentPoints={round.currentPoints}
