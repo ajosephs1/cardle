@@ -8,10 +8,18 @@
   justify-content: center;
   align-items: flex-start;
   overflow-y: scroll;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+
   padding-bottom: 1rem;
   height: 100%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &__modal {
     position: relative;
@@ -22,6 +30,7 @@
     background-color: $bb-coolgrey;
     padding: 1.5rem 1.5rem 1rem;
     border: 2px solid $bb-black;
+    border-radius: 1rem;
   }
 
   &__exit {
@@ -45,7 +54,7 @@
     margin-bottom: 0.5rem;
   }
 
-  &__photo-container{
+  &__photo-container {
     position: relative;
   }
   &__image {
@@ -55,11 +64,11 @@
     border-radius: 0.25rem;
   }
 
-  &__photoCredit{
+  &__photoCredit {
     @include body-mobile;
     position: absolute;
     text-decoration: none;
-    color:$bb-white;
+    color: $bb-white;
     background-color: $bb-black;
     opacity: 50%;
     border-radius: 0.25rem;
@@ -131,7 +140,7 @@
         display: flex;
       }
 
-      &--icon{
+      &--icon {
         height: 1rem;
         // margin: 0 0.75rem
       }
