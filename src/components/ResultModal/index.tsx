@@ -124,7 +124,7 @@ export default function ResultModal({
         <p className="result__answer">{`${answer.make} ${answer.model} ${answer.answerYear ? answer.answerYear : ""
           }`}</p>
         <div className="result__photo-container">
-          <img src={imageFull&& imageFull.url} alt="full car " className="result__image" />
+          <img src={imageFull && imageFull.url} alt="full car " className="result__image" />
           {answer.photoCredit && <a href={answer.photoCredit} target="_blank" className="result__photoCredit">photo cred</a>}
         </div>
         <div className="result__headings">

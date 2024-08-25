@@ -31,7 +31,7 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
   const cld = useRef(
     new Cloudinary({
       cloud: {
-        cloudName: "dcahxcb9j",
+        cloudName: `${process.env.REACT_APP_CLOUDNAME}`,
       },
     })
   ).current;
@@ -68,7 +68,6 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
       setImageAnimation({ ...imageAnimation, [1]: "image--slide-out" });
     }
   });
-  // add dependencies if necessary (round, imageAnimation)
 
   useEffect(() => {
     if (round === 1) {

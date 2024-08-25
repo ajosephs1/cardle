@@ -95,10 +95,10 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        // `${BASE_URL}/answers?populate[fields][0]=date&populate[make][fields][0]=make&populate[model][fields][0]=model&populate[year][fields][0]=year&populate[photoCredit][fields][0]=photoCredit&populate[imageFull][fields][0]=formats&populate[imageOne][fields][0]=formats&populate[imageTwo][fields][0]=formats&populate[imageThree][fields][0]=formats&populate[imageFour][fields][0]=formats&populate[imageFive][fields][0]=formats&filters[date][$eq]=${currentDate}`
-
+        `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
+        
         // url for development environment ensure to change date yyyy-mm-dd
-        `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
+        // `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
       )
       .then((response) => {
         if (response.data.data.length) {

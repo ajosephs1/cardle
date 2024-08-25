@@ -49,17 +49,11 @@ export default function FormSubmit({
       )
       .then((response) => {
         const makeObject = response.data.data;
-        // let makeList: string[] = [];
-
-        // makeObject.map((item: { id: number; attributes: { make: string } }) => {
-        //   makeList.push(item.attributes.make);
-        // });
 
         let makeList: string[] = makeObject.map(
           (item: { id: number; attributes: { make: string } }) => item.attributes.make
         );
         
-
         setMakes(makeList);
       })
       .catch((error) => {
