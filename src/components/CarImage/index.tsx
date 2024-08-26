@@ -31,7 +31,7 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
   const cld = useRef(
     new Cloudinary({
       cloud: {
-        cloudName: `${process.env.REACT_APP_CLOUDNAME}`,
+        cloudName: `${import.meta.env.VITE_CLOUDNAME}`,
       },
     })
   ).current;

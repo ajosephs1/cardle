@@ -39,7 +39,7 @@ export default function FormSubmit({
     model: false,
     year: false,
   });
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // get make inputValues
   useEffect(() => {
