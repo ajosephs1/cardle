@@ -4,7 +4,7 @@ import "./index.scss";
 import App from "./App";
 import ReactGA from "react-ga4";
 
-const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID
 
 ReactGA.initialize(`${GA_MEASUREMENT_ID}`);
 

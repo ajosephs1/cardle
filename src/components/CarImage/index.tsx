@@ -31,7 +31,7 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
   const cld = useRef(
     new Cloudinary({
       cloud: {
-        cloudName: `${process.env.REACT_APP_CLOUDNAME}`,
+        cloudName: `${import.meta.env.VITE_CLOUDNAME}`,
       },
     })
   ).current;
@@ -54,10 +54,10 @@ export default function CarImage({ round, images, coordinates }: CarImageProps) 
     const cldImage30 = cld.image(cldImageId).resize(crop().width(0.3).height(0.3).aspectRatio("3:2").gravity("xy_center").x(xCoord).y(yCoord))
       .resize(fill().width('iw').height('ih')).toURL()
 
-    const cldImage35 = cld.image(cldImageId).resize(crop().width(0.35).height(0.35).aspectRatio("3:2").gravity("xy_center").x(xCoord).y(yCoord))
+    const cldImage35 = cld.image(cldImageId).resize(crop().width(0.3).height(0.3).aspectRatio("3:2").gravity("xy_center").x(xCoord).y(yCoord))
       .resize(fill().width('iw').height('ih')).toURL()
 
-    const cldImage40 = cld.image(cldImageId).resize(crop().width(0.4).height(0.4).aspectRatio("3:2").gravity("xy_center").x(xCoord).y(yCoord))
+    const cldImage40 = cld.image(cldImageId).resize(crop().width(0.3).height(0.3).aspectRatio("3:2").gravity("xy_center").x(xCoord).y(yCoord))
       .resize(fill().width('iw').height('ih')).toURL()
 
     setCldCroppedImg({ cldImageOne: cldImage20, cldImageTwo: cldImage25, cldImageThree: cldImage30, cldImageFour: cldImage35, cldImageFive: cldImage40, })

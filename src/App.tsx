@@ -81,7 +81,7 @@ function App() {
   const localDate = new Date().toLocaleDateString("en-GB");
   const dateParts = localDate.split("/");
   const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const totalPoints =
     round.currentPoints *
     (round.multiplier === 5
