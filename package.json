@@ -5,6 +5,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.20.0",
+    "@jridgewell/sourcemap-codec": "^1.5.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,7 +17,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
-    "react-scripts": "^5.0.1",
     "sass": "^1.64.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -51,9 +51,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-class-properties": "^7.25.4",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.7",
+    "@babel/plugin-transform-numeric-separator": "^7.24.7",
+    "@babel/plugin-transform-optional-chaining": "^7.24.8",
+    "@babel/plugin-transform-private-methods": "^7.25.4",
     "@babel/plugin-transform-private-property-in-object": "^7.24.7",
     "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7"
+    "@babel/preset-react": "^7.24.7",
+    "@eslint/config-array": "^0.18.0",
+    "@eslint/object-schema": "^2.1.4",
+    "@rollup/plugin-terser": "^0.4.4"
   }
 }
