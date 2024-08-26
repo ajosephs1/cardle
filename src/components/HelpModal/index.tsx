@@ -50,7 +50,7 @@ export default function HelpModal({ handleClick }: ModalProps) {
             <li>Play Cardle on the same device & browser each day to keep your streak and increase your total points from all previous games. Soon, we’ll add a leaderboard for all users to see how they stack up!</li>
           </ul>
 
-          <h2 className="modal__subheading">Contact Us</h2>
+          <h2 className="modal_subheading">Contact Us</h2>
           <ul>
             <li>If you have feedback, questions, or concerns, please contact us at cardle.game@gmail.com</li>
           </ul>
