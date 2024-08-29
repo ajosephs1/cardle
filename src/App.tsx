@@ -277,7 +277,7 @@ function App() {
       }
     }
 
-    if (parseInt(formVals.year) >= parseInt(answer.answerYear) - 3 && parseInt(formVals.year) <= parseInt(answer.answerYear) + 3) {
+    if (parseInt(formVals.year) >= parseInt(answer.answerYear) - 2 && parseInt(formVals.year) <= parseInt(answer.answerYear) + 2) {
       roundBools.year = true;
 
       if (!round.year) {
