@@ -104,7 +104,7 @@ export default function Select({ data, name, localFormVal, updateForm, selType, 
         id={`cardle-select-${selType}`}
         className={`select__input  ${errorState && "select__input--error"
           }`}
-        placeholder={focus ? "" : selType === 'year' ? 'Year (guess within +-2 years)' : name}
+        placeholder={focus ? "" : selType === 'year' ? 'Year (YYYY, guess within +-2 years)' : name}
         autoComplete="off"
         onChange={handleInputChange}
         onFocus={() => {
@@ -115,7 +115,8 @@ export default function Select({ data, name, localFormVal, updateForm, selType, 
         value={inputVal}
         disabled={isPlayed}
       />
-      {focus && (selType === 'model' || selType === 'make') && (
+      {/* filter options if make or model select type  */}
+      {focus && (selType === 'make' || selType === 'model') && (
         <ul className="select__data">
           {filteredData.map((item, index) => (
             <li
