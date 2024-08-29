@@ -160,7 +160,7 @@ export default function FormSubmit({
         // if game is played submit button displays result modal
         disabled={
           !!(
-            !(formValues.make && formValues.model && formValues.year) || (errorState.make || errorState.model || errorState.year)
+            !(formValues.make && formValues.model && formValues.year) || (errorState.make || errorState.model || errorState.year) || (formValues.year.length !== 4)
           )
         }
       >
