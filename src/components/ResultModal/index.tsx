@@ -66,7 +66,7 @@ export default function ResultModal({
       }
     }
 
-    result += "cardle.boxbox.autos";
+    result += "https://cardle.boxbox.autos";
     return result;
   }
 
