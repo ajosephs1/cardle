@@ -51,7 +51,7 @@ export default function ResultModal({
   }
 
   function emojiGrid(obj: ResultModalProps["score"]) {
-    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\n${streak > 0 ? "Streak " + streak + "🔥" + "\n" : ""}${allTimeScore > 0 ? "Total Score " + allTimeScore : ""}\nCardle moved to a new site!\n`;
+    let result = `Cardle ${isRoundFive() ? 5 : round - 1}/5\n${streak > 0 ? "Streak " + streak + "🔥" + "\n" : ""}${allTimeScore > 0 ? "Total Score " + allTimeScore : ""}\n`;
 
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -66,7 +66,7 @@ export default function ResultModal({
       }
     }
 
-    result += "playcardle.com";
+    result += "cardle.boxbox.autos";
     return result;
   }
 
