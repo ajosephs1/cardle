@@ -60,9 +60,7 @@ function App() {
   const [answer, setAnswer] = useState({
     make: "",
     model: "",
-    // year: "",
     answerYear: "",
-    // remove year
     photoCredit: ""
   });
   const [carImages, setCarImages] = useState({
@@ -77,7 +75,6 @@ function App() {
     x: 0, y: 0
   })
 
-
   // global variables
   const localDate = new Date().toLocaleDateString("en-GB");
   const dateParts = localDate.split("/");
@@ -91,22 +88,17 @@ function App() {
         ? 1
         : round.multiplier + 1);
 
-  // change api request to only accept the year input 
   // API requests to strapi
   useEffect(() => {
     axios
       .get(
-        // `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
-
-        // url for development environment ensure to change date yyyy-mm-dd
-        `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
+        `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
       )
       .then((response) => {
         if (response.data.data.length) {
           const answerData = response.data.data[0].attributes;
           const make = answerData.make.data.attributes.make;
           const model = answerData.model.data.attributes.model;
-          // const year = answerData.year.data.attributes.year;
           const answerYear = answerData.answerYear;
           const xCoordinate: number = answerData.xCoordinate
           const yCoordinate: number = answerData.yCoordinate
@@ -153,7 +145,6 @@ function App() {
         } else {
           const make = "";
           const model = "";
-          // const year = "";
           const answerYear = "";
           const photoCredit = ""
 
@@ -420,7 +411,6 @@ function App() {
             updateForm={updateForm}
             updateRound={updateRound}
             isPlayed={gamePlayed}
-            // round={round.currentRound}
             round={round}
           />
 
