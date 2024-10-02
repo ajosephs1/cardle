@@ -24,6 +24,7 @@ function App() {
     model: false,
     year: false,
   });
+
   const [score, setScore] = useState({
     1: {
       make: null,
@@ -95,10 +96,10 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
-        
+        // `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
+
         // url for development environment ensure to change date yyyy-mm-dd
-        // `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
+        `http://localhost:1337/api/answers?populate=*&filters[date][$eq]=2024-02-02`
       )
       .then((response) => {
         if (response.data.data.length) {
@@ -190,24 +191,11 @@ function App() {
 
     if (localStorageDate === null) {
       setHelp(true);
-    } else {
-      // Function to convert a date string (yyyy-mm-dd) to a Date object
-      function parseDate(dateString: string) {
-        const [year, month, day] = dateString.split('-').map(Number);
-        return new Date(year, month - 1, day); // month is zero-based in JS Date
-      }
-      const lastPlayedDate = parseDate(localStorageDate);
-      const currentUnixDate = new Date();
-      const differenceInMilliseconds = currentUnixDate.getTime() - lastPlayedDate.getTime();
-      const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
-      if (differenceInDays > 1) {
-        localStorage.setItem("answerStreak", "0")
-      }
     }
 
     // reset game if new day
     if (localStorageDate !== currentDate) {
-      localStorage.setItem("lastPlayed", currentDate);
+
       localStorage.setItem("gamePlayed", "false");
       localStorageGamePlayed = "false";
       localStorage.removeItem("gameScore");
@@ -338,11 +326,29 @@ function App() {
     setFormVals(newFormVals);
     localStorage.setItem("gameFormVals", JSON.stringify(newFormVals));
 
+    // check the answer streak 
+    const checkStreak = () => {
+      var today = new Date();
+      let yesterday = new Date(today.setDate(new Date().getDate() - 1)).toLocaleDateString("en-GB")
+      let yesterdaySplit = yesterday.split("/")
+      let yesterdayString = `${yesterdaySplit[2]}-${yesterdaySplit[1]}-${yesterdaySplit[0]}`;
+
+      let lastPlayedString = localStorage.getItem("lastPlayed")
+      if (lastPlayedString === yesterdayString) {
+        return true
+      } else return false
+    }
+
     // Update win/lose state
     if (addPoints === 3) {
-      localStorage.setItem("answerStreak", `${answerStreak + 1}`);
-      setAnswerStreak(answerStreak + 1);
-
+      if (checkStreak()) {
+        localStorage.setItem("answerStreak", `${answerStreak + 1}`);
+        setAnswerStreak(answerStreak + 1);
+      } else {
+        localStorage.setItem("answerStreak", "0");
+        setAnswerStreak(0)
+      }
+      localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem(
         "allTimeScore",
         `${allTimeScore + (6 - currentRound) * addPoints}`
@@ -356,7 +362,8 @@ function App() {
 
     if (currentRound === 5 && addPoints !== 3) {
       localStorage.setItem("answerStreak", "0");
-
+      setAnswerStreak(0)
+      localStorage.setItem("lastPlayed", currentDate);
       localStorage.setItem(
         "allTimeScore",
         `${allTimeScore + (6 - currentRound) * addPoints}`
@@ -373,6 +380,7 @@ function App() {
     // show result modal if the game has already been played
     if (round.currentPoints === 3 && gamePlayed) {
       setDidWin("win");
+      localStorage.setItem("lastPlayed", currentDate);
       return;
     }
     if (round.currentPoints !== 3 && gamePlayed) {
