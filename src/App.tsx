@@ -76,9 +76,16 @@ function App() {
   })
 
   // global variables
-  const localDate = new Date().toLocaleDateString("en-GB");
-  const dateParts = localDate.split("/");
-  const currentDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+  // function to format date
+  function formatDateToString(date: Date): string {
+    const localDate = date.toLocaleDateString("en-GB");
+    const dateParts = localDate.split("/");
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  }
+
+  let todaysDate = new Date()
+  const currentDate = formatDateToString(todaysDate)
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const totalPoints =
     round.currentPoints *
@@ -143,30 +150,85 @@ function App() {
           setCoordinates({ x: xCoordinate, y: yCoordinate })
 
         } else {
-          const make = "";
-          const model = "";
-          const answerYear = "";
-          const photoCredit = ""
 
-          const placeholderURL =
-            "https://placehold.jp/0f0a10/ffffff/300x200.png?text=%F0%9F%8F%8E";
-          const imageFull = placeholderURL;
-          const imageOne = placeholderURL;
-          const imageTwo = placeholderURL;
-          const imageThree = placeholderURL;
-          const imageFour = placeholderURL;
-          const imageFive = placeholderURL;
+          axios.get(`${BASE_URL}/answers/?populate=*`)
+            .then((response) => {
+              if (response.data.data.length) {
+                const answerData = response.data.data[0].attributes;
+                const make = answerData.make.data.attributes.make;
+                const model = answerData.model.data.attributes.model;
+                const answerYear = answerData.answerYear;
+                const xCoordinate: number = answerData.xCoordinate
+                const yCoordinate: number = answerData.yCoordinate
+                const photoCredit = answerData.photoCredit ? answerData.photoCredit : ""
 
-          setAnswer({ make, model, answerYear, photoCredit });
-          setCarImages({
-            imageFull,
-            imageOne,
-            imageTwo,
-            imageThree,
-            imageFour,
-            imageFive,
-          });
-          setCoordinates({ x: Math.random() * (900 - 1) + 1, y: Math.random() * (600 - 1) + 1 })
+                const imageFull = !!answerData.imageFull ? answerData.imageFull.data.attributes :
+                  answerData.imageFull.data.attributes.formats.hasOwnProperty("large")
+                    ? answerData.imageFull.data.attributes.formats.large
+                    : answerData.imageFull.data.attributes.formats.medium;
+                const imageOne = !!answerData.imageOne.data ?
+                  answerData.imageOne.data.attributes.formats.hasOwnProperty("small")
+                    ? answerData.imageOne.data.attributes.formats.small.url
+                    : answerData.imageOne.data.attributes.formats.thumbnail.url : "";
+                const imageTwo = !!answerData.imageTwo.data ?
+                  answerData.imageTwo.data.attributes.formats.hasOwnProperty("small")
+                    ? answerData.imageTwo.data.attributes.formats.small.url
+                    : answerData.imageTwo.data.attributes.formats.thumbnail.url : "";
+                const imageThree = !!answerData.imageThree.data ?
+                  answerData.imageThree.data.attributes.formats.hasOwnProperty(
+                    "small"
+                  )
+                    ? answerData.imageThree.data.attributes.formats.small.url
+                    : answerData.imageThree.data.attributes.formats.thumbnail.url : "";
+                const imageFour = !!answerData.imageFour.data ?
+                  answerData.imageFour.data.attributes.formats.hasOwnProperty("small")
+                    ? answerData.imageFour.data.attributes.formats.small.url
+                    : answerData.imageFour.data.attributes.formats.thumbnail.url : "";
+                const imageFive = !!answerData.imageFive.data ?
+                  answerData.imageFive.data.attributes.formats.hasOwnProperty("small")
+                    ? answerData.imageFive.data.attributes.formats.small.url
+                    : answerData.imageFive.data.attributes.formats.thumbnail.url : "";
+
+                setAnswer({ make, model, answerYear, photoCredit });
+                setCarImages({
+                  imageFull,
+                  imageOne,
+                  imageTwo,
+                  imageThree,
+                  imageFour,
+                  imageFive,
+                });
+                setCoordinates({ x: xCoordinate, y: yCoordinate })
+
+              } else {
+                const make = "";
+                const model = "";
+                const answerYear = "";
+                const photoCredit = ""
+
+                const placeholderURL =
+                  "https://placehold.jp/0f0a10/ffffff/300x200.png?text=%F0%9F%8F%8E";
+                const imageFull = placeholderURL;
+                const imageOne = placeholderURL;
+                const imageTwo = placeholderURL;
+                const imageThree = placeholderURL;
+                const imageFour = placeholderURL;
+                const imageFive = placeholderURL;
+
+                setAnswer({ make, model, answerYear, photoCredit });
+                setCarImages({
+                  imageFull,
+                  imageOne,
+                  imageTwo,
+                  imageThree,
+                  imageFour,
+                  imageFive,
+                });
+                setCoordinates({ x: Math.random() * (900 - 1) + 1, y: Math.random() * (600 - 1) + 1 })
+              }
+            }).catch((error) => {
+              console.error(error);
+            })
         }
       })
       .catch((error) => {
