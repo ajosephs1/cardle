@@ -102,7 +102,6 @@ function App() {
         `${BASE_URL}/answers?populate=*&filters[date][$eq]=${currentDate}`
       )
       .then((response) => {
-        console.log(response.data.data.length)
         if (response.data.data.length) {
           const answerData = response.data.data[0].attributes;
           const make = answerData.make.data.attributes.make;
